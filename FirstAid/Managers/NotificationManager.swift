@@ -13,15 +13,13 @@ class NotificationManager: ObservableObject {
     @Published var settings: UNNotificationSettings?
     
     func requestAuthorization(completion: @escaping  (Bool) -> Void) {
-        // request authorization to show notifications
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _  in
             self.fetchNotificationSettings()
-            completion(granted) // indicates whether the user granted the authorization
+            completion(granted)
         }
     }
     
     func fetchNotificationSettings() {
-        // requests the notification settings authorized by the app
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
                 self.settings = settings
@@ -31,7 +29,7 @@ class NotificationManager: ObservableObject {
     
     func scheduleNotification() {
         
-        let content = UNMutableNotificationContent() // Содержимое уведомления
+        let content = UNMutableNotificationContent() 
         
         content.title = "First Aid"
         content.body = "Самое время повторить изученный материал!"

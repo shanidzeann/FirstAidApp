@@ -102,6 +102,8 @@
 		892936B427235C290067CD25 /* FirstAid */ = {
 			isa = PBXGroup;
 			children = (
+				89793114272AAACC00476E45 /* AppDelegate */,
+				89793115272AAAE200476E45 /* Managers */,
 				892936CC272363F00067CD25 /* Models */,
 				892936CA272363C80067CD25 /* Views */,
 				892936C9272363BA0067CD25 /* Controllers */,
@@ -113,6 +115,7 @@
 		892936C9272363BA0067CD25 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				892E1AF4274D7C73008AC606 /* MyAlert.swift */,
 				89640D86272690AB000D2A12 /* Theory */,
 				89640D87272690B9000D2A12 /* Quest */,
 			);
@@ -131,9 +134,6 @@
 		892936CB272363D80067CD25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				89793114272AAACC00476E45 /* AppDelegate */,
-				892E1AF4274D7C73008AC606 /* MyAlert.swift */,
-				89793115272AAAE200476E45 /* Managers */,
 				89793113272AAA8900476E45 /* Data Resourses */,
 				892936C327235C2E0067CD25 /* Info.plist */,
 				892936BE27235C2E0067CD25 /* Assets.xcassets */,
