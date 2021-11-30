@@ -103,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				89793114272AAACC00476E45 /* AppDelegate */,
-				89793115272AAAE200476E45 /* Managers */,
 				892936CC272363F00067CD25 /* Models */,
 				892936CA272363C80067CD25 /* Views */,
 				892936C9272363BA0067CD25 /* Controllers */,
@@ -144,6 +143,7 @@
 		892936CC272363F00067CD25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				89793115272AAAE200476E45 /* Managers */,
 				89640D8C27276AFC000D2A12 /* QuestModels.swift */,
 				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
 			);

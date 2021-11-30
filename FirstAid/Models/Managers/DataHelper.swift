@@ -8,7 +8,7 @@
 import Foundation
 
 class DataHelper {
-    
+     
     static let shared = DataHelper()
 
     func loadJson(filename fileName: String) -> Data? {
