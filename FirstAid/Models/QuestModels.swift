@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Situation
 
 /// Represents a first aid situation (quest)
 struct Situation: Codable {
@@ -15,7 +14,7 @@ struct Situation: Codable {
     let scene: [Scene]
 }
 
-// MARK: - Scene
+typealias Situations = [Situation]
 
 /// Represents a scene - current part of quest
 struct Scene: Codable {
@@ -24,17 +23,11 @@ struct Scene: Codable {
     let isHappyEnd: Bool
 }
 
-// MARK: - Choice
-
 /// Represents possible answer
 struct Choice: Codable {
     let text: String
     let destination: Int? // next scene id
 }
-
-typealias Situations = [Situation]
-
-// MARK: - Situation for plist
 
 /// Represents Situation struct for persisting data in plist
 struct SituationPlist: Codable {

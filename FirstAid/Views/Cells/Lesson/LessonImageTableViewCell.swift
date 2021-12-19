@@ -10,6 +10,7 @@ import UIKit
 class LessonImageTableViewCell: UITableViewCell {
     
     static let identifier = "LessonImageTableViewCell"
+    
     var image: UIImage? {
         didSet {
             lessonImageView.image = image

@@ -45,32 +45,16 @@ class TheoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
         
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "ellipsis"),
-            style: .plain,
-            target: self,
-            action: #selector(filterTapped))
-        
+        configureNavigationBar()
         menu.anchorView = navigationItem.rightBarButtonItem
-        
-        if let data = DataHelper.shared.loadJson(filename: "theory") {
-            jsonData = data
-        }
-        
-        if !UserDefaults.standard.bool(forKey: "TheoryExecuteOnce") {
-            allLessons = DataHelper.shared.createPlist(from: jsonData, at: allDataFilePath)
-            UserDefaults.standard.set(true, forKey: "TheoryExecuteOnce")
-        }
-        
+        createLessons()
         loadLessons()
-        
         dropDownMenuWork()
     }
     
@@ -108,11 +92,32 @@ class TheoryViewController: UIViewController {
         }
     }
     
-    // MARK: - Load Lessons
+    // MARK: - Lessons
+    
+    func createLessons() {
+        if let data = DataHelper.shared.loadJson(filename: "theory") {
+            jsonData = data
+        }
+        
+        if !UserDefaults.standard.bool(forKey: "TheoryExecuteOnce") {
+            allLessons = DataHelper.shared.createPlist(from: jsonData, at: allDataFilePath)
+            UserDefaults.standard.set(true, forKey: "TheoryExecuteOnce")
+        }
+    }
     
     func loadLessons() {
         allLessons = DataHelper.shared.loadData(from: allDataFilePath)
         filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
+    }
+    
+    // MARK: - Helper Methods
+    
+    func configureNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(filterTapped))
     }
 }
 

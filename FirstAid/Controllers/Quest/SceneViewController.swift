@@ -38,24 +38,7 @@ class SceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pauseButton = UIBarButtonItem(
-            image: UIImage(systemName: "pause.fill"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapPause))
-        restartButton = UIBarButtonItem(
-            image: UIImage(systemName: "gobackward"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapRestart))
-        
-        navigationItem.rightBarButtonItems = [restartButton, pauseButton]
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapCancel))
+        configureNavigationBar()
         
         sceneLabel.adjustsFontSizeToFitWidth = true
         sceneLabel.minimumScaleFactor = 0.5
@@ -64,13 +47,11 @@ class SceneViewController: UIViewController {
         configureButton(middleButton)
         configureButton(bottomButton)
         
-        countdownTimer.delegate = self
-        countdownTimer.lineColor = .red
-        countdownTimer.timerFinishingText = "End"
-        countdownTimer.lineWidth = 4
-        
+        configureTimer()
+
         myAlert.showAlert(with: "Правила", message: "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено.", on: self)
     }
+    
     
     // MARK: - Quest start
     
@@ -155,7 +136,7 @@ class SceneViewController: UIViewController {
         
     }
     
-    // MARK: - Buttons
+    // MARK: - Hepler Methods
     
     func hideButtons(_ bool: Bool) {
         topButton.isHidden = bool
@@ -172,6 +153,34 @@ class SceneViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.minimumScaleFactor = 0.5
+    }
+    
+    func configureNavigationBar() {
+        pauseButton = UIBarButtonItem(
+            image: UIImage(systemName: "pause.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapPause))
+        restartButton = UIBarButtonItem(
+            image: UIImage(systemName: "gobackward"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapRestart))
+        
+        navigationItem.rightBarButtonItems = [restartButton, pauseButton]
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancel))
+    }
+    
+    func configureTimer() {
+        countdownTimer.delegate = self
+        countdownTimer.lineColor = .red
+        countdownTimer.timerFinishingText = "End"
+        countdownTimer.lineWidth = 4
     }
     
 }

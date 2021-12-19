@@ -16,8 +16,8 @@ class SituationsTableViewController: UITableViewController {
     // MARK: - Properties
     
     var jsonData = Data()
-    var situation: Situations?
-    var situationPlist: [SituationPlist]?
+    var situations: Situations?
+    var situationsPlist: [SituationPlist]?
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Quests.plist")
     
@@ -26,19 +26,7 @@ class SituationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let data = DataHelper.shared.loadJson(filename: "graph") {
-            jsonData = data
-        }
-        
-        situation = try? JSONDecoder().decode(Situations.self, from: jsonData)
-        
-        if !UserDefaults.standard.bool(forKey: "QuestExecuteOnce") {
-            situationPlist = DataHelper.shared.createPlist(from: jsonData, at: dataFilePath)
-            UserDefaults.standard.set(true, forKey: "QuestExecuteOnce")
-        } else {
-            situationPlist = DataHelper.shared.loadData(from: dataFilePath)
-        }
-        
+        loadSituations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,20 +36,49 @@ class SituationsTableViewController: UITableViewController {
     }
     
     
+    // MARK: - Hepler Methods
+    
+    func loadSituations() {
+        if let data = DataHelper.shared.loadJson(filename: "graph") {
+            jsonData = data
+        }
+        
+        situations = try? JSONDecoder().decode(Situations.self, from: jsonData)
+        
+        if !UserDefaults.standard.bool(forKey: "QuestExecuteOnce") {
+            situationsPlist = DataHelper.shared.createPlist(from: jsonData, at: dataFilePath)
+            UserDefaults.standard.set(true, forKey: "QuestExecuteOnce")
+        } else {
+            situationsPlist = DataHelper.shared.loadData(from: dataFilePath)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == "sceneSegue" else { return }
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let vc = segue.destination as! SceneViewController
+            vc.situation = situations?[indexPath.row]
+            vc.id = indexPath.row
+            vc.delegate = self
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return situation?.count ?? 0
+        return situations?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "situationCell", for: indexPath)
         
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = situation?[indexPath.row].title
+        cell.textLabel?.text = situations?[indexPath.row].title
         
-        if let done = situationPlist?[indexPath.row].isFinished,
-           let success = situationPlist?[indexPath.row].isSuccess {
+        if let done = situationsPlist?[indexPath.row].isFinished,
+           let success = situationsPlist?[indexPath.row].isSuccess {
             
             let successImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
             successImageView.image = UIImage(systemName: "face.smiling.fill")
@@ -87,7 +104,7 @@ class SituationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let done = situationPlist?[indexPath.row].isFinished else {
+        guard let done = situationsPlist?[indexPath.row].isFinished else {
             return
         }
         
@@ -115,26 +132,15 @@ class SituationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard segue.identifier == "sceneSegue" else { return }
-        
-        if let indexPath = tableView.indexPathForSelectedRow {
-            let vc = segue.destination as! SceneViewController
-            vc.situation = situation?[indexPath.row]
-            vc.id = indexPath.row
-            vc.delegate = self
-        }
-    }
+
 }
 
 // MARK: - Receive data about quest completion from SceneVC
 
 extension SituationsTableViewController: CanReceive {
     func endReceived(id: Int, isFinished: Bool, isSuccess: Bool) {
-        situationPlist?[id].isFinished = isFinished
-        situationPlist?[id].isSuccess = isSuccess
-        DataHelper.shared.saveData(situationPlist, at: dataFilePath)
+        situationsPlist?[id].isFinished = isFinished
+        situationsPlist?[id].isSuccess = isSuccess
+        DataHelper.shared.saveData(situationsPlist, at: dataFilePath)
     }
 }

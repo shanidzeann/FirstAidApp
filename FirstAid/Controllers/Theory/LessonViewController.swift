@@ -43,24 +43,16 @@ class LessonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = .red
-        view.backgroundColor = .systemBackground
         
+        view.backgroundColor = .systemBackground
+
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapCancel))
-        navigationItem.leftBarButtonItem?.tintColor = .white
-        
         titleLabel.text = titleText
-        navigationItem.titleView = titleLabel
+        configureNavigationBar()
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -73,12 +65,24 @@ class LessonViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Helper Methods
+    
+    func configureNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .red
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.backward"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancel))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.titleView = titleLabel
+    }
 }
 
 
-// MARK: - Table view data source
+// MARK: - TableView data source
 
-extension LessonViewController: UITableViewDelegate, UITableViewDataSource {
+extension LessonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return text?.count ?? 0
@@ -102,8 +106,14 @@ extension LessonViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         }
-        
     }
+    
+}
+
+
+// MARK: - TableView delegate
+
+extension LessonViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
