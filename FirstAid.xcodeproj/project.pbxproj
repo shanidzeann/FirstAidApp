@@ -28,6 +28,8 @@
 		89640D8F27276B5B000D2A12 /* TheoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89640D8E27276B5B000D2A12 /* TheoryModels.swift */; };
 		89793117272AAB4000476E45 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89793116272AAB4000476E45 /* NotificationManager.swift */; };
 		899B80E8276FC452009F8DA1 /* TheoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */; };
+		89ACEE7D278B792B008DD3C9 /* LessonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ACEE7C278B792B008DD3C9 /* LessonViewModel.swift */; };
+		89ACEE7F278B8615008DD3C9 /* LessonTVCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ACEE7E278B8615008DD3C9 /* LessonTVCellViewModel.swift */; };
 		89E47123278A30CE00EF4E07 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E47122278A30CE00EF4E07 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 		89640D8E27276B5B000D2A12 /* TheoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryModels.swift; sourceTree = "<group>"; };
 		89793116272AAB4000476E45 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryViewModel.swift; sourceTree = "<group>"; };
+		89ACEE7C278B792B008DD3C9 /* LessonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewModel.swift; sourceTree = "<group>"; };
+		89ACEE7E278B8615008DD3C9 /* LessonTVCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTVCellViewModel.swift; sourceTree = "<group>"; };
 		89E47122278A30CE00EF4E07 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		BDEDA7BA86C5BECE89F68881 /* Pods-FirstAid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAid.debug.xcconfig"; path = "Target Support Files/Pods-FirstAid/Pods-FirstAid.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +248,8 @@
 			children = (
 				899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */,
 				891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */,
+				89ACEE7C278B792B008DD3C9 /* LessonViewModel.swift */,
+				89ACEE7E278B8615008DD3C9 /* LessonTVCellViewModel.swift */,
 			);
 			path = Theory;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				89E47123278A30CE00EF4E07 /* TableViewCell.swift in Sources */,
 				892936D027236BB70067CD25 /* LessonViewController.swift in Sources */,
 				89640D8D27276AFC000D2A12 /* QuestModels.swift in Sources */,
+				89ACEE7F278B8615008DD3C9 /* LessonTVCellViewModel.swift in Sources */,
 				891FCC652780CAD70016842A /* TheoryTVCellViewModel.swift in Sources */,
 				895B94C627286EF4001B466A /* DataHelper.swift in Sources */,
 				89793117272AAB4000476E45 /* NotificationManager.swift in Sources */,
@@ -386,6 +393,7 @@
 				891FCC632780C60C0016842A /* Protocols.swift in Sources */,
 				892936B827235C290067CD25 /* SceneDelegate.swift in Sources */,
 				89640D8F27276B5B000D2A12 /* TheoryModels.swift in Sources */,
+				89ACEE7D278B792B008DD3C9 /* LessonViewModel.swift in Sources */,
 				892E1AF5274D7C73008AC606 /* MyAlert.swift in Sources */,
 				89640D85272690A1000D2A12 /* SceneViewController.swift in Sources */,
 			);

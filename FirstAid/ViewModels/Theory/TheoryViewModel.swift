@@ -18,7 +18,11 @@ class TheoryViewModel: TheoryViewModelType {
         return TheoryTVCellViewModel(lesson: lesson)
     }
     
-    var numberOfRows: Int {
+    func lessonViewModel(for lesson: Lesson) -> LessonViewModel? {
+        return LessonViewModel(lesson)
+    }
+    
+    func numberOfRows() -> Int {
         return filteredLessons!.count
     }
     
@@ -47,7 +51,6 @@ class TheoryViewModel: TheoryViewModelType {
     }
     
     func filterLessons(at index: Int) {
-        //  guard var viewModel = self?.viewModel else { return }
         
         loadLessons()
         guard let allLessons = allLessons else { return }

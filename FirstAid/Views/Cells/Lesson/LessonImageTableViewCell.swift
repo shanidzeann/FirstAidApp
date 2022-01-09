@@ -17,6 +17,12 @@ class LessonImageTableViewCell: UITableViewCell {
         }
     }
     
+    weak var viewModel: LessonTVCellViewModel? {
+        willSet(viewModel) {
+            image = UIImage(named: viewModel!.imageName)
+        }
+    }
+    
     public var lessonImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true

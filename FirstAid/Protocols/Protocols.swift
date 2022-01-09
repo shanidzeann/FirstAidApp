@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TheoryViewModelType {
-    var numberOfRows: Int { get }
+    func numberOfRows() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> TheoryTVCellViewModelType?
     
     var allLessons: [Lesson]? { get set }
@@ -21,6 +21,7 @@ protocol TheoryViewModelType {
     func removeLesson(at indexPath: IndexPath)
     func toggleCompletion(of lesson: inout Lesson, at indexPath: IndexPath)
     func insert(_ lesson: Lesson, at indexPath: IndexPath)
+    func lessonViewModel(for lesson: Lesson) -> LessonViewModel?
     
     var allDataFilePath: URL? { get }
     

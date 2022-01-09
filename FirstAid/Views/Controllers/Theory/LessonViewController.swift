@@ -12,13 +12,19 @@ class LessonViewController: UIViewController {
     // MARK: - Properties
     
     /// Represents a cell type to handle lesson text
-    enum LessonCellType {
-        case image, text
-    }
+    //    enum LessonCellType {
+    //        case image, text
+    //    }
     
-    var text: [String]?
-    var titleText: String?
-    var cellType: LessonViewController.LessonCellType?
+    //    var text: [String]?
+    //    var titleText: String?
+  //  var cellType: LessonViewController.LessonCellType?
+    
+    var viewModel: LessonViewModel! {
+        willSet(viewModel) {
+            titleLabel.text = viewModel.titleText
+        }
+    }
     
     // MARK: - UI
     
@@ -43,14 +49,9 @@ class LessonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
 
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        titleLabel.text = titleText
+        setBackgroundColor()
+        addTableView()
         configureNavigationBar()
     }
     
@@ -77,6 +78,17 @@ class LessonViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
         navigationItem.titleView = titleLabel
     }
+    
+    func setBackgroundColor() {
+        view.backgroundColor = .systemBackground
+    }
+    
+    func addTableView() {
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+
 }
 
 
@@ -85,29 +97,26 @@ class LessonViewController: UIViewController {
 extension LessonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return text?.count ?? 0
+        return viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let paragraph = text![indexPath.row]
-        
-        if paragraph.hasPrefix("image") {
-            cellType = .image
-            let cell = tableView.dequeueReusableCell(withIdentifier: LessonImageTableViewCell.identifier, for: indexPath) as! LessonImageTableViewCell
-            cell.image = UIImage(named: paragraph)
-            return cell
-            
-        } else {
-            cellType = .text
+        let paragraph = viewModel.paragraph(at: indexPath)
+        switch viewModel.cellType(for: indexPath) {
+        case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = paragraph
             cell.textLabel?.numberOfLines = 0
             cell.selectionStyle = .none
             return cell
+        case .image:
+            let cell = tableView.dequeueReusableCell(withIdentifier: LessonImageTableViewCell.identifier, for: indexPath) as! LessonImageTableViewCell
+            let cellVM = viewModel.cellViewModel(for: paragraph)
+            cell.viewModel = cellVM
+            return cell
         }
     }
-    
 }
 
 
@@ -121,8 +130,8 @@ extension LessonViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // TODO: Fix images
-        switch cellType {
-        case .image, .none:
+        switch viewModel.cellType(for: indexPath) {
+        case .image:
             return 200
         case .text:
             return UITableView.automaticDimension

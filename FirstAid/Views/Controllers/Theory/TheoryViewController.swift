@@ -100,7 +100,7 @@ class TheoryViewController: UIViewController {
 extension TheoryViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
+        return viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,7 +109,6 @@ extension TheoryViewController: UITableViewDataSource {
         guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
         tableViewCell.viewModel = cellVM
-        tableViewCell.backgroundColor = tableViewCell.done ? UIColor(red: 0, green: 0.4, blue: 0, alpha: 0.5) : .systemBackground
         
         return tableViewCell
     }
@@ -128,9 +127,9 @@ extension TheoryViewController: UITableViewDelegate {
         
         let vc = LessonViewController()
         
-        let selectedLesson = viewModel.filteredLessons![indexPath.row]
-        vc.titleText = "Первая помощь при " + (selectedLesson.title).lowercased()
-        vc.text = selectedLesson.text
+        let selectedLesson = viewModel.selectedLesson(at: indexPath)
+        let lessonVM = viewModel.lessonViewModel(for: selectedLesson)
+        vc.viewModel = lessonVM
         
         let navVC = UINavigationController(rootViewController: vc)
         navVC.modalPresentationStyle = .fullScreen
@@ -162,7 +161,7 @@ extension TheoryViewController: UITableViewDelegate {
             switch viewModel.menuState {
             case .all, .none:
                 cell.setBackground()
-                if cell.done {
+                if !cell.done {
                     self.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0), with: lesson)
                 } else {
                     let lastIndexPath = IndexPath(row: (viewModel.filteredLessons?.count)! - 1, section: 0)
