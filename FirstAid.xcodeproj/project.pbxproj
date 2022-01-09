@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D36F76C0278EDE8699A11E7 /* Pods_FirstAid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */; };
+		891FCC632780C60C0016842A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FCC622780C60C0016842A /* Protocols.swift */; };
+		891FCC652780CAD70016842A /* TheoryTVCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */; };
 		892936B627235C290067CD25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892936B527235C290067CD25 /* AppDelegate.swift */; };
 		892936B827235C290067CD25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892936B727235C290067CD25 /* SceneDelegate.swift */; };
 		892936BA27235C290067CD25 /* TheoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892936B927235C290067CD25 /* TheoryViewController.swift */; };
@@ -25,11 +27,15 @@
 		89640D8D27276AFC000D2A12 /* QuestModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89640D8C27276AFC000D2A12 /* QuestModels.swift */; };
 		89640D8F27276B5B000D2A12 /* TheoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89640D8E27276B5B000D2A12 /* TheoryModels.swift */; };
 		89793117272AAB4000476E45 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89793116272AAB4000476E45 /* NotificationManager.swift */; };
+		899B80E8276FC452009F8DA1 /* TheoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */; };
+		89E47123278A30CE00EF4E07 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E47122278A30CE00EF4E07 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		480822E2A3C1374AB64F1D8B /* Pods-FirstAid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAid.release.xcconfig"; path = "Target Support Files/Pods-FirstAid/Pods-FirstAid.release.xcconfig"; sourceTree = "<group>"; };
 		87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstAid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		891FCC622780C60C0016842A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryTVCellViewModel.swift; sourceTree = "<group>"; };
 		892936B227235C290067CD25 /* FirstAid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstAid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		892936B527235C290067CD25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		892936B727235C290067CD25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +55,8 @@
 		89640D8C27276AFC000D2A12 /* QuestModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestModels.swift; sourceTree = "<group>"; };
 		89640D8E27276B5B000D2A12 /* TheoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryModels.swift; sourceTree = "<group>"; };
 		89793116272AAB4000476E45 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryViewModel.swift; sourceTree = "<group>"; };
+		89E47122278A30CE00EF4E07 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		BDEDA7BA86C5BECE89F68881 /* Pods-FirstAid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAid.debug.xcconfig"; path = "Target Support Files/Pods-FirstAid/Pods-FirstAid.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +113,9 @@
 				89793114272AAACC00476E45 /* AppDelegate */,
 				892936CC272363F00067CD25 /* Models */,
 				892936CA272363C80067CD25 /* Views */,
-				892936C9272363BA0067CD25 /* Controllers */,
+				89E03E94278B416A00BC619F /* ViewModels */,
+				89793115272AAAE200476E45 /* Managers */,
+				89E03E96278B41E100BC619F /* Protocols */,
 				892936CB272363D80067CD25 /* Supporting Files */,
 			);
 			path = FirstAid;
@@ -124,6 +134,7 @@
 		892936CA272363C80067CD25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				892936C9272363BA0067CD25 /* Controllers */,
 				892936D127236CFD0067CD25 /* Storyboards */,
 				892936D227236D0E0067CD25 /* Cells */,
 			);
@@ -143,7 +154,6 @@
 		892936CC272363F00067CD25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				89793115272AAAE200476E45 /* Managers */,
 				89640D8C27276AFC000D2A12 /* QuestModels.swift */,
 				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
 			);
@@ -162,6 +172,7 @@
 		892936D227236D0E0067CD25 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				89E47122278A30CE00EF4E07 /* TableViewCell.swift */,
 				892936D727236D990067CD25 /* Lesson */,
 			);
 			path = Cells;
@@ -218,6 +229,31 @@
 				89793116272AAB4000476E45 /* NotificationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		89E03E94278B416A00BC619F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				89E03E95278B41D200BC619F /* Theory */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		89E03E95278B41D200BC619F /* Theory */ = {
+			isa = PBXGroup;
+			children = (
+				899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */,
+				891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */,
+			);
+			path = Theory;
+			sourceTree = "<group>";
+		};
+		89E03E96278B41E100BC619F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				891FCC622780C60C0016842A /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,13 +373,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				89640D8B2726AC60000D2A12 /* SituationsTableViewController.swift in Sources */,
+				89E47123278A30CE00EF4E07 /* TableViewCell.swift in Sources */,
 				892936D027236BB70067CD25 /* LessonViewController.swift in Sources */,
 				89640D8D27276AFC000D2A12 /* QuestModels.swift in Sources */,
+				891FCC652780CAD70016842A /* TheoryTVCellViewModel.swift in Sources */,
 				895B94C627286EF4001B466A /* DataHelper.swift in Sources */,
 				89793117272AAB4000476E45 /* NotificationManager.swift in Sources */,
 				892936BA27235C290067CD25 /* TheoryViewController.swift in Sources */,
+				899B80E8276FC452009F8DA1 /* TheoryViewModel.swift in Sources */,
 				892936D627236D800067CD25 /* LessonImageTableViewCell.swift in Sources */,
 				892936B627235C290067CD25 /* AppDelegate.swift in Sources */,
+				891FCC632780C60C0016842A /* Protocols.swift in Sources */,
 				892936B827235C290067CD25 /* SceneDelegate.swift in Sources */,
 				89640D8F27276B5B000D2A12 /* TheoryModels.swift in Sources */,
 				892E1AF5274D7C73008AC606 /* MyAlert.swift in Sources */,

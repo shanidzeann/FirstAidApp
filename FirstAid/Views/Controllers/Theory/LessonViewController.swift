@@ -120,12 +120,16 @@ extension LessonViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // TODO: Fix images
         switch cellType {
-        case .image:
+        case .image, .none:
             return 200
-        case .text, .none:
+        case .text:
             return UITableView.automaticDimension
         }
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
 }
