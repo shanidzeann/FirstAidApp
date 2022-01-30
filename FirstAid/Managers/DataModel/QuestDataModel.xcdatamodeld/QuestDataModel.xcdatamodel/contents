@@ -8,14 +8,14 @@
     <entity name="SceneDB" representedClassName=".SceneDB" syncable="YES" codeGenerationType="class">
         <attribute name="isHappyEnd" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="text" attributeType="String"/>
-        <relationship name="choices" optional="YES" toMany="YES" minCount="1" maxCount="3" deletionRule="Nullify" destinationEntity="ChoiceDB" inverseName="scene" inverseEntity="ChoiceDB"/>
+        <relationship name="choices" optional="YES" toMany="YES" minCount="1" maxCount="3" deletionRule="Nullify" ordered="YES" destinationEntity="ChoiceDB" inverseName="scene" inverseEntity="ChoiceDB"/>
         <relationship name="situation" maxCount="1" deletionRule="Nullify" destinationEntity="SituationDB" inverseName="scenes" inverseEntity="SituationDB"/>
     </entity>
     <entity name="SituationDB" representedClassName=".SituationDB" syncable="YES" codeGenerationType="class">
         <attribute name="isFinished" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSuccess" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="scenes" toMany="YES" deletionRule="Nullify" destinationEntity="SceneDB" inverseName="situation" inverseEntity="SceneDB"/>
+        <relationship name="scenes" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SceneDB" inverseName="situation" inverseEntity="SceneDB"/>
     </entity>
     <elements>
         <element name="ChoiceDB" positionX="83.07830810546875" positionY="14.49505615234375" width="128" height="88"/>

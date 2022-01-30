@@ -24,14 +24,9 @@ class SceneViewController: UIViewController {
     var restartButton: UIBarButtonItem!
     
     var delegate: CanReceive?
-    var id: Int?
-    var situation: Situation?
-    
-    var viewModel: SceneViewModel?
-    
-    var scene: Scene? {
-        didSet {
-            updateUI()
+    var viewModel: SceneViewModel? {
+        willSet(viewModel) {
+            viewModel?.valueDidChangeClosure = updateUI
         }
     }
     
@@ -54,21 +49,13 @@ class SceneViewController: UIViewController {
         myAlert.showAlert(with: "Правила", message: "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено.", on: self)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let viewModel = viewModel {
-            updateUI()
-        }
-    }
-    
-    
     // MARK: - Quest start
     
     func setFirstScene() {
         tabBarController?.tabBar.isHidden = true
         navigationItem.leftBarButtonItem?.isEnabled = false
-        scene = situation?.scenes[0]
+        
+        viewModel?.setFirstScene()
         
         countdownTimer.isHidden = false
         countdownTimer.start(beginingValue: 15, interval: 1)
@@ -79,31 +66,28 @@ class SceneViewController: UIViewController {
     func updateUI() {
         
         countdownTimer.start(beginingValue: 15, interval: 1)
-        guard let scene = scene else {
+        guard let scene = viewModel?.scene else {
             return
         }
+        sceneLabel.text = viewModel?.text
         
-        sceneLabel.text = scene.text
-        
-        guard let choices = scene.choices else {
+        guard viewModel?.choices?.count == 3 else {
             countdownTimer.pause()
             hideButtons(true)
-            delegate?.endReceived(id: id!, isFinished: true, isSuccess: scene.isHappyEnd)
+            delegate?.endReceived(id: (viewModel?.id)!, isFinished: true, isSuccess: scene.isHappyEnd)
             return
         }
         
         hideButtons(false)
-        topButton.setTitle(choices[0].text, for: .normal)
-        middleButton.setTitle(choices[1].text, for: .normal)
-        bottomButton.setTitle(choices[2].text, for: .normal)
+        topButton.setTitle(viewModel?.choiceText(0), for: .normal)
+        middleButton.setTitle(viewModel?.choiceText(1), for: .normal)
+        bottomButton.setTitle(viewModel?.choiceText(2), for: .normal)
     }
     
     // MARK: - User actions
     
     @IBAction func answerButtonTapped(_ sender: UIButton) {
-        if let nextSceneID = scene?.choices?[sender.tag - 1].destination {
-            scene = situation?.scenes[nextSceneID]
-        }
+        viewModel?.setNextScene(sender.tag)
     }
     
     @objc private func didTapPause() {
@@ -137,7 +121,7 @@ class SceneViewController: UIViewController {
     @objc private func didTapRestart() {
         setFirstScene()
         sceneLabel.isHidden = false
-        delegate?.endReceived(id: id!, isFinished: false, isSuccess: false)
+        delegate?.endReceived(id: (viewModel?.id)!, isFinished: false, isSuccess: false)
     }
     
     @objc private func didTapCancel() {
@@ -200,7 +184,8 @@ class SceneViewController: UIViewController {
 
 extension SceneViewController: SRCountdownTimerDelegate {
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        scene = situation?.scenes.last
+        //scene = situation?.scenes.last
+        viewModel?.setLastScene()
         sender.isHidden = true
     }
 }

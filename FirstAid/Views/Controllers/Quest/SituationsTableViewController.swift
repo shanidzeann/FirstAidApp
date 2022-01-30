@@ -49,8 +49,8 @@ class SituationsTableViewController: UITableViewController {
             let vc = segue.destination as! SceneViewController
             let selectedSituation = viewModel.selectedSituation(at: indexPath)
             vc.viewModel = viewModel.viewModelForSelectedRow(for: selectedSituation)
-//            vc.id = indexPath.row
-            vc.delegate = self
+            vc.viewModel?.id = indexPath.row // это потом убрать
+            vc.delegate = self // и это может тоже
         }
     }
     
