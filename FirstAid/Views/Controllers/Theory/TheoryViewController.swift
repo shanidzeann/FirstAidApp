@@ -108,7 +108,7 @@ extension TheoryViewController: UITableViewDataSource {
         
         guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
-        tableViewCell.TheoryViewModel = cellVM
+        tableViewCell.viewModel = cellVM
         
         return tableViewCell
     }

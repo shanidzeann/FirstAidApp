@@ -17,9 +17,10 @@ class SituationsViewModel {
             if let data = DataHelper.shared.loadJson(filename: "graph") {
                 guard let situationsJSON = try? JSONDecoder().decode(Situations.self, from: data) else { return }
                 db.addQuestsToCoreData(situationsJSON)
+                UserDefaults.standard.set(true, forKey: "QuestExecuteOnce")
             }
-            situations = db.loadSituations()
         }
+        situations = db.loadSituations()
     }
     
     func numberOfRows() -> Int {
