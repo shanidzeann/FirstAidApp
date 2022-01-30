@@ -23,7 +23,7 @@ class TheoryViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
     
@@ -104,11 +104,11 @@ extension TheoryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TheoryTableViewCell
         
         guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
-        tableViewCell.viewModel = cellVM
+        tableViewCell.TheoryViewModel = cellVM
         
         return tableViewCell
     }
@@ -155,7 +155,7 @@ extension TheoryViewController: UITableViewDelegate {
             
             viewModel.toggleCompletion(of: &lesson, at: indexPath)
             
-            let cell = self.tableView.cellForRow(at: indexPath) as! TableViewCell
+            let cell = self.tableView.cellForRow(at: indexPath) as! TheoryTableViewCell
             cell.done = lesson.isFinished
             
             switch viewModel.menuState {

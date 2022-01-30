@@ -11,15 +11,6 @@ class LessonViewController: UIViewController {
     
     // MARK: - Properties
     
-    /// Represents a cell type to handle lesson text
-    //    enum LessonCellType {
-    //        case image, text
-    //    }
-    
-    //    var text: [String]?
-    //    var titleText: String?
-  //  var cellType: LessonViewController.LessonCellType?
-    
     var viewModel: LessonViewModel! {
         willSet(viewModel) {
             titleLabel.text = viewModel.titleText
@@ -38,7 +29,7 @@ class LessonViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.tableViewCell.rawValue)
         tableView.register(LessonImageTableViewCell.self, forCellReuseIdentifier: LessonImageTableViewCell.identifier)
         tableView.separatorStyle = .none
         
@@ -105,14 +96,14 @@ extension LessonViewController: UITableViewDataSource {
         let paragraph = viewModel.paragraph(at: indexPath)
         switch viewModel.cellType(for: indexPath) {
         case .text:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tableViewCell.rawValue, for: indexPath)
             cell.textLabel?.text = paragraph
             cell.textLabel?.numberOfLines = 0
             cell.selectionStyle = .none
             return cell
         case .image:
             let cell = tableView.dequeueReusableCell(withIdentifier: LessonImageTableViewCell.identifier, for: indexPath) as! LessonImageTableViewCell
-            let cellVM = viewModel.cellViewModel(for: paragraph)
+            let cellVM = viewModel.imageCellViewModel(for: paragraph)
             cell.viewModel = cellVM
             return cell
         }

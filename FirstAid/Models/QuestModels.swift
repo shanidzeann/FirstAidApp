@@ -11,7 +11,9 @@ import Foundation
 /// Represents a first aid situation (quest)
 struct Situation: Codable {
     let title: String
-    let scene: [Scene]
+    let scenes: [Scene]
+    var isFinished: Bool
+    var isSuccess: Bool
 }
 
 typealias Situations = [Situation]
@@ -29,10 +31,4 @@ struct Choice: Codable {
     let destination: Int? // next scene id
 }
 
-/// Represents Situation struct for persisting data in plist
-struct SituationPlist: Codable {
-    let title: String
-    var isFinished: Bool
-    var isSuccess: Bool
-}
 

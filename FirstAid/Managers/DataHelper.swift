@@ -12,6 +12,7 @@ class DataHelper {
     static let shared = DataHelper()
 
     func loadJson(filename fileName: String) -> Data? {
+        #warning("разбить общий файл (по файлу на квест) и решить как с этим быть")
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
             do {
                 let jsonData = try Data(contentsOf: url)

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChoiceDB" representedClassName=".ChoiceDB" syncable="YES" codeGenerationType="class">
+        <attribute name="destination" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="text" attributeType="String"/>
+        <relationship name="scene" maxCount="1" deletionRule="Nullify" destinationEntity="SceneDB" inverseName="choices" inverseEntity="SceneDB"/>
+    </entity>
+    <entity name="SceneDB" representedClassName=".SceneDB" syncable="YES" codeGenerationType="class">
+        <attribute name="isHappyEnd" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="text" attributeType="String"/>
+        <relationship name="choices" optional="YES" toMany="YES" minCount="1" maxCount="3" deletionRule="Nullify" destinationEntity="ChoiceDB" inverseName="scene" inverseEntity="ChoiceDB"/>
+        <relationship name="situation" maxCount="1" deletionRule="Nullify" destinationEntity="SituationDB" inverseName="scenes" inverseEntity="SituationDB"/>
+    </entity>
+    <entity name="SituationDB" representedClassName=".SituationDB" syncable="YES" codeGenerationType="class">
+        <attribute name="isFinished" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isSuccess" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="scenes" toMany="YES" deletionRule="Nullify" destinationEntity="SceneDB" inverseName="situation" inverseEntity="SceneDB"/>
+    </entity>
+    <elements>
+        <element name="ChoiceDB" positionX="83.07830810546875" positionY="14.49505615234375" width="128" height="88"/>
+        <element name="SceneDB" positionX="-150.8333129882812" positionY="11.00009155273438" width="128" height="103"/>
+        <element name="SituationDB" positionX="-341.7203369140625" positionY="3.623779296875" width="128" height="103"/>
+    </elements>
+</model>

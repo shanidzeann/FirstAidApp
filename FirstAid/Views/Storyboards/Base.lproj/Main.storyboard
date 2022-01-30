@@ -82,14 +82,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="situationCell" id="Uue-un-lvG">
-                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="questCell" rowHeight="80" id="Uue-un-lvG" customClass="SituationTableViewCell" customModule="FirstAid" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uue-un-lvG" id="Rt2-tN-dB2">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGD-CR-T8N">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="80"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="pGD-CR-T8N" secondAttribute="bottom" id="3jI-7O-91U"/>
+                                        <constraint firstItem="pGD-CR-T8N" firstAttribute="leading" secondItem="Rt2-tN-dB2" secondAttribute="leading" constant="20" symbolic="YES" id="czi-Uu-A9u"/>
+                                        <constraint firstItem="pGD-CR-T8N" firstAttribute="top" secondItem="Rt2-tN-dB2" secondAttribute="top" id="h5s-1o-tM3"/>
+                                        <constraint firstAttribute="trailing" secondItem="pGD-CR-T8N" secondAttribute="trailing" constant="20" symbolic="YES" id="hDf-zr-N54"/>
+                                        <constraint firstItem="pGD-CR-T8N" firstAttribute="centerY" secondItem="Rt2-tN-dB2" secondAttribute="centerY" id="ppZ-hT-Ya9"/>
+                                        <constraint firstItem="pGD-CR-T8N" firstAttribute="centerX" secondItem="Rt2-tN-dB2" secondAttribute="centerX" id="yO3-JH-WQL"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="label" destination="pGD-CR-T8N" id="bjw-5n-jiZ"/>
                                     <segue destination="FKs-uU-0um" kind="show" identifier="sceneSegue" trigger="accessoryAction" id="UTU-tp-U11"/>
                                 </connections>
                             </tableViewCell>
@@ -103,7 +120,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jz8-oG-pzF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="741" y="1646"/>
+            <point key="canvasLocation" x="740.57971014492762" y="1645.9821428571429"/>
         </scene>
         <!--Scene View Controller-->
         <scene sceneID="p13-83-8zc">

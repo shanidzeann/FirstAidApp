@@ -27,6 +27,8 @@ class SceneViewController: UIViewController {
     var id: Int?
     var situation: Situation?
     
+    var viewModel: SceneViewModel?
+    
     var scene: Scene? {
         didSet {
             updateUI()
@@ -52,13 +54,21 @@ class SceneViewController: UIViewController {
         myAlert.showAlert(with: "Правила", message: "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено.", on: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let viewModel = viewModel {
+            updateUI()
+        }
+    }
+    
     
     // MARK: - Quest start
     
     func setFirstScene() {
         tabBarController?.tabBar.isHidden = true
         navigationItem.leftBarButtonItem?.isEnabled = false
-        scene = situation?.scene[0]
+        scene = situation?.scenes[0]
         
         countdownTimer.isHidden = false
         countdownTimer.start(beginingValue: 15, interval: 1)
@@ -92,7 +102,7 @@ class SceneViewController: UIViewController {
     
     @IBAction func answerButtonTapped(_ sender: UIButton) {
         if let nextSceneID = scene?.choices?[sender.tag - 1].destination {
-            scene = situation?.scene[nextSceneID]
+            scene = situation?.scenes[nextSceneID]
         }
     }
     
@@ -190,7 +200,7 @@ class SceneViewController: UIViewController {
 
 extension SceneViewController: SRCountdownTimerDelegate {
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        scene = situation?.scene.last
+        scene = situation?.scenes.last
         sender.isHidden = true
     }
 }

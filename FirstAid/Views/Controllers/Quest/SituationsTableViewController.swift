@@ -7,51 +7,39 @@
 
 import UIKit
 
-protocol CanReceive {
-    func endReceived(id: Int, isFinished: Bool, isSuccess: Bool)
-}
-
 class SituationsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var jsonData = Data()
-    var situations: Situations?
-    var situationsPlist: [SituationPlist]?
-    
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Quests.plist")
+    #warning("подумать про optionals")
+    private var viewModel: SituationsViewModel! {
+        didSet {
+            viewModel?.loadSituations()
+            print("ситуации есть")
+        }
+    }
     
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadSituations()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        setViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         tableView.reloadData()
     }
     
     
     // MARK: - Hepler Methods
     
-    func loadSituations() {
-        if let data = DataHelper.shared.loadJson(filename: "graph") {
-            jsonData = data
-        }
-        
-        situations = try? JSONDecoder().decode(Situations.self, from: jsonData)
-        
-        if !UserDefaults.standard.bool(forKey: "QuestExecuteOnce") {
-            situationsPlist = DataHelper.shared.createPlist(from: jsonData, at: dataFilePath)
-            UserDefaults.standard.set(true, forKey: "QuestExecuteOnce")
-        } else {
-            situationsPlist = DataHelper.shared.loadData(from: dataFilePath)
-        }
+    func setViewModel() {
+        viewModel = SituationsViewModel()
+        print("вьюмодел есть")
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -59,8 +47,9 @@ class SituationsTableViewController: UITableViewController {
         
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as! SceneViewController
-            vc.situation = situations?[indexPath.row]
-            vc.id = indexPath.row
+            let selectedSituation = viewModel.selectedSituation(at: indexPath)
+            vc.viewModel = viewModel.viewModelForSelectedRow(for: selectedSituation)
+//            vc.id = indexPath.row
             vc.delegate = self
         }
     }
@@ -68,34 +57,15 @@ class SituationsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return situations?.count ?? 0
+        return viewModel.numberOfRows()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "situationCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questCell", for: indexPath) as! SituationTableViewCell
         
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = situations?[indexPath.row].title
+        let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
+        cell.SituationViewModel = cellVM
         
-        if let done = situationsPlist?[indexPath.row].isFinished,
-           let success = situationsPlist?[indexPath.row].isSuccess {
-            
-            let successImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            successImageView.image = UIImage(systemName: "face.smiling.fill")
-            successImageView.tintColor = UIColor(red: 0, green: 0.4, blue: 0, alpha: 0.5)
-            
-            let failImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            failImageView.image = UIImage(systemName: "hand.thumbsdown.fill")
-            failImageView.tintColor = .systemRed
-            
-            if done && success {
-                cell.accessoryView = successImageView
-            } else if done && !success {
-                cell.accessoryView = failImageView
-            } else {
-                cell.accessoryView = .none
-            }
-        }
         return cell
     }
     
@@ -104,9 +74,7 @@ class SituationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let done = situationsPlist?[indexPath.row].isFinished else {
-            return
-        }
+        let done = viewModel.selectedSituation(at: indexPath).isFinished
         
         if done {
             let alert = UIAlertController(title: "Начать заново?", message: nil, preferredStyle: .actionSheet)
@@ -132,15 +100,18 @@ class SituationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+ 
 
 }
 
 // MARK: - Receive data about quest completion from SceneVC
 
 extension SituationsTableViewController: CanReceive {
+    // TODO: - и тут подумать
     func endReceived(id: Int, isFinished: Bool, isSuccess: Bool) {
-        situationsPlist?[id].isFinished = isFinished
-        situationsPlist?[id].isSuccess = isSuccess
-        DataHelper.shared.saveData(situationsPlist, at: dataFilePath)
+      //  viewModel.saveEnding(id: id, isFinished: isFinished, isSuccess: isSuccess)
+//        situationsPlist?[id].isFinished = isFinished
+//        situationsPlist?[id].isSuccess = isSuccess
+//        DataHelper.shared.saveData(situationsPlist, at: dataFilePath)
     }
 }

@@ -36,7 +36,7 @@ class LessonViewModel {
         return text[indexPath.row]
     }
     
-    func cellViewModel(for paragraph: String) -> LessonTVCellViewModel {
+    func imageCellViewModel(for paragraph: String) -> LessonTVCellViewModel {
         return LessonTVCellViewModel(imageName: paragraph)
     }
     

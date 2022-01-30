@@ -45,7 +45,7 @@ class TheoryViewModel: TheoryViewModelType {
     }
     
     func loadLessons() {
-        // TODO: - подумать башкой
+        #warning("подумать башкой")
         allLessons = DataHelper.shared.loadData(from: allDataFilePath)
         filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
     }

@@ -32,3 +32,7 @@ protocol TheoryTVCellViewModelType: AnyObject {
     var title: String { get }
     var done: Bool { get }
 }
+
+protocol CanReceive {
+    func endReceived(id: Int, isFinished: Bool, isSuccess: Bool)
+}
