@@ -35,6 +35,7 @@
 		89ACEE81278B8B8F008DD3C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89ACEE80278B8B8F008DD3C9 /* Constants.swift */; };
 		89D57050278D9DCA002126DF /* SituationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D5704F278D9DCA002126DF /* SituationTableViewCell.swift */; };
 		89D57053278DA540002126DF /* SceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D57052278DA540002126DF /* SceneViewModel.swift */; };
+		89DC757027A9ABFD00E21A99 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DC756F27A9ABFD00E21A99 /* Box.swift */; };
 		89E47123278A30CE00EF4E07 /* TheoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E47122278A30CE00EF4E07 /* TheoryTableViewCell.swift */; };
 		89F0609227A43A0600F10E18 /* QuestDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89F0609027A43A0500F10E18 /* QuestDataModel.xcdatamodeld */; };
 		89F0609527A45DA700F10E18 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0609427A45DA700F10E18 /* DatabaseManager.swift */; };
@@ -72,6 +73,7 @@
 		89ACEE80278B8B8F008DD3C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		89D5704F278D9DCA002126DF /* SituationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationTableViewCell.swift; sourceTree = "<group>"; };
 		89D57052278DA540002126DF /* SceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneViewModel.swift; sourceTree = "<group>"; };
+		89DC756F27A9ABFD00E21A99 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		89E47122278A30CE00EF4E07 /* TheoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheoryTableViewCell.swift; sourceTree = "<group>"; };
 		89F0609127A43A0500F10E18 /* QuestDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuestDataModel.xcdatamodel; sourceTree = "<group>"; };
 		89F0609427A45DA700F10E18 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				892936CC272363F00067CD25 /* Models */,
 				892936CA272363C80067CD25 /* Views */,
 				89E03E94278B416A00BC619F /* ViewModels */,
+				89F0609327A43AB200F10E18 /* DataModel */,
 				89793115272AAAE200476E45 /* Managers */,
 				89E03E96278B41E100BC619F /* Protocols */,
 				892936CB272363D80067CD25 /* Supporting Files */,
@@ -258,7 +261,7 @@
 				895B94C527286EF4001B466A /* DataHelper.swift */,
 				89793116272AAB4000476E45 /* NotificationManager.swift */,
 				89F0609427A45DA700F10E18 /* DatabaseManager.swift */,
-				89F0609327A43AB200F10E18 /* DataModel */,
+				89DC756F27A9ABFD00E21A99 /* Box.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89DC757027A9ABFD00E21A99 /* Box.swift in Sources */,
 				89640D8B2726AC60000D2A12 /* SituationsTableViewController.swift in Sources */,
 				89ACEE81278B8B8F008DD3C9 /* Constants.swift in Sources */,
 				89E47123278A30CE00EF4E07 /* TheoryTableViewCell.swift in Sources */,

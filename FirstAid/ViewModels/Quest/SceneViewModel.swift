@@ -6,31 +6,25 @@
 //
 
 import Foundation
-import UIKit
 
 class SceneViewModel {
     
     var situation: SituationDB
-    var valueDidChangeClosure: (() -> Void)?
     #warning("переместить id в структуру и файл")
     var id: Int?
     
-    var scene: SceneDB? {
-        didSet {
-            valueDidChangeClosure?()
-        }
-    }
+    lazy var scene = Box(situation.scenes?[0] as? SceneDB)
     
     var text: String? {
-        return scene?.text
+        return scene.value?.text
     }
     
     var end: Bool? {
-        return scene?.isHappyEnd
+        return scene.value?.isHappyEnd
     }
     
     var choices: NSOrderedSet? {
-        return scene?.choices
+        return scene.value?.choices
     }
     
     func choiceText(_ id: Int) -> String? {
@@ -48,18 +42,18 @@ class SceneViewModel {
     }
     
     func setFirstScene() {
-        scene = situation.scenes?[0] as? SceneDB
+        scene.value = situation.scenes?[0] as? SceneDB
     }
 
     func setNextScene(_ tag: Int) {
         let id = nextSceneID(tag)
         if let nextSceneID = id {
-            scene = situation.scenes?[nextSceneID] as? SceneDB
+            scene.value = situation.scenes?[nextSceneID] as? SceneDB
         }
     }
     
     func setLastScene() {
-        scene = situation.scenes?.lastObject as? SceneDB
+        scene.value = situation.scenes?.lastObject as? SceneDB
     }
     
 }

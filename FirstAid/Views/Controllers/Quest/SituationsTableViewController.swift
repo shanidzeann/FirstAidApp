@@ -57,6 +57,7 @@ class SituationsTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(viewModel.numberOfRows())
         return viewModel.numberOfRows()
     }
     
@@ -109,7 +110,7 @@ class SituationsTableViewController: UITableViewController {
 extension SituationsTableViewController: CanReceive {
     // TODO: - и тут подумать
     func endReceived(id: Int, isFinished: Bool, isSuccess: Bool) {
-      //  viewModel.saveEnding(id: id, isFinished: isFinished, isSuccess: isSuccess)
+        viewModel.saveEnding(id: id, isFinished: isFinished, isSuccess: isSuccess)
 //        situationsPlist?[id].isFinished = isFinished
 //        situationsPlist?[id].isSuccess = isSuccess
 //        DataHelper.shared.saveData(situationsPlist, at: dataFilePath)

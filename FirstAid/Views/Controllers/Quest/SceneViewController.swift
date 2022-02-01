@@ -24,11 +24,7 @@ class SceneViewController: UIViewController {
     var restartButton: UIBarButtonItem!
     
     var delegate: CanReceive?
-    var viewModel: SceneViewModel? {
-        willSet(viewModel) {
-            viewModel?.valueDidChangeClosure = updateUI
-        }
-    }
+    var viewModel: SceneViewModel?
     
     // MARK: - VC Lifecycle
     
@@ -36,17 +32,15 @@ class SceneViewController: UIViewController {
         super.viewDidLoad()
         
         configureNavigationBar()
-        
-        sceneLabel.adjustsFontSizeToFitWidth = true
-        sceneLabel.minimumScaleFactor = 0.5
-        
+        configureLabel()
         configureButton(topButton)
         configureButton(middleButton)
         configureButton(bottomButton)
-        
         configureTimer()
 
         myAlert.showAlert(with: "Правила", message: "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено.", on: self)
+        
+        setUpBindings()
     }
     
     // MARK: - Quest start
@@ -58,7 +52,6 @@ class SceneViewController: UIViewController {
         viewModel?.setFirstScene()
         
         countdownTimer.isHidden = false
-        countdownTimer.start(beginingValue: 15, interval: 1)
     }
     
     // MARK: - Update UI
@@ -74,7 +67,7 @@ class SceneViewController: UIViewController {
         guard viewModel?.choices?.count == 3 else {
             countdownTimer.pause()
             hideButtons(true)
-            delegate?.endReceived(id: (viewModel?.id)!, isFinished: true, isSuccess: scene.isHappyEnd)
+            delegate?.endReceived(id: (viewModel?.id)!, isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
             return
         }
         
@@ -132,6 +125,12 @@ class SceneViewController: UIViewController {
     
     // MARK: - Hepler Methods
     
+    func setUpBindings() {
+        viewModel?.scene.bind({ [weak self] _ in
+            self?.updateUI()
+        })
+    }
+    
     func hideButtons(_ bool: Bool) {
         topButton.isHidden = bool
         middleButton.isHidden = bool
@@ -141,6 +140,11 @@ class SceneViewController: UIViewController {
         pauseButton.isEnabled = !bool
         restartButton.isEnabled = bool
         navigationItem.leftBarButtonItem?.isEnabled = bool
+    }
+    
+    func configureLabel() {
+        sceneLabel.adjustsFontSizeToFitWidth = true
+        sceneLabel.minimumScaleFactor = 0.5
     }
     
     func configureButton(_ button: UIButton) {
@@ -184,7 +188,6 @@ class SceneViewController: UIViewController {
 
 extension SceneViewController: SRCountdownTimerDelegate {
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        //scene = situation?.scenes.last
         viewModel?.setLastScene()
         sender.isHidden = true
     }

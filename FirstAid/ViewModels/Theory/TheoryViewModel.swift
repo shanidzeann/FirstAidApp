@@ -33,8 +33,6 @@ class TheoryViewModel: TheoryViewModelType {
     
     let allDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("AllTheory.plist")
     
-    //   var jsonData: Data?
-    
     func createLessons() {
         if let data = DataHelper.shared.loadJson(filename: "theory") {
             if !UserDefaults.standard.bool(forKey: "TheoryExecuteOnce") {

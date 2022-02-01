@@ -21,17 +21,19 @@ class SituationsViewModel {
             }
         }
         situations = db.loadSituations()
+        print("все ок")
     }
     
     func numberOfRows() -> Int {
         return situations!.count
     }
     
-    //    func saveEnding(id: Int, isFinished: Bool, isSuccess: Bool) {
-    //        situations?[id].isFinished = isFinished
-    //        situations?[id].isSuccess = isSuccess
-    //        DataHelper.shared.saveData(situations, at: dataFilePath)
-    //    }
+        func saveEnding(id: Int, isFinished: Bool, isSuccess: Bool) {
+            situations?[id].isFinished = isFinished
+            situations?[id].isSuccess = isSuccess
+            //DataHelper.shared.saveData(situations, at: dataFilePath)
+            db.save()
+        }
     
     
     #warning("переделать в свойство")

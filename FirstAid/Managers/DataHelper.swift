@@ -16,6 +16,7 @@ class DataHelper {
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
             do {
                 let jsonData = try Data(contentsOf: url)
+                print(jsonData)
                 return jsonData
             } catch {
                 print("Error loading JSON:\(error)")
