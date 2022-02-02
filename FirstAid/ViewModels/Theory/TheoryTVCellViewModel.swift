@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TheoryTVCellViewModel: TheoryTVCellViewModelType {
+class TheoryTVCellViewModel {
     
     var title: String {
         return lesson.title

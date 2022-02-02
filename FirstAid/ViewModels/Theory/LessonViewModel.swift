@@ -7,8 +7,9 @@
 
 import Foundation
 
-
 class LessonViewModel {
+    
+    // MARK: - Properties
     
     enum LessonCellType {
         case image, text
@@ -24,9 +25,13 @@ class LessonViewModel {
         return "Первая помощь при " + lesson.title.lowercased()
     }
     
+    // MARK: - Init
+    
     init(_ lesson: Lesson) {
         self.lesson = lesson
     }
+    
+    // MARK: - Methods
     
     func numberOfRows() -> Int {
         return text.count
@@ -34,10 +39,6 @@ class LessonViewModel {
     
     func paragraph(at indexPath: IndexPath) -> String {
         return text[indexPath.row]
-    }
-    
-    func imageCellViewModel(for paragraph: String) -> LessonTVCellViewModel {
-        return LessonTVCellViewModel(imageName: paragraph)
     }
     
     func cellType(for indexPath: IndexPath) -> LessonCellType {
@@ -48,5 +49,9 @@ class LessonViewModel {
         } else {
             return .text
         }
+    }
+    
+    func imageCellViewModel(for paragraph: String) -> LessonTVCellViewModel {
+        return LessonTVCellViewModel(imageName: paragraph)
     }
 }

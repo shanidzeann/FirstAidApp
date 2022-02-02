@@ -9,10 +9,16 @@ import Foundation
 
 class SceneViewModel {
     
-    var situation: SituationDB
-    #warning("переместить id в структуру и файл")
-    var id: Int?
+    // MARK: - Properties
     
+    struct Alert {
+        let title = "Правила"
+        let text = "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено."
+    }
+    
+    var delegate: ViewModelDelegate?
+    let alert = Alert()
+    var situation: SituationDB
     lazy var scene = Box(situation.scenes?[0] as? SceneDB)
     
     var text: String? {
@@ -27,6 +33,15 @@ class SceneViewModel {
         return scene.value?.choices
     }
     
+    // MARK: - Init
+    
+    init(_ situation: SituationDB, delegate: ViewModelDelegate?) {
+        self.situation = situation
+        self.delegate = delegate
+    }
+    
+    // MARK: - Methods
+    
     func choiceText(_ id: Int) -> String? {
         let choice = choices?[id] as? ChoiceDB
         return choice?.text
@@ -35,10 +50,6 @@ class SceneViewModel {
     func nextSceneID(_ id: Int) -> Int? {
         let choice = choices?[id - 1] as? ChoiceDB
         return Int(choice?.destination ?? 0)
-    }
-    
-    init(_ situation: SituationDB) {
-        self.situation = situation
     }
     
     func setFirstScene() {

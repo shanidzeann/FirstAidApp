@@ -9,8 +9,16 @@ import Foundation
 
 class SituationsViewModel {
     
+    // MARK: - Properties
+    
     let db = DatabaseManager()
     var situations: [SituationDB]?
+    
+    // MARK: - Methods
+    
+    func numberOfRows() -> Int {
+        return situations!.count
+    }
     
     func loadSituations() {
         if !UserDefaults.standard.bool(forKey: "QuestExecuteOnce") {
@@ -21,22 +29,14 @@ class SituationsViewModel {
             }
         }
         situations = db.loadSituations()
-        print("все ок")
     }
     
-    func numberOfRows() -> Int {
-        return situations!.count
+    func saveEnding(situation: SituationDB, isFinished: Bool, isSuccess: Bool) {
+        situation.isFinished = isFinished
+        situation.isSuccess = isSuccess
+        db.save()
     }
     
-        func saveEnding(id: Int, isFinished: Bool, isSuccess: Bool) {
-            situations?[id].isFinished = isFinished
-            situations?[id].isSuccess = isSuccess
-            //DataHelper.shared.saveData(situations, at: dataFilePath)
-            db.save()
-        }
-    
-    
-    #warning("переделать в свойство")
     func selectedSituation(at indexPath: IndexPath) -> SituationDB {
         return (situations?[indexPath.row])!
     }
@@ -46,8 +46,19 @@ class SituationsViewModel {
         return SituationsTVCellViewModel(situation: situation)
     }
     
-    func viewModelForSelectedRow(for situation: SituationDB) -> SceneViewModel? {
-        return SceneViewModel(situation)
+    func viewModelForSelectedRow(for situation: SituationDB, delegate: ViewModelDelegate?) -> SceneViewModel? {
+        return SceneViewModel(situation, delegate: delegate)
+    }
+    
+}
+
+
+// MARK: - Receive data about quest completion
+
+#warning("норм ли так делать в мввм")
+extension SituationsViewModel: ViewModelDelegate {
+    func endReceived(situation: SituationDB, isFinished: Bool, isSuccess: Bool) {
+        saveEnding(situation: situation, isFinished: isFinished, isSuccess: isSuccess)
     }
     
 }

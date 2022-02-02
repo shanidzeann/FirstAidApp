@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - Lesson
-
 /// Represents a first aid lesson
 struct Lesson: Codable {
     let title: String

@@ -17,7 +17,7 @@ class TheoryTableViewCell: UITableViewCell {
     
     var done = false
     
-    weak var viewModel: TheoryTVCellViewModelType? {
+    weak var viewModel: TheoryTVCellViewModel? {
         willSet(viewModel) {
             label.text = viewModel?.title
             done = viewModel?.done ?? false

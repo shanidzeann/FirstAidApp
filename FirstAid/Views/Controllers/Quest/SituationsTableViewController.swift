@@ -11,20 +11,13 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    #warning("подумать про optionals")
-    private var viewModel: SituationsViewModel! {
-        didSet {
-            viewModel?.loadSituations()
-            print("ситуации есть")
-        }
-    }
+    private var viewModel = SituationsViewModel()
     
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        setViewModel()
+        loadSituations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,11 +28,9 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Hepler Methods
     
-    func setViewModel() {
-        viewModel = SituationsViewModel()
-        print("вьюмодел есть")
+    func loadSituations() {
+        viewModel.loadSituations()
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -48,16 +39,13 @@ class SituationsTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as! SceneViewController
             let selectedSituation = viewModel.selectedSituation(at: indexPath)
-            vc.viewModel = viewModel.viewModelForSelectedRow(for: selectedSituation)
-            vc.viewModel?.id = indexPath.row // это потом убрать
-            vc.delegate = self // и это может тоже
+            vc.viewModel = viewModel.viewModelForSelectedRow(for: selectedSituation, delegate: viewModel)
         }
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.numberOfRows())
         return viewModel.numberOfRows()
     }
     
@@ -75,23 +63,24 @@ class SituationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let done = viewModel.selectedSituation(at: indexPath).isFinished
+        let situation = viewModel.selectedSituation(at: indexPath)
         
-        if done {
+        if situation.isFinished {
             let alert = UIAlertController(title: "Начать заново?", message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(
-                title: "Отменить",
-                style: .cancel) { _ in
-                    tableView.deselectRow(at: indexPath, animated: true)
-                })
-            alert.addAction(UIAlertAction(
-                title: "Да",
-                style: .destructive) { [weak self] _ in
-                    self?.performSegue(withIdentifier: "sceneSegue", sender: self)
-                    self?.endReceived(id: indexPath.row, isFinished: false, isSuccess: false)
-                })
-            present(alert, animated: true, completion: nil)
+            var action = UIAlertAction(title: "Отменить", style: .cancel) { _ in
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
             
+            alert.addAction(action)
+            
+            action = UIAlertAction(title: "Да", style: .destructive) { [weak self] _ in
+                self?.performSegue(withIdentifier: "sceneSegue", sender: self)
+                self?.viewModel.endReceived(situation: situation, isFinished: false, isSuccess: false)
+                }
+            
+            alert.addAction(action)
+            
+            present(alert, animated: true, completion: nil)
         } else {
             performSegue(withIdentifier: "sceneSegue", sender: self)
         }
@@ -101,18 +90,5 @@ class SituationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
- 
 
-}
-
-// MARK: - Receive data about quest completion from SceneVC
-
-extension SituationsTableViewController: CanReceive {
-    // TODO: - и тут подумать
-    func endReceived(id: Int, isFinished: Bool, isSuccess: Bool) {
-        viewModel.saveEnding(id: id, isFinished: isFinished, isSuccess: isSuccess)
-//        situationsPlist?[id].isFinished = isFinished
-//        situationsPlist?[id].isSuccess = isSuccess
-//        DataHelper.shared.saveData(situationsPlist, at: dataFilePath)
-    }
 }

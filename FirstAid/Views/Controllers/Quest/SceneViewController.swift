@@ -23,7 +23,6 @@ class SceneViewController: UIViewController {
     var pauseButton: UIBarButtonItem!
     var restartButton: UIBarButtonItem!
     
-    var delegate: CanReceive?
     var viewModel: SceneViewModel?
     
     // MARK: - VC Lifecycle
@@ -37,9 +36,7 @@ class SceneViewController: UIViewController {
         configureButton(middleButton)
         configureButton(bottomButton)
         configureTimer()
-
-        myAlert.showAlert(with: "Правила", message: "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено.", on: self)
-        
+        showAlert()
         setUpBindings()
     }
     
@@ -67,7 +64,7 @@ class SceneViewController: UIViewController {
         guard viewModel?.choices?.count == 3 else {
             countdownTimer.pause()
             hideButtons(true)
-            delegate?.endReceived(id: (viewModel?.id)!, isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
+            viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
             return
         }
         
@@ -75,6 +72,11 @@ class SceneViewController: UIViewController {
         topButton.setTitle(viewModel?.choiceText(0), for: .normal)
         middleButton.setTitle(viewModel?.choiceText(1), for: .normal)
         bottomButton.setTitle(viewModel?.choiceText(2), for: .normal)
+    }
+    
+    func showAlert() {
+        guard let viewModel = viewModel else { return }
+        myAlert.showAlert(with: viewModel.alert.title, message: viewModel.alert.text, on: self)
     }
     
     // MARK: - User actions
@@ -114,7 +116,7 @@ class SceneViewController: UIViewController {
     @objc private func didTapRestart() {
         setFirstScene()
         sceneLabel.isHidden = false
-        delegate?.endReceived(id: (viewModel?.id)!, isFinished: false, isSuccess: false)
+        viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: false, isSuccess: false)
     }
     
     @objc private func didTapCancel() {

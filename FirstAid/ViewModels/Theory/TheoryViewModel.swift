@@ -7,31 +7,28 @@
 
 import Foundation
 
-enum MenuState {
-    case read, unread, all
-}
-
-class TheoryViewModel: TheoryViewModelType {
+class TheoryViewModel {
     
-    func cellViewModel(forIndexPath indexPath: IndexPath) -> TheoryTVCellViewModelType? {
-        let lesson = filteredLessons![indexPath.row]
-        return TheoryTVCellViewModel(lesson: lesson)
-    }
+    // MARK: - Properties
     
-    func lessonViewModel(for lesson: Lesson) -> LessonViewModel? {
-        return LessonViewModel(lesson)
-    }
-    
-    func numberOfRows() -> Int {
-        return filteredLessons!.count
+    enum MenuState {
+        case read, unread, all
     }
     
     var allLessons: [Lesson]?
     var filteredLessons: [Lesson]?
-    
     var menuState: MenuState?
-    
+    let menuData = ["Показать только прочитанные",
+                    "Показать только непрочитанные",
+                    "Показать все"]
+    let titleForHeader = "Первая помощь при ..."
     let allDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("AllTheory.plist")
+    
+    // MARK: - Work with lessons
+    
+    func numberOfRows() -> Int {
+        return filteredLessons!.count
+    }
     
     func createLessons() {
         if let data = DataHelper.shared.loadJson(filename: "theory") {
@@ -43,14 +40,17 @@ class TheoryViewModel: TheoryViewModelType {
     }
     
     func loadLessons() {
-        #warning("подумать башкой")
         allLessons = DataHelper.shared.loadData(from: allDataFilePath)
+        filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
+    }
+    
+    func refreshFilteredLessons() {
         filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
     }
     
     func filterLessons(at index: Int) {
         
-        loadLessons()
+        refreshFilteredLessons()
         guard let allLessons = allLessons else { return }
         
         switch index {
@@ -90,7 +90,17 @@ class TheoryViewModel: TheoryViewModelType {
             allLessons?[itemID].isFinished = !done
             DataHelper.shared.saveData(allLessons, at: allDataFilePath)
         }
-        
+    }
+    
+    // MARK: - Get ViewModels
+    
+    func cellViewModel(forIndexPath indexPath: IndexPath) -> TheoryTVCellViewModel? {
+        let lesson = filteredLessons![indexPath.row]
+        return TheoryTVCellViewModel(lesson: lesson)
+    }
+    
+    func lessonViewModel(for lesson: Lesson) -> LessonViewModel? {
+        return LessonViewModel(lesson)
     }
     
 }

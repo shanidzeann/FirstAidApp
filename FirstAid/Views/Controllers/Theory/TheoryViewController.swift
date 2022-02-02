@@ -12,26 +12,18 @@ class TheoryViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var viewModel: TheoryViewModelType! {
-        didSet {
-            viewModel?.createLessons()
-            viewModel?.loadLessons()
-        }
-    }
+    private var viewModel = TheoryViewModel()
     
     // MARK: - UI
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: Identifiers.tableViewCell.rawValue)
         return tableView
     }()
     
     let menu: DropDown = {
         let menu = DropDown()
-        menu.dataSource = ["Показать только прочитанные",
-                           "Показать только непрочитанные",
-                           "Показать все"]
         return menu
     }()
     
@@ -43,7 +35,7 @@ class TheoryViewController: UIViewController {
         setBackgroundColor()
         addTableView()
         configureNavigationBar()
-        setViewModel()
+        setData()
         dropDownMenuWork()
     }
     
@@ -82,8 +74,10 @@ class TheoryViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    func setViewModel() {
-        viewModel = TheoryViewModel()
+    func setData() {
+        viewModel.createLessons()
+        viewModel.loadLessons()
+        menu.dataSource = viewModel.menuData
     }
     
     func configureNavigationBar() {
@@ -104,9 +98,9 @@ extension TheoryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TheoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tableViewCell.rawValue, for: indexPath) as? TheoryTableViewCell
         
-        guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
+        guard let tableViewCell = cell else { return UITableViewCell() }
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
         tableViewCell.viewModel = cellVM
         
@@ -114,7 +108,7 @@ extension TheoryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Первая помощь при ..."
+        return viewModel.titleForHeader
     }
     
 }
@@ -133,7 +127,6 @@ extension TheoryViewController: UITableViewDelegate {
         
         let navVC = UINavigationController(rootViewController: vc)
         navVC.modalPresentationStyle = .fullScreen
-        
         present(navVC, animated: true, completion: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -150,12 +143,12 @@ extension TheoryViewController: UITableViewDelegate {
         
         let action = UIContextualAction(style: .destructive, title: "Done") { [weak self] (action, view, completion) in
             
-            guard let self = self,
-                  let viewModel = self.viewModel else { return }
+            guard let self = self else { return }
+            let viewModel = self.viewModel
             
             viewModel.toggleCompletion(of: &lesson, at: indexPath)
             
-            let cell = self.tableView.cellForRow(at: indexPath) as! TheoryTableViewCell
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
             cell.done = lesson.isFinished
             
             switch viewModel.menuState {

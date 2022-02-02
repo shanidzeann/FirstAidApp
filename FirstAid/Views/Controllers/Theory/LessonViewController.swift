@@ -11,9 +11,9 @@ class LessonViewController: UIViewController {
     
     // MARK: - Properties
     
-    var viewModel: LessonViewModel! {
+    var viewModel: LessonViewModel? {
         willSet(viewModel) {
-            titleLabel.text = viewModel.titleText
+            titleLabel.text = viewModel?.titleText
         }
     }
     
@@ -88,13 +88,13 @@ class LessonViewController: UIViewController {
 extension LessonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        return viewModel?.numberOfRows() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let paragraph = viewModel.paragraph(at: indexPath)
-        switch viewModel.cellType(for: indexPath) {
+        guard let paragraph = viewModel?.paragraph(at: indexPath) else { return UITableViewCell() }
+        switch viewModel?.cellType(for: indexPath) {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tableViewCell.rawValue, for: indexPath)
             cell.textLabel?.text = paragraph
@@ -103,9 +103,11 @@ extension LessonViewController: UITableViewDataSource {
             return cell
         case .image:
             let cell = tableView.dequeueReusableCell(withIdentifier: LessonImageTableViewCell.identifier, for: indexPath) as! LessonImageTableViewCell
-            let cellVM = viewModel.imageCellViewModel(for: paragraph)
+            let cellVM = viewModel?.imageCellViewModel(for: paragraph)
             cell.viewModel = cellVM
             return cell
+        case .none:
+            return UITableViewCell()
         }
     }
 }
@@ -120,11 +122,10 @@ extension LessonViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // TODO: Fix images
-        switch viewModel.cellType(for: indexPath) {
+        switch viewModel?.cellType(for: indexPath) {
         case .image:
             return 200
-        case .text:
+        case .text, .none:
             return UITableView.automaticDimension
         }
     }

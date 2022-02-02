@@ -23,7 +23,6 @@ class SituationTableViewCell: UITableViewCell {
         }
     }
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -34,16 +33,6 @@ class SituationTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-//        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-//        label.widthAnchor.constraint(equalToConstant: contentView.frame.width - 40).isActive = true
-//        label.heightAnchor.constraint(equalToConstant: contentView.frame.height).isActive = true
-//    }
     
     func setAccessoryView() {
         let successImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))

@@ -144,11 +144,9 @@
 				892936CC272363F00067CD25 /* Models */,
 				892936CA272363C80067CD25 /* Views */,
 				89E03E94278B416A00BC619F /* ViewModels */,
-				89F0609327A43AB200F10E18 /* DataModel */,
 				89793115272AAAE200476E45 /* Managers */,
 				89E03E96278B41E100BC619F /* Protocols */,
 				892936CB272363D80067CD25 /* Supporting Files */,
-				89ACEE80278B8B8F008DD3C9 /* Constants.swift */,
 			);
 			path = FirstAid;
 			sourceTree = "<group>";
@@ -176,6 +174,7 @@
 		892936CB272363D80067CD25 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				89ACEE80278B8B8F008DD3C9 /* Constants.swift */,
 				89793113272AAA8900476E45 /* Data Resourses */,
 				892936C327235C2E0067CD25 /* Info.plist */,
 				892936BE27235C2E0067CD25 /* Assets.xcassets */,
@@ -188,6 +187,7 @@
 			children = (
 				89640D8C27276AFC000D2A12 /* QuestModels.swift */,
 				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
+				89F0609327A43AB200F10E18 /* DataModel */,
 			);
 			path = Models;
 			sourceTree = "<group>";

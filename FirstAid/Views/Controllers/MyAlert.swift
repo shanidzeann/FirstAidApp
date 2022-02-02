@@ -31,9 +31,10 @@ class MyAlert {
     }()
     
     private var myTargetView: UIView?
-    private weak var myVc: SceneViewController?
+    private var myVc: SceneViewController?
     
     func showAlert(with title: String, message: String, on viewController: UIViewController) {
+        
         guard let targerView = viewController.view,
               let vc = viewController as? SceneViewController else {
                   return
@@ -46,9 +47,10 @@ class MyAlert {
         myVc?.sceneLabel.isHidden = true
         
         backgroundView.frame = targerView.bounds
-        targerView.addSubview(backgroundView)
         
+        targerView.addSubview(backgroundView)
         targerView.addSubview(alertView)
+        
         alertView.frame = CGRect(x: 40,
                                  y: -30,
                                  width: targerView.frame.size.width - 80,
@@ -81,9 +83,7 @@ class MyAlert {
         
         button.setTitle("Начать", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.addTarget(self,
-                         action: #selector(dismissAlert),
-                         for: .touchUpInside)
+        button.addTarget(self, action: #selector(dismissAlert), for: .touchUpInside)
         alertView.addSubview(button)
         
         UIView.animate(withDuration: 0.25) {
@@ -95,7 +95,6 @@ class MyAlert {
                 }
             }
         }
-        
     }
     
     @objc func dismissAlert() {

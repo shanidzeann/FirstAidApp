@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// Represents a first aid situation (quest)
 struct Situation: Codable {
     let title: String
