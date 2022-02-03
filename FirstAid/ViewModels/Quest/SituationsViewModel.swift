@@ -46,7 +46,7 @@ class SituationsViewModel {
         return SituationsTVCellViewModel(situation: situation)
     }
     
-    func viewModelForSelectedRow(for situation: SituationDB, delegate: ViewModelDelegate?) -> SceneViewModel? {
+    func situationViewModel(for situation: SituationDB, delegate: ViewModelDelegate?) -> SceneViewModel? {
         return SceneViewModel(situation, delegate: delegate)
     }
     

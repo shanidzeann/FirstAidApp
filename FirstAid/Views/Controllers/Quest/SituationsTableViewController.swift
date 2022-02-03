@@ -39,7 +39,7 @@ class SituationsTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as! SceneViewController
             let selectedSituation = viewModel.selectedSituation(at: indexPath)
-            vc.viewModel = viewModel.viewModelForSelectedRow(for: selectedSituation, delegate: viewModel)
+            vc.viewModel = viewModel.situationViewModel(for: selectedSituation, delegate: viewModel)
         }
     }
     
