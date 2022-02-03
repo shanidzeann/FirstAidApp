@@ -10,7 +10,6 @@ import Foundation
 class NewsTVCellViewModel {
     
     let networkManager = NetworkManager()
-    
     private var article: Article
     
     var title: String {

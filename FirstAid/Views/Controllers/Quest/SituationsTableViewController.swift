@@ -11,6 +11,16 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
+    struct TableView {
+        struct CellIdentifiers {
+            static let questCell = "questCell"
+        }
+    }
+    
+    struct SegueIdentifiers {
+        static let sceneSegue = "sceneSegue"
+    }
+    
     private var viewModel = SituationsViewModel()
     
     // MARK: - VC Lifecycle
@@ -34,7 +44,7 @@ class SituationsTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard segue.identifier == "sceneSegue" else { return }
+        guard segue.identifier == SegueIdentifiers.sceneSegue else { return }
         
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as! SceneViewController
@@ -50,7 +60,7 @@ class SituationsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "questCell", for: indexPath) as! SituationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.questCell, for: indexPath) as! SituationTableViewCell
         
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
         cell.SituationViewModel = cellVM
@@ -74,7 +84,7 @@ class SituationsTableViewController: UITableViewController {
             alert.addAction(action)
             
             action = UIAlertAction(title: "Да", style: .destructive) { [weak self] _ in
-                self?.performSegue(withIdentifier: "sceneSegue", sender: self)
+                self?.performSegue(withIdentifier: SegueIdentifiers.sceneSegue, sender: self)
                 self?.viewModel.endReceived(situation: situation, isFinished: false, isSuccess: false)
                 }
             
@@ -82,7 +92,7 @@ class SituationsTableViewController: UITableViewController {
             
             present(alert, animated: true, completion: nil)
         } else {
-            performSegue(withIdentifier: "sceneSegue", sender: self)
+            performSegue(withIdentifier: SegueIdentifiers.sceneSegue, sender: self)
         }
         
     }

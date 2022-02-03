@@ -10,8 +10,12 @@ import Foundation
 class NewsViewModel {
     
     let networkManager = NetworkManager()
-    
     private var articles: [Article]?
+    
+    var state: State {
+        return networkManager.state
+    }
+    
     
     func getArticles(completion: @escaping () -> ()) {
         networkManager.getArticles { [weak self] result in
@@ -24,10 +28,6 @@ class NewsViewModel {
             }
             
         }
-    }
-    
-    var state: State {
-        return networkManager.state
     }
     
     func numberOfRows() -> Int {

@@ -11,6 +11,18 @@ class NewsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
+    struct TableView {
+        struct CellIdentifiers {
+            static let resultCell = "ResultCell"
+            static let nothingFoundCell = "NothingFoundCell"
+            static let loadingCell = "LoadingCell"
+        }
+    }
+    
+    struct SegueIdentifiers {
+        static let articleSegue = "articleSegue"
+    }
+    
     let viewModel = NewsViewModel()
     
     // MARK: - VC Lifecycle
@@ -18,14 +30,8 @@ class NewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var cellNib = UINib(nibName: "NothingFoundCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "nothingFoundCell")
-        
-        cellNib = UINib(nibName: "LoadingCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "loadingCell")
-        
+        registerCells()
         getArticles()
-        
     }
     
     // MARK: - Methods
@@ -37,6 +43,13 @@ class NewsTableViewController: UITableViewController {
         }
     }
     
+    func registerCells() {
+        var cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
+        
+        cellNib = UINib(nibName: TableView.CellIdentifiers.loadingCell, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
+    }
     
     // MARK: - Table view data source
     
@@ -49,7 +62,7 @@ class NewsTableViewController: UITableViewController {
         switch viewModel.state {
         case .loading:
             tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loadingCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.loadingCell, for: indexPath)
             cell.backgroundColor = .secondarySystemBackground
             let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
             spinner.startAnimating()
@@ -57,13 +70,13 @@ class NewsTableViewController: UITableViewController {
             
         case .noResults:
             tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: "nothingFoundCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
             cell.backgroundColor = .secondarySystemBackground
             return cell
             
         case .results:
             tableView.separatorStyle = .singleLine
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? NewsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.resultCell, for: indexPath) as? NewsTableViewCell
             guard let cell = cell else { return UITableViewCell() }
             cell.viewModel = viewModel.cellViewModel(forIndexPath: indexPath)
             return cell
@@ -78,13 +91,13 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "articleSegue", sender: self)
+        performSegue(withIdentifier: SegueIdentifiers.articleSegue, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "articleSegue" else { return }
+        guard segue.identifier == SegueIdentifiers.articleSegue else { return }
         
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as? ArticleViewController
@@ -92,6 +105,5 @@ class NewsTableViewController: UITableViewController {
             vc?.viewModel = viewModel.articleViewModel(for: article)
         }
     }
-    
     
 }
