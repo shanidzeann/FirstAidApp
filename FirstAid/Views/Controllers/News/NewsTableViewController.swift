@@ -34,10 +34,7 @@ class NewsTableViewController: UITableViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         
         registerCells()
-        
         getArticles()
-        
-        
     }
     
     // MARK: - Methods

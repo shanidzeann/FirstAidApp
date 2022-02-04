@@ -121,8 +121,8 @@ extension TheoryViewController: UITableViewDelegate {
         
         let vc = LessonViewController()
         
-        let selectedLesson = viewModel.selectedLesson(at: indexPath)
-        let lessonVM = viewModel.lessonViewModel(for: selectedLesson)
+        guard let selectedLesson = viewModel.selectedLesson(at: indexPath),
+              let lessonVM = viewModel.lessonViewModel(for: selectedLesson) else { return }
         vc.viewModel = lessonVM
         
         let navVC = UINavigationController(rootViewController: vc)
@@ -139,7 +139,7 @@ extension TheoryViewController: UITableViewDelegate {
     
     func doneAction(at indexPath: IndexPath) -> UIContextualAction {
         
-        var lesson = viewModel.selectedLesson(at: indexPath)
+        guard var lesson = viewModel.selectedLesson(at: indexPath) else { return UIContextualAction() }
         
         let action = UIContextualAction(style: .destructive, title: "Done") { [weak self] (action, view, completion) in
             

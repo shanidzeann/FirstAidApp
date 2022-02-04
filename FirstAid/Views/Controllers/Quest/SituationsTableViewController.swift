@@ -46,9 +46,9 @@ class SituationsTableViewController: UITableViewController {
         
         guard segue.identifier == SegueIdentifiers.sceneSegue else { return }
         
-        if let indexPath = tableView.indexPathForSelectedRow {
+        if let indexPath = tableView.indexPathForSelectedRow,
+           let selectedSituation = viewModel.selectedSituation(at: indexPath) {
             let vc = segue.destination as! SceneViewController
-            let selectedSituation = viewModel.selectedSituation(at: indexPath)
             vc.viewModel = viewModel.situationViewModel(for: selectedSituation, delegate: viewModel)
         }
     }
@@ -73,7 +73,7 @@ class SituationsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let situation = viewModel.selectedSituation(at: indexPath)
+        guard let situation = viewModel.selectedSituation(at: indexPath) else { return }
         
         if situation.isFinished {
             let alert = UIAlertController(title: "Начать заново?", message: nil, preferredStyle: .actionSheet)

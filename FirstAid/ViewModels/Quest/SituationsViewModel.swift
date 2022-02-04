@@ -17,7 +17,7 @@ class SituationsViewModel {
     // MARK: - Methods
     
     func numberOfRows() -> Int {
-        return situations!.count
+        return situations?.count ?? 0
     }
     
     func loadSituations() {
@@ -37,12 +37,12 @@ class SituationsViewModel {
         db.save()
     }
     
-    func selectedSituation(at indexPath: IndexPath) -> SituationDB {
-        return (situations?[indexPath.row])!
+    func selectedSituation(at indexPath: IndexPath) -> SituationDB? {
+        return situations?[indexPath.row]
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> SituationsTVCellViewModel? {
-        let situation = situations![indexPath.row]
+        guard let situation = situations?[indexPath.row] else { return nil }
         return SituationsTVCellViewModel(situation: situation)
     }
     

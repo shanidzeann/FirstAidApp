@@ -32,7 +32,7 @@ class NotificationManager: ObservableObject {
         let content = UNMutableNotificationContent() 
         
         content.title = "First Aid"
-        content.body = "Самое время повторить изученный материал!"
+        content.body = "Самое время повторить изученный материал!(нет)"
         content.sound = UNNotificationSound.default
         content.badge = 1
         

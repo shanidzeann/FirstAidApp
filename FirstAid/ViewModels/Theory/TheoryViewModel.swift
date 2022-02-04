@@ -27,7 +27,7 @@ class TheoryViewModel {
     // MARK: - Work with lessons
     
     func numberOfRows() -> Int {
-        return filteredLessons!.count
+        return filteredLessons?.count ?? 0
     }
     
     func createLessons() {
@@ -66,8 +66,8 @@ class TheoryViewModel {
         }
     }
     
-    func selectedLesson(at indexPath: IndexPath) -> Lesson {
-        return filteredLessons![indexPath.row]
+    func selectedLesson(at indexPath: IndexPath) -> Lesson? {
+        return filteredLessons?[indexPath.row]
     }
     
     func removeLesson(at indexPath: IndexPath) {
@@ -95,7 +95,7 @@ class TheoryViewModel {
     // MARK: - Get ViewModels
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> TheoryTVCellViewModel? {
-        let lesson = filteredLessons![indexPath.row]
+        guard let lesson = filteredLessons?[indexPath.row] else { return nil }
         return TheoryTVCellViewModel(lesson: lesson)
     }
     
