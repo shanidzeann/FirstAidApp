@@ -10,7 +10,6 @@ import Foundation
 class NetworkManager {
     
     private(set) var state: State = .noResults
-    
     let healthHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=ru&category=health&apiKey=\(yourKey)")
     
     func getArticles(completion: @escaping (Result<[Article], Error>) -> Void) {

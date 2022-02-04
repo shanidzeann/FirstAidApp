@@ -308,15 +308,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="XtW-9J-G6j">
+                                <rect key="frame" x="197" y="255" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-HT-S78">
+                                <rect key="frame" x="20" y="152" width="374" height="225.5"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrG-n5-Bv1">
                                 <rect key="frame" x="20" y="108" width="374" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-HT-S78">
-                                <rect key="frame" x="20" y="152" width="374" height="225.5"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-cm-yV0">
                                 <rect key="frame" x="136.5" y="741.5" width="141" height="46.5"/>
                                 <state key="normal" title="Button"/>
@@ -333,9 +336,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="XtW-9J-G6j">
-                                <rect key="frame" x="197" y="255" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UGk-kW-AEK"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -360,6 +360,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="htp-yS-vFP"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="XtW-9J-G6j" id="5cb-u9-wpt"/>
                         <outlet property="articleImageView" destination="1dJ-HT-S78" id="7Sb-eR-NfB"/>
                         <outlet property="articleTitleLabel" destination="OrG-n5-Bv1" id="Ihz-aj-5Gx"/>
                         <outlet property="descriptionLabel" destination="Wlm-CR-sJB" id="X7D-WM-wAy"/>

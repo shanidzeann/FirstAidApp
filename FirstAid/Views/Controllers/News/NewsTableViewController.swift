@@ -30,17 +30,28 @@ class NewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        
         registerCells()
+        
         getArticles()
+        
+        
     }
     
     // MARK: - Methods
     func getArticles() {
         viewModel.getArticles { [weak self] in
             DispatchQueue.main.async {
+                self?.tableView.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             }
         }
+    }
+    
+    @objc private func didPullToRefresh() {
+        getArticles()
     }
     
     func registerCells() {

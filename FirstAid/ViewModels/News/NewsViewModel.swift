@@ -18,6 +18,7 @@ class NewsViewModel {
     
     
     func getArticles(completion: @escaping () -> ()) {
+        articles?.removeAll()
         networkManager.getArticles { [weak self] result in
             switch result {
             case .success(let articles):

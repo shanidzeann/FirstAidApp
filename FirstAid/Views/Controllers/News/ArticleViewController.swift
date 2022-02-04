@@ -8,17 +8,18 @@
 import UIKit
 
 class ArticleViewController: UIViewController {
-
+    
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var articleImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var viewModel: ArticleViewModel?
     var downloadTask: URLSessionDownloadTask?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         getData()
     }
     
@@ -30,8 +31,15 @@ class ArticleViewController: UIViewController {
         articleTitleLabel.text = viewModel?.title
         descriptionLabel.text = viewModel?.desctiption
         if let imageURL = viewModel?.imageURL, let url = URL(string: imageURL) {
-            downloadTask = articleImageView.loadImage(url: url)
+            downloadTask = articleImageView.loadImage(url: url, completion: {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
+            })
+        } else {
+            activityIndicator.stopAnimating()
         }
+        
     }
     
     @IBAction func openInSafari(_ sender: Any) {
