@@ -151,8 +151,8 @@ class SceneViewController: UIViewController {
     
     func configureButton(_ button: UIButton) {
         button.layer.cornerRadius = 10
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.minimumScaleFactor = 0.5
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.lineBreakStrategy = .hangulWordPriority
     }
     
     func configureNavigationBar() {
