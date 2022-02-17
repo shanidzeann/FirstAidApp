@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TheoryTableViewCell: UITableViewCell {
     
@@ -33,20 +34,16 @@ class TheoryTableViewCell: UITableViewCell {
         contentView.addSubview(label)
         label.numberOfLines = 0
         
+        label.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalToSuperview()
+            make.height.equalTo(80)
+        }
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        label.widthAnchor.constraint(equalToConstant: contentView.frame.width - 40).isActive = true
-        label.heightAnchor.constraint(equalToConstant: contentView.frame.height).isActive = true
     }
     
     func setBackground() {

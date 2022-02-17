@@ -18,9 +18,7 @@ class TheoryViewModel {
     var allLessons: [Lesson]?
     var filteredLessons: [Lesson]?
     var menuState: MenuState?
-    let menuData = ["Показать только прочитанные",
-                    "Показать только непрочитанные",
-                    "Показать все"]
+    
     let titleForHeader = "Первая помощь при ..."
     let allDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("AllTheory.plist")
     

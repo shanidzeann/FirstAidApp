@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import DropDown
 
 class TheoryViewController: UIViewController {
     
@@ -22,11 +21,6 @@ class TheoryViewController: UIViewController {
         return tableView
     }()
     
-    let menu: DropDown = {
-        let menu = DropDown()
-        return menu
-    }()
-    
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
@@ -36,7 +30,6 @@ class TheoryViewController: UIViewController {
         addTableView()
         configureNavigationBar()
         setData()
-        dropDownMenuWork()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,19 +40,9 @@ class TheoryViewController: UIViewController {
     
     // MARK: - DropDown Menu Functionality
     
-    @objc private func filterTapped() {
-        menu.show()
-    }
-    
-    func dropDownMenuWork() {
-        menu.anchorView = navigationItem.rightBarButtonItem
-        
-        menu.selectionAction = { [weak self] index, _ in
-            guard let viewModel = self?.viewModel else { return }
-            
-            viewModel.filterLessons(at: index)
-            self?.tableView.reloadData()
-        }
+    func menuWork(index: Int) {
+        viewModel.filterLessons(at: index)
+        tableView.reloadData()
     }
     
     // MARK: - Helper Methods
@@ -77,15 +60,24 @@ class TheoryViewController: UIViewController {
     func setData() {
         viewModel.createLessons()
         viewModel.loadLessons()
-        menu.dataSource = viewModel.menuData
     }
     
     func configureNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "ellipsis"),
-            style: .plain,
-            target: self,
-            action: #selector(filterTapped))
+        let showRead = UIAction(title: "Показать прочитанные") { [weak self] (action) in
+            self?.menuWork(index: 0)
+        }
+        
+        let showUnread = UIAction(title: "Показать непрочитанные") { [weak self] (action) in
+            self?.menuWork(index: 1)
+        }
+        
+        let showAll = UIAction(title: "Показать все") { [weak self] (action) in
+            self?.menuWork(index: 2)
+        }
+        
+        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: [showRead, showUnread, showAll])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: menu)
     }
 }
 

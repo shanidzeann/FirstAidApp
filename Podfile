@@ -6,7 +6,7 @@ target 'FirstAid' do
   use_frameworks!
 
   # Pods for FirstAid
-  pod 'DropDown'
+  pod 'SnapKit'
   pod 'SRCountdownTimer'
 
 end
