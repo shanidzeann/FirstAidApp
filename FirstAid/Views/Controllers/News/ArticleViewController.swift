@@ -37,9 +37,9 @@ class ArticleViewController: UIViewController {
     }()
     
     private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         indicator.hidesWhenStopped = true
-        
+        indicator.startAnimating()
         return indicator
     }()
     
