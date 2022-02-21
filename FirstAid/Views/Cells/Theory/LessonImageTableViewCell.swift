@@ -19,7 +19,8 @@ class LessonImageTableViewCell: UITableViewCell {
     
     weak var viewModel: LessonTVCellViewModel? {
         willSet(viewModel) {
-            image = UIImage(named: viewModel!.imageName)
+            guard let viewModel = viewModel else { return }
+            image = UIImage(named: viewModel.imageName)
         }
     }
     
