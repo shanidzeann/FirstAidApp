@@ -55,7 +55,6 @@ class SituationsViewModel {
 
 // MARK: - Receive data about quest completion
 
-#warning("норм ли так делать в мввм")
 extension SituationsViewModel: ViewModelDelegate {
     func endReceived(situation: SituationDB, isFinished: Bool, isSuccess: Bool) {
         saveEnding(situation: situation, isFinished: isFinished, isSuccess: isSuccess)
