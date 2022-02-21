@@ -96,15 +96,15 @@ class SceneViewController: UIViewController {
             message: "Продолжить квест?\nЕсли Вы покинете игру, прогресс будет потерян",
             preferredStyle: .alert)
         
-        vc.addAction(UIAlertAction(title: "Выйти", style: .cancel, handler: { [weak self] _ in
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.tabBarController?.tabBar.isHidden = false
-        }))
-        
-        vc.addAction(UIAlertAction(title: "Продолжить", style: .destructive, handler: { [weak self] _ in
+        vc.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: { [weak self] _ in
             self?.countdownTimer.resume()
             self?.hideButtons(false)
             self?.sceneLabel.isHidden = false
+        }))
+        
+        vc.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { [weak self] _ in
+            self?.navigationController?.popToRootViewController(animated: true)
+            self?.tabBarController?.tabBar.isHidden = false
         }))
         
         vc.addAction(UIAlertAction(title: "Начать заново", style: .destructive, handler: { [weak self] _ in

@@ -79,7 +79,7 @@
 		1811824779F2C07FE5D904AF6F75769F /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
 		25848BF6A32FB8BAFA2008BEFDAAAACB /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
 		28786C8140E73F03C44B4EDB03930808 /* Pods-FirstAid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FirstAid.release.xcconfig"; sourceTree = "<group>"; };
-		2C141EF8F00A52310FD12EFCB5A6D285 /* Pods-FirstAid */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FirstAid"; path = Pods_FirstAid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C141EF8F00A52310FD12EFCB5A6D285 /* Pods_FirstAid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstAid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB225E87AFD320F953FCCC35769752D /* SRCountdownTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SRCountdownTimer.debug.xcconfig; sourceTree = "<group>"; };
 		3709609B0BD0A47B132A44F84F27F527 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPriortizable.swift; path = Source/ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
 		38919D31D822187336589B779374DB4B /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		9BBF89622B0B2F9BB224225222AA5504 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C141EF8F00A52310FD12EFCB5A6D285 /* Pods-FirstAid */,
+				2C141EF8F00A52310FD12EFCB5A6D285 /* Pods_FirstAid.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
 				8E22AA3A49DCC60F5733818749BEE047 /* SRCountdownTimer */,
 			);
@@ -387,7 +387,7 @@
 			);
 			name = "Pods-FirstAid";
 			productName = Pods_FirstAid;
-			productReference = 2C141EF8F00A52310FD12EFCB5A6D285 /* Pods-FirstAid */;
+			productReference = 2C141EF8F00A52310FD12EFCB5A6D285 /* Pods_FirstAid.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A32423E0D02E0A41B4E900FB52F6D139 /* SRCountdownTimer */ = {
