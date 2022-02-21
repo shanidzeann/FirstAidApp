@@ -33,7 +33,6 @@ class NewsTableViewCell: UITableViewCell {
         newsImageView.clipsToBounds = true
     }
 
-
     override func prepareForReuse() {
         super.prepareForReuse()
         downloadTask?.cancel()

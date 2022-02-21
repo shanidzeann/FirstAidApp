@@ -16,20 +16,6 @@ class NewsViewModel {
         return networkManager.state
     }
     
-    func getArticles(completion: @escaping () -> ()) {
-        articles?.removeAll()
-        networkManager.getArticles { [weak self] result in
-            switch result {
-            case .success(let articles):
-                self?.articles = articles
-                completion()
-            case .failure(let error):
-                print(error)
-            }
-            
-        }
-    }
-    
     func numberOfRows() -> Int {
         switch networkManager.state {
         case .loading:
@@ -52,6 +38,20 @@ class NewsViewModel {
     
     func articleViewModel(for article: Article) -> ArticleViewModel? {
         return ArticleViewModel(article: article)
+    }
+    
+    func getArticles(completion: @escaping () -> ()) {
+        articles?.removeAll()
+        networkManager.getArticles { [weak self] result in
+            switch result {
+            case .success(let articles):
+                self?.articles = articles
+                completion()
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
     }
     
 }

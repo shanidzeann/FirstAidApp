@@ -37,7 +37,6 @@ class LessonImageTableViewCell: UITableViewCell {
         selectionStyle = .none
         contentView.clipsToBounds = true
         contentView.addSubview(lessonImageView)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -52,8 +51,6 @@ class LessonImageTableViewCell: UITableViewCell {
         lessonImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         lessonImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
         lessonImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        
-        
     }
     
 }
