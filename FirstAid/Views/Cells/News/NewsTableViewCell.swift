@@ -33,7 +33,7 @@ class NewsTableViewCell: UITableViewCell {
         newsImageView.clipsToBounds = true
     }
 
-    #warning("решить проблему ячеек без картинки")
+
     override func prepareForReuse() {
         super.prepareForReuse()
         downloadTask?.cancel()

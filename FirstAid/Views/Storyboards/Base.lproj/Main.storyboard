@@ -303,7 +303,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Новости" id="vyI-PW-iZW"/>
                     <connections>
-                        <segue destination="gxu-NT-Wxk" kind="show" identifier="articleSegue" id="qRm-1U-mqW"/>
+                        <segue destination="XRU-tw-1aG" kind="show" identifier="articleSegue" id="DRL-Yn-Uu4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRQ-I4-sYz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -311,74 +311,20 @@
             <point key="canvasLocation" x="2983" y="1633"/>
         </scene>
         <!--Article View Controller-->
-        <scene sceneID="pke-pp-o4L">
+        <scene sceneID="IcH-xf-BR4">
             <objects>
-                <viewController id="gxu-NT-Wxk" customClass="ArticleViewController" customModule="FirstAid" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pHd-7R-2QH">
+                <viewController id="XRU-tw-1aG" customClass="ArticleViewController" customModule="FirstAid" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c2J-rl-hxj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="XtW-9J-G6j">
-                                <rect key="frame" x="197" y="255" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-HT-S78">
-                                <rect key="frame" x="20" y="152" width="374" height="225.5"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OrG-n5-Bv1">
-                                <rect key="frame" x="20" y="108" width="374" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-cm-yV0">
-                                <rect key="frame" x="136.5" y="741.5" width="141" height="46.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Перейти к статье">
-                                    <color key="baseBackgroundColor" systemColor="systemRedColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="openInSafari:" destination="gxu-NT-Wxk" eventType="touchUpInside" id="y5l-iF-DdZ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlm-CR-sJB" userLabel="Description">
-                                <rect key="frame" x="20" y="397.5" width="374" height="339"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="UGk-kW-AEK"/>
+                        <viewLayoutGuide key="safeArea" id="9LB-Rq-6Eb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="OrG-n5-Bv1" firstAttribute="leading" secondItem="UGk-kW-AEK" secondAttribute="leading" constant="20" id="0eY-c7-276"/>
-                            <constraint firstItem="b3O-cm-yV0" firstAttribute="centerX" secondItem="pHd-7R-2QH" secondAttribute="centerX" id="2ed-FX-fdZ"/>
-                            <constraint firstItem="1dJ-HT-S78" firstAttribute="top" secondItem="OrG-n5-Bv1" secondAttribute="bottom" constant="20" id="9LO-kW-eHA"/>
-                            <constraint firstItem="UGk-kW-AEK" firstAttribute="bottom" secondItem="b3O-cm-yV0" secondAttribute="bottom" constant="25" id="G4D-JF-nKj"/>
-                            <constraint firstItem="Wlm-CR-sJB" firstAttribute="leading" secondItem="UGk-kW-AEK" secondAttribute="leading" constant="20" id="KhI-29-aMN"/>
-                            <constraint firstItem="XtW-9J-G6j" firstAttribute="centerX" secondItem="1dJ-HT-S78" secondAttribute="centerX" id="LAk-jM-RLP"/>
-                            <constraint firstItem="OrG-n5-Bv1" firstAttribute="top" secondItem="UGk-kW-AEK" secondAttribute="top" constant="20" id="Rp5-Wg-Ee6"/>
-                            <constraint firstItem="1dJ-HT-S78" firstAttribute="leading" secondItem="UGk-kW-AEK" secondAttribute="leading" constant="20" id="Vpk-m1-nX0"/>
-                            <constraint firstItem="XtW-9J-G6j" firstAttribute="centerY" secondItem="1dJ-HT-S78" secondAttribute="centerY" id="dSU-Fa-EhI"/>
-                            <constraint firstItem="UGk-kW-AEK" firstAttribute="trailing" secondItem="Wlm-CR-sJB" secondAttribute="trailing" constant="20" id="k0g-2M-1yE"/>
-                            <constraint firstItem="b3O-cm-yV0" firstAttribute="top" secondItem="Wlm-CR-sJB" secondAttribute="bottom" constant="5" id="lqC-yr-cMu"/>
-                            <constraint firstItem="Wlm-CR-sJB" firstAttribute="top" secondItem="1dJ-HT-S78" secondAttribute="bottom" constant="20" id="rmo-kb-u7v"/>
-                            <constraint firstItem="1dJ-HT-S78" firstAttribute="height" secondItem="Wlm-CR-sJB" secondAttribute="height" multiplier="2:3" id="sKN-Hm-DoF"/>
-                            <constraint firstItem="UGk-kW-AEK" firstAttribute="trailing" secondItem="1dJ-HT-S78" secondAttribute="trailing" constant="20" id="uhv-Jw-B1O"/>
-                            <constraint firstItem="Wlm-CR-sJB" firstAttribute="width" secondItem="b3O-cm-yV0" secondAttribute="height" multiplier="8:1" id="x0w-7J-hS3"/>
-                            <constraint firstItem="UGk-kW-AEK" firstAttribute="trailing" secondItem="OrG-n5-Bv1" secondAttribute="trailing" constant="20" id="xjO-2u-XCu"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="htp-yS-vFP"/>
-                    <connections>
-                        <outlet property="activityIndicator" destination="XtW-9J-G6j" id="5cb-u9-wpt"/>
-                        <outlet property="articleImageView" destination="1dJ-HT-S78" id="7Sb-eR-NfB"/>
-                        <outlet property="articleTitleLabel" destination="OrG-n5-Bv1" id="Ihz-aj-5Gx"/>
-                        <outlet property="descriptionLabel" destination="Wlm-CR-sJB" id="X7D-WM-wAy"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="E2Y-wo-57a"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qey-fi-dAM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wev-02-n4N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4134.7826086956529" y="1645.9821428571429"/>
+            <point key="canvasLocation" x="3877" y="1633"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TGx-Ef-p87">
