@@ -116,6 +116,174 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01D69E3A27DE565800248D9C /* QuestModule */ = {
+			isa = PBXGroup;
+			children = (
+				01D69E3B27DE567F00248D9C /* Model */,
+				01D69E3D27DE569C00248D9C /* View */,
+				01D69E3C27DE569000248D9C /* ViewModel */,
+			);
+			path = QuestModule;
+			sourceTree = "<group>";
+		};
+		01D69E3B27DE567F00248D9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				89F0609327A43AB200F10E18 /* DataModel */,
+				89640D8C27276AFC000D2A12 /* QuestModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01D69E3C27DE569000248D9C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				892481E0278CC45600BD03C5 /* SituationsViewModel.swift */,
+				892481E2278CC84100BD03C5 /* SituationsTVCellViewModel.swift */,
+				89D57052278DA540002126DF /* SceneViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		01D69E3D27DE569C00248D9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				892E1AF4274D7C73008AC606 /* MyAlert.swift */,
+				01D69E4A27DE597700248D9C /* Controllers */,
+				01D69E4B27DE597E00248D9C /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01D69E3E27DE571800248D9C /* TheoryModule */ = {
+			isa = PBXGroup;
+			children = (
+				01D69E3F27DE579000248D9C /* Model */,
+				01D69E4027DE579D00248D9C /* View */,
+				01D69E4127DE57B300248D9C /* ViewModel */,
+			);
+			path = TheoryModule;
+			sourceTree = "<group>";
+		};
+		01D69E3F27DE579000248D9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01D69E4027DE579D00248D9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01D69E4827DE594E00248D9C /* Controllers */,
+				01D69E4927DE595800248D9C /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01D69E4127DE57B300248D9C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */,
+				891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */,
+				89ACEE7C278B792B008DD3C9 /* LessonViewModel.swift */,
+				89ACEE7E278B8615008DD3C9 /* LessonTVCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		01D69E4227DE57C400248D9C /* NewsModule */ = {
+			isa = PBXGroup;
+			children = (
+				01D69E4327DE589E00248D9C /* Model */,
+				01D69E4427DE58A900248D9C /* View */,
+				01D69E4527DE58B000248D9C /* ViewModel */,
+			);
+			path = NewsModule;
+			sourceTree = "<group>";
+		};
+		01D69E4327DE589E00248D9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8906C6C427AB3D43008F53BA /* NewsModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01D69E4427DE58A900248D9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01D69E4627DE58FA00248D9C /* Controllers */,
+				01D69E4727DE590700248D9C /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01D69E4527DE58B000248D9C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8906C6B927AB1C5D008F53BA /* NewsViewModel.swift */,
+				8906C6C227AB3841008F53BA /* NewsTVCellViewModel.swift */,
+				8906C6BB27AB1C6B008F53BA /* ArticleViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		01D69E4627DE58FA00248D9C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */,
+				8906C6B627AABBE0008F53BA /* ArticleViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		01D69E4727DE590700248D9C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				89A595D227AC2AD4006A240E /* LoadingCell.xib */,
+				89A595D427AC3685006A240E /* NothingFoundCell.xib */,
+				8906C6C027AB33D2008F53BA /* NewsTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		01D69E4827DE594E00248D9C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				892936B927235C290067CD25 /* TheoryViewController.swift */,
+				892936CF27236BB70067CD25 /* LessonViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		01D69E4927DE595800248D9C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				89E47122278A30CE00EF4E07 /* TheoryTableViewCell.swift */,
+				892936D527236D800067CD25 /* LessonImageTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		01D69E4A27DE597700248D9C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				89640D8A2726AC60000D2A12 /* SituationsTableViewController.swift */,
+				89640D84272690A1000D2A12 /* SceneViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		01D69E4B27DE597E00248D9C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				89D5704F278D9DCA002126DF /* SituationTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		196BBEB37343FB3A279868E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,43 +299,6 @@
 				480822E2A3C1374AB64F1D8B /* Pods-FirstAid.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		8906C6B127AABA5D008F53BA /* News */ = {
-			isa = PBXGroup;
-			children = (
-				8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */,
-				8906C6B627AABBE0008F53BA /* ArticleViewController.swift */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		8906C6B827AB1C23008F53BA /* News */ = {
-			isa = PBXGroup;
-			children = (
-				8906C6B927AB1C5D008F53BA /* NewsViewModel.swift */,
-				8906C6C227AB3841008F53BA /* NewsTVCellViewModel.swift */,
-				8906C6BB27AB1C6B008F53BA /* ArticleViewModel.swift */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		8906C6BF27AB3379008F53BA /* News */ = {
-			isa = PBXGroup;
-			children = (
-				8906C6C027AB33D2008F53BA /* NewsTableViewCell.swift */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		892481DF278CC42E00BD03C5 /* Quest */ = {
-			isa = PBXGroup;
-			children = (
-				892481E0278CC45600BD03C5 /* SituationsViewModel.swift */,
-				892481E2278CC84100BD03C5 /* SituationsTVCellViewModel.swift */,
-				89D57052278DA540002126DF /* SceneViewModel.swift */,
-			);
-			path = Quest;
 			sourceTree = "<group>";
 		};
 		892936A927235C290067CD25 = {
@@ -192,36 +323,16 @@
 			isa = PBXGroup;
 			children = (
 				89793114272AAACC00476E45 /* AppDelegate */,
-				892936CC272363F00067CD25 /* Models */,
-				892936CA272363C80067CD25 /* Views */,
-				89E03E94278B416A00BC619F /* ViewModels */,
+				892936D127236CFD0067CD25 /* MainStoryboard */,
+				01D69E4227DE57C400248D9C /* NewsModule */,
+				01D69E3E27DE571800248D9C /* TheoryModule */,
+				01D69E3A27DE565800248D9C /* QuestModule */,
 				89793115272AAAE200476E45 /* Managers */,
 				89E03E96278B41E100BC619F /* Protocols */,
 				892936CB272363D80067CD25 /* Supporting Files */,
 				89A595D827AC44DB006A240E /* Extensions */,
 			);
 			path = FirstAid;
-			sourceTree = "<group>";
-		};
-		892936C9272363BA0067CD25 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				892E1AF4274D7C73008AC606 /* MyAlert.swift */,
-				89640D86272690AB000D2A12 /* Theory */,
-				89640D87272690B9000D2A12 /* Quest */,
-				8906C6B127AABA5D008F53BA /* News */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		892936CA272363C80067CD25 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				892936C9272363BA0067CD25 /* Controllers */,
-				892936D127236CFD0067CD25 /* Storyboards */,
-				892936D227236D0E0067CD25 /* Cells */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		892936CB272363D80067CD25 /* Supporting Files */ = {
@@ -237,63 +348,13 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		892936CC272363F00067CD25 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				89640D8C27276AFC000D2A12 /* QuestModels.swift */,
-				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
-				8906C6C427AB3D43008F53BA /* NewsModels.swift */,
-				89F0609327A43AB200F10E18 /* DataModel */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		892936D127236CFD0067CD25 /* Storyboards */ = {
+		892936D127236CFD0067CD25 /* MainStoryboard */ = {
 			isa = PBXGroup;
 			children = (
 				892936BB27235C290067CD25 /* Main.storyboard */,
 				892936C027235C2E0067CD25 /* LaunchScreen.storyboard */,
-				89A595D227AC2AD4006A240E /* LoadingCell.xib */,
-				89A595D427AC3685006A240E /* NothingFoundCell.xib */,
 			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		892936D227236D0E0067CD25 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				892936D727236D990067CD25 /* Theory */,
-				89D57051278D9DD3002126DF /* Quest */,
-				8906C6BF27AB3379008F53BA /* News */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		892936D727236D990067CD25 /* Theory */ = {
-			isa = PBXGroup;
-			children = (
-				89E47122278A30CE00EF4E07 /* TheoryTableViewCell.swift */,
-				892936D527236D800067CD25 /* LessonImageTableViewCell.swift */,
-			);
-			path = Theory;
-			sourceTree = "<group>";
-		};
-		89640D86272690AB000D2A12 /* Theory */ = {
-			isa = PBXGroup;
-			children = (
-				892936B927235C290067CD25 /* TheoryViewController.swift */,
-				892936CF27236BB70067CD25 /* LessonViewController.swift */,
-			);
-			path = Theory;
-			sourceTree = "<group>";
-		};
-		89640D87272690B9000D2A12 /* Quest */ = {
-			isa = PBXGroup;
-			children = (
-				89640D8A2726AC60000D2A12 /* SituationsTableViewController.swift */,
-				89640D84272690A1000D2A12 /* SceneViewController.swift */,
-			);
-			path = Quest;
+			path = MainStoryboard;
 			sourceTree = "<group>";
 		};
 		89793113272AAA8900476E45 /* Data Resourses */ = {
@@ -331,35 +392,6 @@
 				89A595D627AC3EFA006A240E /* UIImageView+DownloadImage.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		89D57051278D9DD3002126DF /* Quest */ = {
-			isa = PBXGroup;
-			children = (
-				89D5704F278D9DCA002126DF /* SituationTableViewCell.swift */,
-			);
-			path = Quest;
-			sourceTree = "<group>";
-		};
-		89E03E94278B416A00BC619F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				89E03E95278B41D200BC619F /* Theory */,
-				892481DF278CC42E00BD03C5 /* Quest */,
-				8906C6B827AB1C23008F53BA /* News */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		89E03E95278B41D200BC619F /* Theory */ = {
-			isa = PBXGroup;
-			children = (
-				899B80E7276FC452009F8DA1 /* TheoryViewModel.swift */,
-				891FCC642780CAD70016842A /* TheoryTVCellViewModel.swift */,
-				89ACEE7C278B792B008DD3C9 /* LessonViewModel.swift */,
-				89ACEE7E278B8615008DD3C9 /* LessonTVCellViewModel.swift */,
-			);
-			path = Theory;
 			sourceTree = "<group>";
 		};
 		89E03E96278B41E100BC619F /* Protocols */ = {
