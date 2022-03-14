@@ -32,10 +32,6 @@ class SceneViewController: UIViewController {
         
         navigationItem.leftBarButtonItem?.isEnabled = false
         configureNavigationBar()
-        configureLabel()
-        configureButton(topButton)
-        configureButton(middleButton)
-        configureButton(bottomButton)
         configureTimer()
         showAlert()
         setUpBindings()
@@ -46,6 +42,14 @@ class SceneViewController: UIViewController {
     private func setFirstScene() {
         tabBarController?.tabBar.isHidden = true
         viewModel?.setFirstScene()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureLabel()
+        configureButton(topButton)
+        configureButton(middleButton)
+        configureButton(bottomButton)
     }
     
     // MARK: - Update UI
@@ -88,7 +92,6 @@ class SceneViewController: UIViewController {
     }
     
     private func showAlert() {
-        guard let viewModel = viewModel else { return }
         rulesAlert.showAlert(on: self)
     }
     
