@@ -16,9 +16,9 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 - Лекции выводятся в table view с двумя типами ячеек
 
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/launch.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/theory1.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/theory2.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/theory3.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f1.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f2.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f3.png)
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/lesson1.png)
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/lesson2.png)
 
@@ -28,13 +28,22 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 - Парсинг JSON (Decodable)
 - Для сохранения прогресса пользователя используется Core Data
 - Время выбора ответа ограничено таймером (SRCountdownTimer)
-- Если время заканчивается - выводится последняя сцена, описывающая проигрыш
+- Переходы между сценами анимированы
 
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/quests.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/quest1.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/quest2.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/stop.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/again.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f5.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f6.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f7.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f8.png)
+
+- Квест пройден успешно
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f9.png)
+
+- Выбран неверный ответ 
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f10.png)
+
+- Истекло время 
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f11.png)
+
 
 
 3) Вывод новостей здоровья и медицины (https://newsapi.org/s/russia-health-news-api)
@@ -43,4 +52,4 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/FirstAid11.png)
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/FirstAid9.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/FirstAid10.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f12.png)
