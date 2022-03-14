@@ -35,13 +35,10 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f7.png)
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f8.png)
 
-- Квест пройден успешно
+- Квест пройден успешно / Выбран неверный ответ / Истекло время 
+
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f9.png)
-
-- Выбран неверный ответ 
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f10.png)
-
-- Истекло время 
 ![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f11.png)
 
 
