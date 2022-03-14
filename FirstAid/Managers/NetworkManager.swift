@@ -18,8 +18,8 @@ class NetworkManager {
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
-                completion(.failure(error))
                 self?.state = .noResults
+                completion(.failure(error))
             } else if let data = data {
                 self?.parseJSON(data: data, completion: { (result: Result<APIResponse, Error>) in
                     switch result {
