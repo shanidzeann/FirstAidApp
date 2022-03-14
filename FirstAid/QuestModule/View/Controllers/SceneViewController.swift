@@ -12,7 +12,7 @@ class SceneViewController: UIViewController {
     
     // MARK: - Properties
     
-    let myAlert = MyAlert()
+    let rulesAlert = RulesAlert()
     
     @IBOutlet weak var countdownTimer: SRCountdownTimer!
     @IBOutlet weak var sceneLabel: UILabel!
@@ -30,6 +30,7 @@ class SceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem?.isEnabled = false
         configureNavigationBar()
         configureLabel()
         configureButton(topButton)
@@ -42,54 +43,130 @@ class SceneViewController: UIViewController {
     
     // MARK: - Quest start
     
-    func setFirstScene() {
+    private func setFirstScene() {
         tabBarController?.tabBar.isHidden = true
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        
         viewModel?.setFirstScene()
-        
-        countdownTimer.isHidden = false
     }
     
     // MARK: - Update UI
     
-    func updateUI() {
-        
-        countdownTimer.start(beginingValue: 15, interval: 1)
+    private func updateUI() {
+        sceneLabel.text = viewModel?.text
         guard let scene = viewModel?.scene else {
             return
         }
-        sceneLabel.text = viewModel?.text
         
         guard viewModel?.choices?.count == 3 else {
             countdownTimer.pause()
             hideButtons(true)
+            navigationItem.leftBarButtonItem?.isEnabled = true
             viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
+            UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+                self.sceneLabel.alpha = 1
+            }
             return
         }
         
-        hideButtons(false)
         topButton.setTitle(viewModel?.choiceText(0), for: .normal)
         middleButton.setTitle(viewModel?.choiceText(1), for: .normal)
         bottomButton.setTitle(viewModel?.choiceText(2), for: .normal)
+        hideButtons(false)
+        
+        countdownTimer.start(beginingValue: Constants.Timer.beginingValue, interval: Constants.Timer.interval)
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(true)
+        }
+
     }
     
-    func showAlert() {
+    private func showMainUI(_ bool: Bool) {
+        sceneLabel.alpha = bool ? 1 : 0
+        topButton.alpha = bool ? 1 : 0
+        middleButton.alpha = bool ? 1 : 0
+        bottomButton.alpha = bool ? 1 : 0
+        countdownTimer.alpha = bool ? 1 : 0
+    }
+    
+    private func showAlert() {
         guard let viewModel = viewModel else { return }
-        myAlert.showAlert(with: viewModel.alert.title, message: viewModel.alert.text, on: self)
+        rulesAlert.showAlert(on: self)
+    }
+    
+    private func hideButtons(_ bool: Bool) {
+        pauseButton.isEnabled = !bool
+        restartButton.isEnabled = bool
+        navigationItem.leftBarButtonItem?.isEnabled = !bool
+    }
+    
+    private func configureLabel() {
+        sceneLabel.adjustsFontSizeToFitWidth = true
+        sceneLabel.minimumScaleFactor = 0.5
+        sceneLabel.backgroundColor = .systemBackground
+        sceneLabel.layer.shadowPath = UIBezierPath(rect: sceneLabel.bounds).cgPath
+        sceneLabel.layer.shadowColor = UIColor.systemRed.cgColor
+        sceneLabel.layer.shadowOpacity = 1
+        sceneLabel.layer.shadowRadius = 5
+        sceneLabel.layer.shadowOffset = .zero
+    }
+    
+    private func configureButton(_ button: UIButton) {
+        button.layer.cornerRadius = 10
+        button.titleLabel?.textAlignment = .center
+    }
+    
+    private func configureNavigationBar() {
+        pauseButton = UIBarButtonItem(
+            image: UIImage(systemName: Constants.Images.BarButtonItems.pause),
+            style: .plain,
+            target: self,
+            action: #selector(didTapPause))
+        restartButton = UIBarButtonItem(
+            image: UIImage(systemName: Constants.Images.BarButtonItems.restart),
+            style: .plain,
+            target: self,
+            action: #selector(didTapRestart))
+        
+        navigationItem.rightBarButtonItems = [restartButton, pauseButton]
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: Constants.Images.BarButtonItems.back),
+            style: .plain,
+            target: self,
+            action: #selector(didTapCancel))
+    }
+    
+    private func configureTimer() {
+        countdownTimer.delegate = self
+        countdownTimer.lineColor = .red
+        countdownTimer.timerFinishingText = "End"
+        countdownTimer.lineWidth = 4
+    }
+    
+    func prepareToShowAlert() {
+        hideButtons(true)
+        showMainUI(false)
+        restartButton.isEnabled = false
+    }
+    
+    func start() {
+        setFirstScene()
     }
     
     // MARK: - User actions
     
     @IBAction func answerButtonTapped(_ sender: UIButton) {
-        viewModel?.setNextScene(sender.tag)
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(false)
+        } completion: { done in
+            if done {
+                self.viewModel?.setNextScene(sender.tag)
+            }
+        }
     }
     
     @objc private func didTapPause() {
         countdownTimer.pause()
-        
-        hideButtons(true)
-        sceneLabel.isHidden = true
+        navigationItem.leftBarButtonItem?.isEnabled = false
         
         let vc = UIAlertController(
             title: "Квест приостановлен",
@@ -99,7 +176,13 @@ class SceneViewController: UIViewController {
         vc.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: { [weak self] _ in
             self?.countdownTimer.resume()
             self?.hideButtons(false)
-            self?.sceneLabel.isHidden = false
+            UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+                self?.showMainUI(true)
+            }
+        }))
+        
+        vc.addAction(UIAlertAction(title: "Начать заново", style: .destructive, handler: { [weak self] _ in
+            self?.didTapRestart()
         }))
         
         vc.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { [weak self] _ in
@@ -107,80 +190,35 @@ class SceneViewController: UIViewController {
             self?.tabBarController?.tabBar.isHidden = false
         }))
         
-        vc.addAction(UIAlertAction(title: "Начать заново", style: .destructive, handler: { [weak self] _ in
-            self?.didTapRestart()
-        }))
-        present(vc, animated: true)
+        hideButtons(true)
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(false)
+        } completion: { done in
+            self.present(vc, animated: true)
+        }
     }
     
     @objc private func didTapRestart() {
-        setFirstScene()
-        sceneLabel.isHidden = false
         viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: false, isSuccess: false)
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(false)
+        } completion: { done in
+            if done {
+                self.setFirstScene()
+            }
+        }
     }
     
     @objc private func didTapCancel() {
-        tabBarController?.tabBar.isHidden = false
-        navigationController?.popToRootViewController(animated: true)
-        
+        didTapPause()
     }
     
     // MARK: - Hepler Methods
     
-    func setUpBindings() {
+    private func setUpBindings() {
         viewModel?.scene.bind({ [weak self] _ in
             self?.updateUI()
         })
-    }
-    
-    func hideButtons(_ bool: Bool) {
-        topButton.isHidden = bool
-        middleButton.isHidden = bool
-        bottomButton.isHidden = bool
-        countdownTimer.isHidden = bool
-        
-        pauseButton.isEnabled = !bool
-        restartButton.isEnabled = bool
-        navigationItem.leftBarButtonItem?.isEnabled = bool
-    }
-    
-    func configureLabel() {
-        sceneLabel.adjustsFontSizeToFitWidth = true
-        sceneLabel.minimumScaleFactor = 0.5
-    }
-    
-    func configureButton(_ button: UIButton) {
-        button.layer.cornerRadius = 10
-        button.titleLabel?.textAlignment = .center
-        button.titleLabel?.lineBreakStrategy = .hangulWordPriority
-    }
-    
-    func configureNavigationBar() {
-        pauseButton = UIBarButtonItem(
-            image: UIImage(systemName: "pause.fill"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapPause))
-        restartButton = UIBarButtonItem(
-            image: UIImage(systemName: "gobackward"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapRestart))
-        
-        navigationItem.rightBarButtonItems = [restartButton, pauseButton]
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "chevron.backward"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapCancel))
-    }
-    
-    func configureTimer() {
-        countdownTimer.delegate = self
-        countdownTimer.lineColor = .red
-        countdownTimer.timerFinishingText = "End"
-        countdownTimer.lineWidth = 4
     }
     
 }
@@ -190,7 +228,12 @@ class SceneViewController: UIViewController {
 
 extension SceneViewController: SRCountdownTimerDelegate {
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        viewModel?.setLastScene()
-        sender.isHidden = true
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(false)
+        } completion: { done in
+            if done {
+                self.viewModel?.setLastScene()
+            }
+        }
     }
 }

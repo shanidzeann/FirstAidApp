@@ -14,8 +14,8 @@ class RulesAlert {
     
     // MARK: - Properties
     
-    private var myTargetView: UIView?
-    private weak var myVc: SceneViewController?
+    private var targetView: UIView?
+    private weak var vc: SceneViewController?
     
     // MARK: - UI
     
@@ -41,6 +41,7 @@ class RulesAlert {
         label.font = .systemFont(ofSize: 25)
         label.textColor = .label
         label.textAlignment = .center
+        label.text = Constants.RulesAlert.title
         return label
     }()
     
@@ -49,6 +50,7 @@ class RulesAlert {
         label.numberOfLines = 0
         label.textColor = .label
         label.textAlignment = .center
+        label.text = Constants.RulesAlert.text
         return label
     }()
     
@@ -61,18 +63,18 @@ class RulesAlert {
     
     // MARK: - Show alert method
     
-    func showAlert(with title: String, message: String, on viewController: UIViewController) {
+    func showAlert(on viewController: UIViewController) {
         
         guard let targetView = viewController.view,
               let vc = viewController as? SceneViewController else {
                   return
               }
         
-        myTargetView = targetView
-        myVc = vc
-        myVc?.prepareToShowAlert()
+        self.targetView = targetView
+        self.vc = vc
+        self.vc?.prepareToShowAlert()
         
-        createAlert(with: title, message: message, on: targetView)
+        createAlert(on: targetView)
         
         UIView.animate(withDuration: Constants.Animation.alertDuration) {
             self.backgroundView.alpha = 0.6
@@ -88,7 +90,7 @@ class RulesAlert {
     // MARK: - Dismiss alert
     
     @objc func dismissAlert() {
-        guard let targetView = myTargetView else {
+        guard let targetView = targetView else {
             return
         }
         
@@ -111,12 +113,12 @@ class RulesAlert {
             }
         }
         
-        myVc?.start()
+        vc?.start()
     }
     
     // MARK: - Create alert
     
-    func createAlert(with title: String, message: String, on targetView: UIView) {
+    func createAlert(on targetView: UIView) {
         backgroundView.frame = targetView.bounds
         
         targetView.addSubview(backgroundView)
@@ -130,7 +132,6 @@ class RulesAlert {
                                       height: Constants.RulesAlert.height)
         
         alertView.addSubview(titleLabel)
-        titleLabel.text = title
         
         titleLabel.snp.makeConstraints { make in
             make.top.width.equalToSuperview()
@@ -138,7 +139,6 @@ class RulesAlert {
         }
         
         alertView.addSubview(messageLabel)
-        messageLabel.text = message
         
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).inset(Constants.RulesAlert.spacing)

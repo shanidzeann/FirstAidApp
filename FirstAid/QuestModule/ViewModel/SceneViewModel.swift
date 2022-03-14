@@ -11,13 +11,7 @@ class SceneViewModel {
     
     // MARK: - Properties
     
-    struct Alert {
-        let title = "Правила"
-        let text = "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено."
-    }
-    
     var delegate: ViewModelDelegate?
-    let alert = Alert()
     var situation: SituationDB
     lazy var scene = Box(situation.scenes?[0] as? SceneDB)
     

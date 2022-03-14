@@ -54,5 +54,7 @@ enum Constants {
         static let titleHeight = 60.0
         static let messageHeight = 130.0
         static let widthSpace = 60.0
+        static let title = "Правила"
+        static let text = "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено."
     }
 }
