@@ -12,7 +12,8 @@ class TheoryTableViewCell: UITableViewCell {
     
     private let label: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .label
+        label.numberOfLines = 0
         return label
     }()
     
@@ -31,15 +32,7 @@ class TheoryTableViewCell: UITableViewCell {
         
         selectionStyle = .none
         contentView.clipsToBounds = true
-        contentView.addSubview(label)
-        label.numberOfLines = 0
-        
-        label.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
-            make.top.equalToSuperview()
-            make.height.equalTo(80)
-        }
-        
+        createUI()
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +41,16 @@ class TheoryTableViewCell: UITableViewCell {
     
     func setBackground() {
         backgroundColor = done ? UIColor(red: 0, green: 0.4, blue: 0, alpha: 0.5) : .systemBackground
+    }
+    
+    private func createUI() {
+        contentView.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalToSuperview()
+            make.height.equalTo(80)
+        }
     }
     
     

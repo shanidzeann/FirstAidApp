@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,12 +20,12 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="NZU-bK-iXR" secondAttribute="bottom" id="Kz9-pI-BEP"/>
-                            <constraint firstItem="NZU-bK-iXR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jXx-l3-1ua"/>
-                            <constraint firstItem="NZU-bK-iXR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lrf-rc-Z2s"/>
-                            <constraint firstItem="NZU-bK-iXR" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="mPX-gx-c69"/>
+                            <constraint firstItem="NZU-bK-iXR" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="8QC-xZ-f9w"/>
+                            <constraint firstItem="NZU-bK-iXR" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="UFc-De-UcE"/>
+                            <constraint firstAttribute="trailing" secondItem="NZU-bK-iXR" secondAttribute="trailing" id="ib6-g9-rpB"/>
+                            <constraint firstAttribute="bottom" secondItem="NZU-bK-iXR" secondAttribute="bottom" id="vhW-aL-p9Q"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,8 +36,5 @@
     </scenes>
     <resources>
         <image name="doctor" width="480" height="986.5"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

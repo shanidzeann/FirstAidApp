@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithDefaultBackground()
-            navigationBarAppearance.backgroundColor = .red
+            navigationBarAppearance.backgroundColor = .systemRed
             navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance

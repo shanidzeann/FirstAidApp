@@ -9,8 +9,6 @@ import UIKit
 
 class LessonImageTableViewCell: UITableViewCell {
     
-    static let identifier = "LessonImageTableViewCell"
-    
     var image: UIImage? {
         didSet {
             lessonImageView.image = image
@@ -28,7 +26,7 @@ class LessonImageTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .tertiarySystemBackground
+        imageView.backgroundColor = .systemBackground
         return imageView
     }()
     

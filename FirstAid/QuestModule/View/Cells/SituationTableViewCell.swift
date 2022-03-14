@@ -37,11 +37,11 @@ class SituationTableViewCell: UITableViewCell {
     func setAccessoryView() {
         let successImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         successImageView.image = UIImage(systemName: "face.smiling.fill")
-        successImageView.tintColor = UIColor(red: 0, green: 0.4, blue: 0, alpha: 0.5)
+        successImageView.tintColor = .systemGreen.withAlphaComponent(0.7)
         
         let failImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         failImageView.image = UIImage(systemName: "hand.thumbsdown.fill")
-        failImageView.tintColor = .systemRed
+        failImageView.tintColor = .systemRed.withAlphaComponent(0.7)
         
         guard let success = isSuccess, let done = isFinished else { return }
         if done && success {
