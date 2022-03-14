@@ -62,5 +62,6 @@ class DatabaseManager {
                 }
             }
         }
+        save()
     }
 }
