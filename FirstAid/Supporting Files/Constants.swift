@@ -21,6 +21,7 @@ enum Constants {
         }
         enum RowHeights {
             static let quest = 80.0
+            static let news = 130.0
         }
     }
     
@@ -56,5 +57,9 @@ enum Constants {
         static let widthSpace = 60.0
         static let title = "Правила"
         static let text = "Твоя задача - оказать первую помощь и спасти постравшего. Будь внимателен, время ответа ограничено."
+    }
+    
+    enum Layout {
+        static let newsSpacing = 20.0
     }
 }

@@ -24,7 +24,7 @@ class NewsTableViewController: UITableViewController {
         registerCells()
         getArticles()
         
-        tableView.rowHeight = 130
+        tableView.rowHeight = Constants.TableView.RowHeights.news
     }
     
     // MARK: - Methods

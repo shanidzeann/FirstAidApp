@@ -92,24 +92,24 @@ class ArticleViewController: UIViewController {
         
         articleTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(10.0)
-            make.left.right.equalToSuperview().inset(20.0)
+            make.left.right.equalToSuperview().inset(Constants.Layout.newsSpacing)
         }
         
         articleImageView.snp.makeConstraints { make in
             make.top.equalTo(articleTitleLabel.snp.bottom).offset(10.0)
-            make.left.right.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(Constants.Layout.newsSpacing)
             make.height.equalTo(view.snp.height).dividedBy(4)
             
         }
         
         descriptionTextView.snp.makeConstraints { make in
             make.top.equalTo(articleImageView.snp.bottom).offset(10)
-            make.left.right.equalToSuperview().inset(20.0)
+            make.left.right.equalToSuperview().inset(Constants.Layout.newsSpacing)
         }
         
         safariButton.snp.makeConstraints { make in
             make.top.equalTo(descriptionTextView.snp.bottom).offset(10.0)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.Layout.newsSpacing)
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
         }
