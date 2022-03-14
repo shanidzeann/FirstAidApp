@@ -143,7 +143,7 @@ class RulesAlert {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).inset(Constants.RulesAlert.spacing)
             make.height.equalTo(Constants.RulesAlert.messageHeight)
-            make.width.equalToSuperview()
+            make.width.equalToSuperview().inset(Constants.RulesAlert.spacing)
         }
         
         alertView.addSubview(button)
