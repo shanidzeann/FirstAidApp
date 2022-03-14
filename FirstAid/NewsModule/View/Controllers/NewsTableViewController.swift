@@ -11,18 +11,6 @@ class NewsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    struct TableView {
-        struct CellIdentifiers {
-            static let resultCell = "ResultCell"
-            static let nothingFoundCell = "NothingFoundCell"
-            static let loadingCell = "LoadingCell"
-        }
-    }
-    
-    struct SegueIdentifiers {
-        static let articleSegue = "articleSegue"
-    }
-    
     let viewModel = NewsViewModel()
     
     // MARK: - VC Lifecycle
@@ -35,6 +23,8 @@ class NewsTableViewController: UITableViewController {
         
         registerCells()
         getArticles()
+        
+        tableView.rowHeight = 130
     }
     
     // MARK: - Methods
@@ -52,11 +42,11 @@ class NewsTableViewController: UITableViewController {
     }
     
     func registerCells() {
-        var cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
+        var cellNib = UINib(nibName: Constants.TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.nothingFoundCell)
         
-        cellNib = UINib(nibName: TableView.CellIdentifiers.loadingCell, bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
+        cellNib = UINib(nibName: Constants.TableView.CellIdentifiers.loadingCell, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.loadingCell)
     }
     
     // MARK: - Table view data source
@@ -70,21 +60,21 @@ class NewsTableViewController: UITableViewController {
         switch viewModel.state {
         case .loading:
             tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.loadingCell, for: indexPath)
-            cell.backgroundColor = .secondarySystemBackground
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.loadingCell, for: indexPath)
+            cell.backgroundColor = .systemBackground
             let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
             spinner.startAnimating()
             return cell
             
         case .noResults:
             tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
-            cell.backgroundColor = .secondarySystemBackground
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
+            cell.backgroundColor = .systemBackground
             return cell
             
         case .results:
             tableView.separatorStyle = .singleLine
-            let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.resultCell, for: indexPath) as? NewsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.resultCell, for: indexPath) as? NewsTableViewCell
             guard let cell = cell else { return UITableViewCell() }
             cell.viewModel = viewModel.cellViewModel(forIndexPath: indexPath)
             return cell
@@ -94,18 +84,14 @@ class NewsTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.articleSegue, sender: self)
+        performSegue(withIdentifier: Constants.SegueIdentifiers.articleSegue, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == SegueIdentifiers.articleSegue else { return }
+        guard segue.identifier == Constants.SegueIdentifiers.articleSegue else { return }
         
         if let indexPath = tableView.indexPathForSelectedRow {
             let vc = segue.destination as? ArticleViewController

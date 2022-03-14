@@ -17,7 +17,7 @@ class TheoryViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: Identifiers.tableViewCell.rawValue)
+        tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.theoryCell)
         return tableView
     }()
     
@@ -40,29 +40,30 @@ class TheoryViewController: UIViewController {
     
     // MARK: - DropDown Menu Functionality
     
-    func menuWork(index: Int) {
+    private func menuWork(index: Int) {
         viewModel.filterLessons(at: index)
         tableView.reloadData()
     }
     
     // MARK: - Helper Methods
     
-    func setBackgroundColor() {
+    private func setBackgroundColor() {
         view.backgroundColor = .systemBackground
     }
     
-    func addTableView() {
+    private func addTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 80
     }
     
-    func setData() {
+    private func setData() {
         viewModel.createLessons()
         viewModel.loadLessons()
     }
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         let showRead = UIAction(title: "Показать прочитанные") { [weak self] (action) in
             self?.menuWork(index: 0)
         }
@@ -90,7 +91,7 @@ extension TheoryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tableViewCell.rawValue, for: indexPath) as? TheoryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.theoryCell, for: indexPath) as? TheoryTableViewCell
         
         guard let tableViewCell = cell else { return UITableViewCell() }
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
@@ -166,14 +167,10 @@ extension TheoryViewController: UITableViewDelegate {
         return action
     }
     
-    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath, with lesson: Lesson) {
+    private func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath, with lesson: Lesson) {
         tableView.moveRow(at: indexPath, to: newIndexPath)
         viewModel.removeLesson(at: indexPath)
         viewModel.insert(lesson, at: newIndexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
 
 }

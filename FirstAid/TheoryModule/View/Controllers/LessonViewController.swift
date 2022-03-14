@@ -29,8 +29,8 @@ class LessonViewController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.tableViewCell.rawValue)
-        tableView.register(LessonImageTableViewCell.self, forCellReuseIdentifier: LessonImageTableViewCell.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.lessonTextCell)
+        tableView.register(LessonImageTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.lessonImageCell)
         tableView.separatorStyle = .none
         
         return tableView
@@ -59,7 +59,7 @@ class LessonViewController: UIViewController {
     
     // MARK: - Helper Methods
     
-    func configureNavigationBar() {
+    private func configureNavigationBar() {
         navigationController?.navigationBar.barTintColor = .red
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.backward"),
@@ -70,14 +70,15 @@ class LessonViewController: UIViewController {
         navigationItem.titleView = titleLabel
     }
     
-    func setBackgroundColor() {
+    private func setBackgroundColor() {
         view.backgroundColor = .systemBackground
     }
     
-    func addTableView() {
+    private func addTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 200
     }
 
 }
@@ -96,13 +97,13 @@ extension LessonViewController: UITableViewDataSource {
         guard let paragraph = viewModel?.paragraph(at: indexPath) else { return UITableViewCell() }
         switch viewModel?.cellType(for: indexPath) {
         case .text:
-            let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.tableViewCell.rawValue, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.lessonTextCell, for: indexPath)
             cell.textLabel?.text = paragraph
             cell.textLabel?.numberOfLines = 0
             cell.selectionStyle = .none
             return cell
         case .image:
-            let cell = tableView.dequeueReusableCell(withIdentifier: LessonImageTableViewCell.identifier, for: indexPath) as! LessonImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.lessonImageCell, for: indexPath) as! LessonImageTableViewCell
             let cellVM = viewModel?.imageCellViewModel(for: paragraph)
             cell.viewModel = cellVM
             return cell
@@ -128,9 +129,5 @@ extension LessonViewController: UITableViewDelegate {
         case .text, .none:
             return UITableView.automaticDimension
         }
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
     }
 }

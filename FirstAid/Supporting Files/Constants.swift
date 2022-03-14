@@ -7,6 +7,52 @@
 
 import Foundation
 
-enum Identifiers: String {
-    case tableViewCell = "cell"
+enum Constants {
+    
+    enum TableView {
+        enum CellIdentifiers {
+            static let questCell = "questCell"
+            static let lessonTextCell = "lessonTextCell"
+            static let theoryCell = "theoryCell"
+            static let lessonImageCell = "lessonImageCell"
+            static let resultCell = "ResultCell"
+            static let nothingFoundCell = "NothingFoundCell"
+            static let loadingCell = "LoadingCell"
+        }
+        enum RowHeights {
+            static let quest = 80.0
+        }
+    }
+    
+    enum SegueIdentifiers {
+        static let sceneSegue = "sceneSegue"
+        static let articleSegue = "articleSegue"
+    }
+    
+    enum Animation {
+        static let sceneDuration = 0.5
+        static let alertDuration = 0.25
+    }
+    
+    enum Timer {
+        static let beginingValue = 15
+        static let interval = 1.0
+    }
+    
+    enum Images {
+        enum BarButtonItems {
+            static let pause = "pause.fill"
+            static let restart = "gobackward"
+            static let back = "chevron.backward"
+
+        }
+    }
+    
+    enum RulesAlert {
+        static let height = 250.0
+        static let spacing = 5.0
+        static let titleHeight = 60.0
+        static let messageHeight = 130.0
+        static let widthSpace = 60.0
+    }
 }

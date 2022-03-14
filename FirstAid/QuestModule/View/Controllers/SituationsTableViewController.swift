@@ -11,16 +11,6 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    struct TableView {
-        struct CellIdentifiers {
-            static let questCell = "questCell"
-        }
-    }
-    
-    struct SegueIdentifiers {
-        static let sceneSegue = "sceneSegue"
-    }
-    
     private var viewModel = SituationsViewModel()
     
     // MARK: - VC Lifecycle
@@ -28,6 +18,7 @@ class SituationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSituations()
+        tableView.rowHeight = Constants.TableView.RowHeights.quest
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,13 +29,13 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Hepler Methods
     
-    func loadSituations() {
+    private func loadSituations() {
         viewModel.loadSituations()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard segue.identifier == SegueIdentifiers.sceneSegue else { return }
+        guard segue.identifier == Constants.SegueIdentifiers.sceneSegue else { return }
         
         if let indexPath = tableView.indexPathForSelectedRow,
            let selectedSituation = viewModel.selectedSituation(at: indexPath) {
@@ -60,7 +51,7 @@ class SituationsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.questCell, for: indexPath) as! SituationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.questCell, for: indexPath) as! SituationTableViewCell
         
         let cellVM = viewModel.cellViewModel(forIndexPath: indexPath)
         cell.SituationViewModel = cellVM
@@ -84,7 +75,7 @@ class SituationsTableViewController: UITableViewController {
             alert.addAction(action)
             
             action = UIAlertAction(title: "Да", style: .destructive) { [weak self] _ in
-                self?.performSegue(withIdentifier: SegueIdentifiers.sceneSegue, sender: self)
+                self?.performSegue(withIdentifier: Constants.SegueIdentifiers.sceneSegue, sender: self)
                 self?.viewModel.endReceived(situation: situation, isFinished: false, isSuccess: false)
                 }
             
@@ -92,13 +83,9 @@ class SituationsTableViewController: UITableViewController {
             
             present(alert, animated: true, completion: nil)
         } else {
-            performSegue(withIdentifier: SegueIdentifiers.sceneSegue, sender: self)
+            performSegue(withIdentifier: Constants.SegueIdentifiers.sceneSegue, sender: self)
         }
         
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
 
 }
