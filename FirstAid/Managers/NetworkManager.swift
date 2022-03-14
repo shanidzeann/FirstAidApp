@@ -21,18 +21,45 @@ class NetworkManager {
                 completion(.failure(error))
                 self?.state = .noResults
             } else if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(APIResponse.self, from: data)
-                    self?.state = .results
-                    completion(.success(result.articles))
-                } catch {
-                    self?.state = .noResults
-                    completion(.failure(error))
-                }
+                self?.parseJSON(data: data, completion: { (result: Result<APIResponse, Error>) in
+                    switch result {
+                    case .success(let articles):
+                        self?.state = .results
+                        completion(.success(articles.articles))
+                    case .failure(let error):
+                        self?.state = .noResults
+                        completion(.failure(error))
+                    }
+                })
             }
         }
         task.resume()
     }
+    
+    private func parseJSON<T: Decodable>(data: Data, completion: @escaping (Result<T, Error>) -> Void)  {
+        do {
+            let result = try JSONDecoder().decode(T.self, from: data)
+            completion(.success(result))
+        } catch let DecodingError.dataCorrupted(context) {
+            print(context)
+            completion(.failure(DecodingError.dataCorrupted(context)))
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.keyNotFound(key, context)))
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.valueNotFound(value, context)))
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+            completion(.failure(DecodingError.typeMismatch(type, context)))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
 }
 
 
