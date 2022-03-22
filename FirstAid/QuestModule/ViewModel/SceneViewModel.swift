@@ -70,4 +70,8 @@ class SceneViewModel {
         db.save()
     }
     
+    func sceneHasChoices() -> Bool {
+        return choices?.count == 3
+    }
+    
 }

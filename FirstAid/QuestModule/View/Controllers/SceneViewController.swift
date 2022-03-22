@@ -60,7 +60,7 @@ class SceneViewController: UIViewController {
             return
         }
         
-        guard viewModel?.choices?.count == 3 else {
+        guard viewModel!.sceneHasChoices() else {
             countdownTimer.pause()
             hideButtons(true)
             navigationItem.leftBarButtonItem?.isEnabled = true
