@@ -2,7 +2,7 @@
 
 UIKit
 
-MVVM, Data binding via Boxing (как минимум, я пыталась)
+MVVM, Data binding via Boxing
 
 UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 
