@@ -11,7 +11,7 @@ class SceneViewModel {
     
     // MARK: - Properties
     
-    var delegate: ViewModelDelegate?
+    let db = DatabaseManager()
     var situation: SituationDB
     lazy var scene = Box(situation.scenes?[0] as? SceneDB)
     
@@ -29,9 +29,8 @@ class SceneViewModel {
     
     // MARK: - Init
     
-    init(_ situation: SituationDB, delegate: ViewModelDelegate?) {
+    init(_ situation: SituationDB) {
         self.situation = situation
-        self.delegate = delegate
     }
     
     // MARK: - Methods
@@ -49,7 +48,7 @@ class SceneViewModel {
     func setFirstScene() {
         scene.value = situation.scenes?[0] as? SceneDB
     }
-
+    
     func setNextScene(_ tag: Int) {
         let id = nextSceneID(tag)
         if let nextSceneID = id {
@@ -63,6 +62,12 @@ class SceneViewModel {
     
     func questIsFinished() -> Bool {
         return scene.value?.situation?.isFinished ?? false
+    }
+    
+    func saveEnding(isFinished: Bool, isSuccess: Bool) {
+        situation.isFinished = isFinished
+        situation.isSuccess = isSuccess
+        db.save()
     }
     
 }

@@ -64,7 +64,7 @@ class SceneViewController: UIViewController {
             countdownTimer.pause()
             hideButtons(true)
             navigationItem.leftBarButtonItem?.isEnabled = true
-            viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
+            viewModel?.saveEnding(isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
             UIView.animate(withDuration: Constants.Animation.sceneDuration) {
                 self.sceneLabel.alpha = 1
             }
@@ -189,8 +189,6 @@ class SceneViewController: UIViewController {
         }))
         
         vc.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { [weak self] _ in
-//            self?.navigationController?.popToRootViewController(animated: true)
-//            self?.tabBarController?.tabBar.isHidden = false
             self?.exit()
         }))
         
@@ -203,7 +201,7 @@ class SceneViewController: UIViewController {
     }
     
     @objc private func didTapRestart() {
-        viewModel?.delegate?.endReceived(situation: viewModel!.situation, isFinished: false, isSuccess: false)
+        viewModel?.saveEnding(isFinished: false, isSuccess: false)
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(false)
         } completion: { done in

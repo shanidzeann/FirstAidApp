@@ -40,7 +40,7 @@ class SituationsTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow,
            let selectedSituation = viewModel.selectedSituation(at: indexPath) {
             let vc = segue.destination as! SceneViewController
-            vc.viewModel = viewModel.situationViewModel(for: selectedSituation, delegate: viewModel)
+            vc.viewModel = viewModel.situationViewModel(for: selectedSituation)
         }
     }
     
@@ -76,8 +76,8 @@ class SituationsTableViewController: UITableViewController {
             
             action = UIAlertAction(title: "Да", style: .destructive) { [weak self] _ in
                 self?.performSegue(withIdentifier: Constants.SegueIdentifiers.sceneSegue, sender: self)
-                self?.viewModel.endReceived(situation: situation, isFinished: false, isSuccess: false)
-                }
+                self?.viewModel.saveEnding(situation: situation, isFinished: false, isSuccess: false)
+            }
             
             alert.addAction(action)
             
@@ -87,5 +87,5 @@ class SituationsTableViewController: UITableViewController {
         }
         
     }
-
+    
 }

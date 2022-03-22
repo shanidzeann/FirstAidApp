@@ -39,18 +39,8 @@ class SituationsViewModel {
         return SituationsTVCellViewModel(situation: situation)
     }
     
-    func situationViewModel(for situation: SituationDB, delegate: ViewModelDelegate?) -> SceneViewModel? {
-        return SceneViewModel(situation, delegate: delegate)
-    }
-    
-}
-
-
-// MARK: - Receive data about quest completion
-
-extension SituationsViewModel: ViewModelDelegate {
-    func endReceived(situation: SituationDB, isFinished: Bool, isSuccess: Bool) {
-        saveEnding(situation: situation, isFinished: isFinished, isSuccess: isSuccess)
+    func situationViewModel(for situation: SituationDB) -> SceneViewModel? {
+        return SceneViewModel(situation)
     }
     
 }
