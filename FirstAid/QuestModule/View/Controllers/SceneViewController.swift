@@ -189,8 +189,9 @@ class SceneViewController: UIViewController {
         }))
         
         vc.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { [weak self] _ in
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.tabBarController?.tabBar.isHidden = false
+//            self?.navigationController?.popToRootViewController(animated: true)
+//            self?.tabBarController?.tabBar.isHidden = false
+            self?.exit()
         }))
         
         hideButtons(true)
@@ -213,7 +214,16 @@ class SceneViewController: UIViewController {
     }
     
     @objc private func didTapCancel() {
-        didTapPause()
+        if viewModel!.questIsFinished() {
+            exit()
+        } else {
+            didTapPause()
+        }
+    }
+    
+    private func exit() {
+        navigationController?.popToRootViewController(animated: true)
+        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Hepler Methods

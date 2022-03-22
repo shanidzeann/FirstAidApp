@@ -61,4 +61,8 @@ class SceneViewModel {
         scene.value = situation.scenes?.lastObject as? SceneDB
     }
     
+    func questIsFinished() -> Bool {
+        return scene.value?.situation?.isFinished ?? false
+    }
+    
 }
