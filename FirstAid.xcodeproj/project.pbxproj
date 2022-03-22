@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		018C475627E9A81400FA4B02 /* QuestDataModel.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */; };
+		018C475727E9A81400FA4B02 /* QuestDataModel.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */; };
+		018C475827E9A81400FA4B02 /* QuestDataModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */; };
 		2D36F76C0278EDE8699A11E7 /* Pods_FirstAid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */; };
 		8906C6B527AABAF4008F53BA /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */; };
 		8906C6B727AABBE0008F53BA /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8906C6B627AABBE0008F53BA /* ArticleViewController.swift */; };
@@ -54,6 +57,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-wal"; sourceTree = "<group>"; };
+		018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-shm"; sourceTree = "<group>"; };
+		018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuestDataModel.sqlite; sourceTree = "<group>"; };
 		480822E2A3C1374AB64F1D8B /* Pods-FirstAid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAid.release.xcconfig"; path = "Target Support Files/Pods-FirstAid/Pods-FirstAid.release.xcconfig"; sourceTree = "<group>"; };
 		87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstAid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -406,6 +412,9 @@
 			isa = PBXGroup;
 			children = (
 				89F0609027A43A0500F10E18 /* QuestDataModel.xcdatamodeld */,
+				018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */,
+				018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */,
+				018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -470,12 +479,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				89640D892726A768000D2A12 /* graph.json in Resources */,
+				018C475727E9A81400FA4B02 /* QuestDataModel.sqlite-shm in Resources */,
 				89A595D527AC3685006A240E /* NothingFoundCell.xib in Resources */,
 				892936C227235C2E0067CD25 /* LaunchScreen.storyboard in Resources */,
 				89A595D327AC2AD4006A240E /* LoadingCell.xib in Resources */,
 				892936BF27235C2E0067CD25 /* Assets.xcassets in Resources */,
+				018C475827E9A81400FA4B02 /* QuestDataModel.sqlite in Resources */,
 				892936CE2723642F0067CD25 /* theory.json in Resources */,
 				892936BD27235C290067CD25 /* Main.storyboard in Resources */,
+				018C475627E9A81400FA4B02 /* QuestDataModel.sqlite-wal in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

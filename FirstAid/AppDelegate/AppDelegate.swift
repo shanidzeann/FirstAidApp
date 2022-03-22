@@ -12,7 +12,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        preloadDBData()
         fixNavigationBar()
         
         application.applicationIconBadgeNumber = 0
@@ -61,34 +61,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: - Core Data
+    
     lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
         let container = NSPersistentContainer(name: "QuestDataModel")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
     }()
-    
-    // MARK: - Core Data Saving support
     
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -96,11 +79,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    func preloadDBData() {
+        let sqlitePath = Bundle.main.path(forResource: "QuestDataModel", ofType: "sqlite")
+        let sqlitePath_shm = Bundle.main.path(forResource: "QuestDataModel", ofType: "sqlite-shm")
+        let sqlitePath_wal = Bundle.main.path(forResource: "QuestDataModel", ofType: "sqlite-wal")
+
+        let URL1 = URL(fileURLWithPath: sqlitePath!)
+        let URL2 = URL(fileURLWithPath: sqlitePath_shm!)
+        let URL3 = URL(fileURLWithPath: sqlitePath_wal!)
+        let URL4 = URL(fileURLWithPath: NSPersistentContainer.defaultDirectoryURL().relativePath + "/QuestDataModel.sqlite")
+        let URL5 = URL(fileURLWithPath: NSPersistentContainer.defaultDirectoryURL().relativePath + "/QuestDataModel.sqlite-shm")
+        let URL6 = URL(fileURLWithPath: NSPersistentContainer.defaultDirectoryURL().relativePath + "/QuestDataModel.sqlite-wal")
+
+        if !FileManager.default.fileExists(atPath: NSPersistentContainer.defaultDirectoryURL().relativePath + "/QuestDataModel.sqlite") {
+            do {
+                try FileManager.default.copyItem(at: URL1, to: URL4)
+                try FileManager.default.copyItem(at: URL2, to: URL5)
+                try FileManager.default.copyItem(at: URL3, to: URL6)
+
+                print("=======================")
+                print("FILES COPIED")
+                print("=======================")
+
+            } catch {
+                print("=======================")
+                print("ERROR IN COPY OPERATION")
+                print("=======================")
+            }
+        } else {
+            print("=======================")
+            print("FILES EXIST")
+            print("=======================")
         }
     }
     
