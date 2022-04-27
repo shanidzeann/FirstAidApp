@@ -136,11 +136,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="s71-9y-NCk">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="356.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afQ-wn-jSd">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hct-Xu-8vY">
                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="244"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afQ-wn-jSd">
+                                                        <rect key="frame" x="10" y="5" width="314" height="234"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="afQ-wn-jSd" secondAttribute="trailing" constant="10" id="GRa-BO-fMH"/>
+                                                    <constraint firstItem="afQ-wn-jSd" firstAttribute="leading" secondItem="hct-Xu-8vY" secondAttribute="leading" constant="10" id="ST3-X4-nyS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="afQ-wn-jSd" secondAttribute="bottom" constant="5" id="gX5-6S-smg"/>
+                                                    <constraint firstItem="afQ-wn-jSd" firstAttribute="top" secondItem="hct-Xu-8vY" secondAttribute="top" constant="5" id="hmm-NZ-kvp"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="7q7-6Y-jgJ" customClass="SRCountdownTimer" customModule="SRCountdownTimer">
                                                 <rect key="frame" x="118" y="259" width="98" height="97.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -150,10 +162,10 @@
                                             </view>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="hct-Xu-8vY" firstAttribute="height" secondItem="7q7-6Y-jgJ" secondAttribute="height" multiplier="2.5" id="5Ki-2M-11B"/>
                                             <constraint firstItem="7q7-6Y-jgJ" firstAttribute="centerX" secondItem="s71-9y-NCk" secondAttribute="centerX" id="Grg-93-CZI"/>
-                                            <constraint firstItem="afQ-wn-jSd" firstAttribute="height" secondItem="7q7-6Y-jgJ" secondAttribute="height" multiplier="2.5" id="dQw-sv-tFs"/>
-                                            <constraint firstItem="afQ-wn-jSd" firstAttribute="leading" secondItem="s71-9y-NCk" secondAttribute="leading" id="lg6-tL-V3p"/>
-                                            <constraint firstAttribute="trailing" secondItem="afQ-wn-jSd" secondAttribute="trailing" id="plr-rf-Aey"/>
+                                            <constraint firstItem="hct-Xu-8vY" firstAttribute="leading" secondItem="s71-9y-NCk" secondAttribute="leading" id="S94-bf-AFW"/>
+                                            <constraint firstAttribute="trailing" secondItem="hct-Xu-8vY" secondAttribute="trailing" id="wD9-aG-fni"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aMk-J6-ScD">
@@ -234,6 +246,7 @@
                         <outlet property="countdownTimer" destination="7q7-6Y-jgJ" id="aEZ-Ff-hkT"/>
                         <outlet property="middleButton" destination="IVi-zt-pCM" id="eIh-eB-wTj"/>
                         <outlet property="sceneLabel" destination="afQ-wn-jSd" id="yAe-w1-4Pb"/>
+                        <outlet property="sceneLabelContainer" destination="hct-Xu-8vY" id="8HV-Ng-xap"/>
                         <outlet property="topButton" destination="dwS-Ml-Myu" id="gbW-KM-hzD"/>
                     </connections>
                 </viewController>

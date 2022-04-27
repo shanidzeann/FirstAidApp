@@ -20,6 +20,9 @@ class SceneViewController: UIViewController {
     @IBOutlet weak var middleButton: UIButton!
     @IBOutlet weak var bottomButton: UIButton!
     
+    @IBOutlet weak var sceneLabelContainer: UIView!
+    private var shadowLayer: CAShapeLayer!
+    
     var pauseButton: UIBarButtonItem!
     var restartButton: UIBarButtonItem!
     
@@ -37,19 +40,20 @@ class SceneViewController: UIViewController {
         setUpBindings()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureLabel()
+        configureSceneLabelContainer()
+        configureButton(topButton)
+        configureButton(middleButton)
+        configureButton(bottomButton)
+    }
+    
     // MARK: - Quest start
     
     private func setFirstScene() {
         tabBarController?.tabBar.isHidden = true
         viewModel?.setFirstScene()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        configureLabel()
-        configureButton(topButton)
-        configureButton(middleButton)
-        configureButton(bottomButton)
     }
     
     // MARK: - Update UI
@@ -67,6 +71,7 @@ class SceneViewController: UIViewController {
             viewModel?.saveEnding(isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
             UIView.animate(withDuration: Constants.Animation.sceneDuration) {
                 self.sceneLabel.alpha = 1
+                self.sceneLabelContainer.alpha = 1
             }
             return
         }
@@ -80,11 +85,12 @@ class SceneViewController: UIViewController {
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(true)
         }
-
+        
     }
     
     private func showMainUI(_ bool: Bool) {
         sceneLabel.alpha = bool ? 1 : 0
+        sceneLabelContainer.alpha = bool ? 1 : 0
         topButton.alpha = bool ? 1 : 0
         middleButton.alpha = bool ? 1 : 0
         bottomButton.alpha = bool ? 1 : 0
@@ -105,11 +111,23 @@ class SceneViewController: UIViewController {
         sceneLabel.adjustsFontSizeToFitWidth = true
         sceneLabel.minimumScaleFactor = 0.5
         sceneLabel.backgroundColor = .systemBackground
-        sceneLabel.layer.shadowPath = UIBezierPath(rect: sceneLabel.bounds).cgPath
-        sceneLabel.layer.shadowColor = UIColor.systemRed.cgColor
-        sceneLabel.layer.shadowOpacity = 1
-        sceneLabel.layer.shadowRadius = 5
-        sceneLabel.layer.shadowOffset = .zero
+        sceneLabel.layer.cornerRadius = 12
+        sceneLabel.clipsToBounds = true
+    }
+    
+    private func configureSceneLabelContainer() {
+        sceneLabelContainer.layer.cornerRadius = 12
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: sceneLabelContainer.bounds, cornerRadius: 12).cgPath
+            shadowLayer.fillColor = UIColor.systemBackground.cgColor
+            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            shadowLayer.shadowOpacity = 0.8
+            shadowLayer.shadowRadius = 2
+            sceneLabelContainer.layer.insertSublayer(shadowLayer, below: nil)
+        }
     }
     
     private func configureButton(_ button: UIButton) {
