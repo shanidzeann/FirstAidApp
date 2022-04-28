@@ -18,6 +18,7 @@ class TheoryViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.theoryCell)
+        tableView.rowHeight = 80
         return tableView
     }()
     
@@ -40,8 +41,8 @@ class TheoryViewController: UIViewController {
     
     // MARK: - DropDown Menu Functionality
     
-    private func menuWork(index: Int) {
-        viewModel.filterLessons(at: index)
+    private func showFilteredLessons(by state: LessonsState) {
+        viewModel.filterLessons(by: state)
         tableView.reloadData()
     }
     
@@ -55,7 +56,6 @@ class TheoryViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 80
     }
     
     private func setData() {
@@ -64,21 +64,23 @@ class TheoryViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let showRead = UIAction(title: "Показать прочитанные") { [weak self] (action) in
-            self?.menuWork(index: 0)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil,
+                                                            image: UIImage(systemName: "ellipsis"),
+                                                            primaryAction: nil,
+                                                            menu: createMenu())
+    }
+    
+    private func createMenu() -> UIMenu {
+        var actions = [UIAction]()
+        
+        for state in LessonsState.allCases {
+            let action = UIAction(title: state.title) { [weak self] _ in
+                self?.showFilteredLessons(by: state)
+            }
+            actions.append(action)
         }
         
-        let showUnread = UIAction(title: "Показать непрочитанные") { [weak self] (action) in
-            self?.menuWork(index: 1)
-        }
-        
-        let showAll = UIAction(title: "Показать все") { [weak self] (action) in
-            self?.menuWork(index: 2)
-        }
-        
-        let menu = UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: [showRead, showUnread, showAll])
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: menu)
+        return UIMenu(title: "", options: .singleSelection, children: actions)
     }
 }
 
@@ -144,7 +146,7 @@ extension TheoryViewController: UITableViewDelegate {
             guard let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
             cell.done = lesson.isFinished
             
-            switch viewModel.menuState {
+            switch viewModel.lessonsState {
             case .all, .none:
                 cell.setBackground()
                 if !cell.done {

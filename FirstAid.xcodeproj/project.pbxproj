@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013DC7B3281AE55600222BA8 /* LessonsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7B2281AE55600222BA8 /* LessonsState.swift */; };
 		018C475627E9A81400FA4B02 /* QuestDataModel.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */; };
 		018C475727E9A81400FA4B02 /* QuestDataModel.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */; };
 		018C475827E9A81400FA4B02 /* QuestDataModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013DC7B2281AE55600222BA8 /* LessonsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsState.swift; sourceTree = "<group>"; };
 		018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-wal"; sourceTree = "<group>"; };
 		018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-shm"; sourceTree = "<group>"; };
 		018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuestDataModel.sqlite; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				89640D8E27276B5B000D2A12 /* TheoryModels.swift */,
+				013DC7B2281AE55600222BA8 /* LessonsState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				8906C6BE27AB1CB1008F53BA /* NetworkManager.swift in Sources */,
 				892936D627236D800067CD25 /* LessonImageTableViewCell.swift in Sources */,
 				892481E3278CC84100BD03C5 /* SituationsTVCellViewModel.swift in Sources */,
+				013DC7B3281AE55600222BA8 /* LessonsState.swift in Sources */,
 				892936B627235C290067CD25 /* AppDelegate.swift in Sources */,
 				8906C6C327AB3841008F53BA /* NewsTVCellViewModel.swift in Sources */,
 				891FCC632780C60C0016842A /* Protocols.swift in Sources */,

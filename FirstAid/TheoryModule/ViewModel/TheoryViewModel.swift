@@ -11,13 +11,9 @@ class TheoryViewModel {
     
     // MARK: - Properties
     
-    enum MenuState {
-        case read, unread, all
-    }
-    
     var allLessons: [Lesson]?
     var filteredLessons: [Lesson]?
-    var menuState: MenuState?
+    var lessonsState: LessonsState?
     
     let titleForHeader = "Первая помощь при ..."
     let allDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("AllTheory.plist")
@@ -46,20 +42,17 @@ class TheoryViewModel {
         filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
     }
     
-    func filterLessons(at index: Int) {
-        
+    func filterLessons(by state: LessonsState) {
         refreshFilteredLessons()
         guard let allLessons = allLessons else { return }
         
-        switch index {
-        case 0:
-            menuState = .read
+        lessonsState = state
+        switch state {
+        case .read:
             filteredLessons = (allLessons.filter { $0.isFinished == true })
-        case 1:
-            menuState = .unread
+        case .unread:
             filteredLessons = (allLessons.filter { $0.isFinished == false })
-        default:
-            menuState = .all
+        case .all:
             filteredLessons = allLessons.sorted { !$0.isFinished && $1.isFinished }
         }
     }

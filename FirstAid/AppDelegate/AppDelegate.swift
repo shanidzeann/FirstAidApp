@@ -12,22 +12,28 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         preloadDBData()
         fixNavigationBar()
+        fixTabBar()
         
         application.applicationIconBadgeNumber = 0
+        notificationsWork()
+        
+        return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        self.saveContext()
+    }
+    
+    private func notificationsWork() {
         NotificationManager.shared.removeNotifications()
         NotificationManager.shared.requestAuthorization { granted in
             if granted {
                 NotificationManager.shared.scheduleNotification()
             }
         }
-        return true
-        
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        self.saveContext()
     }
     
     
@@ -52,7 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-            
+        }
+    }
+    
+    func fixTabBar() {
+        if #available(iOS 15.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
             tabBarAppearance.backgroundColor = .systemBackground
@@ -102,20 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try FileManager.default.copyItem(at: URL1, to: URL4)
                 try FileManager.default.copyItem(at: URL2, to: URL5)
                 try FileManager.default.copyItem(at: URL3, to: URL6)
-
-                print("=======================")
                 print("FILES COPIED")
-                print("=======================")
-
             } catch {
-                print("=======================")
                 print("ERROR IN COPY OPERATION")
-                print("=======================")
             }
         } else {
-            print("=======================")
             print("FILES EXIST")
-            print("=======================")
         }
     }
     
