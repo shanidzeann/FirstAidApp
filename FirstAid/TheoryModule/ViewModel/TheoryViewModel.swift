@@ -83,6 +83,10 @@ class TheoryViewModel {
         }
     }
     
+    func lastLessonIndex() -> Int {
+        return (filteredLessons?.count ?? 1) - 1
+    }
+    
     // MARK: - Get ViewModels
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> TheoryTVCellViewModel? {

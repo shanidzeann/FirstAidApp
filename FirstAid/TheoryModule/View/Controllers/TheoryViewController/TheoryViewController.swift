@@ -46,7 +46,7 @@ class TheoryViewController: UIViewController {
         tableView.reloadData()
     }
     
-    // MARK: - Helper Methods
+    // MARK: - Private
     
     private func setBackgroundColor() {
         view.backgroundColor = .systemBackground
@@ -82,8 +82,75 @@ class TheoryViewController: UIViewController {
         
         return UIMenu(title: "", options: .singleSelection, children: actions)
     }
+    
+    // MARK: - Helper methods for delegate
+    
+    func presentLesson(for indexPath: IndexPath) {
+        guard let vc = createLessonVC(for: indexPath) else { return }
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true, completion: nil)
+    }
+    
+    func createLessonVC(for indexPath: IndexPath) -> LessonViewController? {
+        guard let selectedLesson = viewModel.selectedLesson(at: indexPath),
+              let lessonVM = viewModel.lessonViewModel(for: selectedLesson) else { return nil }
+        let vc = LessonViewController()
+        vc.viewModel = lessonVM
+        return vc
+    }
+    
+    func doneAction(at indexPath: IndexPath) -> UIContextualAction {
+        
+        guard var lesson = viewModel.selectedLesson(at: indexPath) else { return UIContextualAction() }
+        
+        let action = UIContextualAction(style: .destructive, title: "Done") { [weak self] (action, _, completion) in
+            
+            guard let self = self,
+                    let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
+            let viewModel = self.viewModel
+            
+            viewModel.toggleCompletion(of: &lesson, at: indexPath)
+            cell.done = lesson.isFinished
+            cell.setBackground()
+            
+            self.moveLesson(lesson, from: indexPath)
+            
+            completion(true)
+        }
+        
+        action.backgroundColor = lesson.isFinished ? .systemRed : .systemGreen
+        action.image = lesson.isFinished ? UIImage(systemName: "xmark.circle") : UIImage(systemName: "checkmark.circle")
+        
+        return action
+    }
+    
+    private func moveLesson(_ lesson: Lesson, from indexPath: IndexPath) {
+        switch viewModel.lessonsState {
+        case .all, .none:
+            if lesson.isFinished {
+                self.moveLessonToBottom(lesson, from: indexPath)
+            } else {
+                self.moveLessonToTop(lesson, from: indexPath)
+            }
+        case .read, .unread:
+            viewModel.removeLesson(at: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    private func moveLessonToTop(_ lesson: Lesson, from indexPath: IndexPath) {
+        moveRow(at: indexPath, to: IndexPath(row: 0, section: 0), with: lesson)
+    }
+    
+    private func moveLessonToBottom(_ lesson: Lesson, from indexPath: IndexPath) {
+        let lastIndexPath = IndexPath(row: viewModel.lastLessonIndex(), section: 0)
+        moveRow(at: indexPath, to: lastIndexPath, with: lesson)
+    }
+    
+    private func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath, with lesson: Lesson) {
+        tableView.moveRow(at: indexPath, to: newIndexPath)
+        viewModel.removeLesson(at: indexPath)
+        viewModel.insert(lesson, at: newIndexPath)
+    }
 }
-
-
-// MARK: - Table view delegate
-
