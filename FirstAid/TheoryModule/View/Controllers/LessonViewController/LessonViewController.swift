@@ -32,7 +32,7 @@ class LessonViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.lessonTextCell)
         tableView.register(LessonImageTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.lessonImageCell)
         tableView.separatorStyle = .none
-        
+        tableView.estimatedRowHeight = 200
         return tableView
     }()
     
@@ -78,7 +78,6 @@ class LessonViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 200
     }
 
 }

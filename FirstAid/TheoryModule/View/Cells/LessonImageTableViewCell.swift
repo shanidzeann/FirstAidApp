@@ -9,16 +9,10 @@ import UIKit
 
 class LessonImageTableViewCell: UITableViewCell {
     
-    var image: UIImage? {
-        didSet {
-            lessonImageView.image = image
-        }
-    }
-    
     weak var viewModel: LessonTVCellViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
-            image = UIImage(named: viewModel.imageName)
+            lessonImageView.image = UIImage(named: viewModel.imageName)
         }
     }
     

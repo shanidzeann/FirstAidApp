@@ -107,7 +107,7 @@ class TheoryViewController: UIViewController {
         let action = UIContextualAction(style: .destructive, title: "Done") { [weak self] (action, _, completion) in
             
             guard let self = self,
-                    let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
+                  let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
             let viewModel = self.viewModel
             
             viewModel.toggleCompletion(of: &lesson, at: indexPath)
