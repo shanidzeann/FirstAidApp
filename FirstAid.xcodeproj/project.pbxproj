@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		013DC7B3281AE55600222BA8 /* LessonsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7B2281AE55600222BA8 /* LessonsState.swift */; };
+		013DC7B5281AE75E00222BA8 /* TheoryViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7B4281AE75E00222BA8 /* TheoryViewController+UITableViewDataSource.swift */; };
+		013DC7B7281AE7BE00222BA8 /* TheoryViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7B6281AE7BE00222BA8 /* TheoryViewController+UITableViewDelegate.swift */; };
+		013DC7BB281AE88500222BA8 /* LessonViewController+UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7BA281AE88500222BA8 /* LessonViewController+UITableViewDataSource.swift */; };
+		013DC7BD281AE8AD00222BA8 /* LessonViewController+UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7BC281AE8AD00222BA8 /* LessonViewController+UITableViewDelegate.swift */; };
+		013DC7C1281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7C0281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift */; };
+		013DC7C3281AE9EB00222BA8 /* SituationsTableViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7C2281AE9EB00222BA8 /* SituationsTableViewController+Delegate.swift */; };
+		013DC7C5281AEA8000222BA8 /* SceneViewController+SRCountdownTimerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7C4281AEA8000222BA8 /* SceneViewController+SRCountdownTimerDelegate.swift */; };
+		013DC7C7281AEB4200222BA8 /* NewsTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7C6281AEB4200222BA8 /* NewsTableViewController+DataSource.swift */; };
+		013DC7C9281AEB4C00222BA8 /* NewsTableViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DC7C8281AEB4C00222BA8 /* NewsTableViewController+Delegate.swift */; };
 		018C475627E9A81400FA4B02 /* QuestDataModel.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */; };
 		018C475727E9A81400FA4B02 /* QuestDataModel.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */; };
 		018C475827E9A81400FA4B02 /* QuestDataModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */; };
@@ -59,6 +68,15 @@
 
 /* Begin PBXFileReference section */
 		013DC7B2281AE55600222BA8 /* LessonsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsState.swift; sourceTree = "<group>"; };
+		013DC7B4281AE75E00222BA8 /* TheoryViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TheoryViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
+		013DC7B6281AE7BE00222BA8 /* TheoryViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TheoryViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
+		013DC7BA281AE88500222BA8 /* LessonViewController+UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonViewController+UITableViewDataSource.swift"; sourceTree = "<group>"; };
+		013DC7BC281AE8AD00222BA8 /* LessonViewController+UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LessonViewController+UITableViewDelegate.swift"; sourceTree = "<group>"; };
+		013DC7C0281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SituationsTableViewController+DataSource.swift"; sourceTree = "<group>"; };
+		013DC7C2281AE9EB00222BA8 /* SituationsTableViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SituationsTableViewController+Delegate.swift"; sourceTree = "<group>"; };
+		013DC7C4281AEA8000222BA8 /* SceneViewController+SRCountdownTimerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneViewController+SRCountdownTimerDelegate.swift"; sourceTree = "<group>"; };
+		013DC7C6281AEB4200222BA8 /* NewsTableViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsTableViewController+DataSource.swift"; sourceTree = "<group>"; };
+		013DC7C8281AEB4C00222BA8 /* NewsTableViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsTableViewController+Delegate.swift"; sourceTree = "<group>"; };
 		018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-wal"; sourceTree = "<group>"; };
 		018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-shm"; sourceTree = "<group>"; };
 		018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuestDataModel.sqlite; sourceTree = "<group>"; };
@@ -124,6 +142,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013DC7B8281AE86700222BA8 /* TheoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				892936B927235C290067CD25 /* TheoryViewController.swift */,
+				013DC7B4281AE75E00222BA8 /* TheoryViewController+UITableViewDataSource.swift */,
+				013DC7B6281AE7BE00222BA8 /* TheoryViewController+UITableViewDelegate.swift */,
+			);
+			path = TheoryViewController;
+			sourceTree = "<group>";
+		};
+		013DC7B9281AE87100222BA8 /* LessonViewController */ = {
+			isa = PBXGroup;
+			children = (
+				892936CF27236BB70067CD25 /* LessonViewController.swift */,
+				013DC7BA281AE88500222BA8 /* LessonViewController+UITableViewDataSource.swift */,
+				013DC7BC281AE8AD00222BA8 /* LessonViewController+UITableViewDelegate.swift */,
+			);
+			path = LessonViewController;
+			sourceTree = "<group>";
+		};
+		013DC7BE281AE94200222BA8 /* SituationsTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89640D8A2726AC60000D2A12 /* SituationsTableViewController.swift */,
+				013DC7C0281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift */,
+				013DC7C2281AE9EB00222BA8 /* SituationsTableViewController+Delegate.swift */,
+			);
+			path = SituationsTableViewController;
+			sourceTree = "<group>";
+		};
+		013DC7BF281AE94A00222BA8 /* SceneViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89640D84272690A1000D2A12 /* SceneViewController.swift */,
+				013DC7C4281AEA8000222BA8 /* SceneViewController+SRCountdownTimerDelegate.swift */,
+			);
+			path = SceneViewController;
+			sourceTree = "<group>";
+		};
 		01D69E3A27DE565800248D9C /* QuestModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */,
+				013DC7C6281AEB4200222BA8 /* NewsTableViewController+DataSource.swift */,
+				013DC7C8281AEB4C00222BA8 /* NewsTableViewController+Delegate.swift */,
 				8906C6B627AABBE0008F53BA /* ArticleViewController.swift */,
 			);
 			path = Controllers;
@@ -261,8 +320,8 @@
 		01D69E4827DE594E00248D9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				892936B927235C290067CD25 /* TheoryViewController.swift */,
-				892936CF27236BB70067CD25 /* LessonViewController.swift */,
+				013DC7B8281AE86700222BA8 /* TheoryViewController */,
+				013DC7B9281AE87100222BA8 /* LessonViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -279,8 +338,8 @@
 		01D69E4A27DE597700248D9C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				89640D8A2726AC60000D2A12 /* SituationsTableViewController.swift */,
-				89640D84272690A1000D2A12 /* SceneViewController.swift */,
+				013DC7BE281AE94200222BA8 /* SituationsTableViewController */,
+				013DC7BF281AE94A00222BA8 /* SceneViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -546,16 +605,22 @@
 				8906C6C527AB3D43008F53BA /* NewsModels.swift in Sources */,
 				89DC757027A9ABFD00E21A99 /* Box.swift in Sources */,
 				89640D8B2726AC60000D2A12 /* SituationsTableViewController.swift in Sources */,
+				013DC7C9281AEB4C00222BA8 /* NewsTableViewController+Delegate.swift in Sources */,
+				013DC7C5281AEA8000222BA8 /* SceneViewController+SRCountdownTimerDelegate.swift in Sources */,
 				89ACEE81278B8B8F008DD3C9 /* Constants.swift in Sources */,
+				013DC7B5281AE75E00222BA8 /* TheoryViewController+UITableViewDataSource.swift in Sources */,
 				8906C6BC27AB1C6B008F53BA /* ArticleViewModel.swift in Sources */,
 				89E47123278A30CE00EF4E07 /* TheoryTableViewCell.swift in Sources */,
+				013DC7C7281AEB4200222BA8 /* NewsTableViewController+DataSource.swift in Sources */,
 				89D57053278DA540002126DF /* SceneViewModel.swift in Sources */,
 				892936D027236BB70067CD25 /* LessonViewController.swift in Sources */,
 				89640D8D27276AFC000D2A12 /* QuestModels.swift in Sources */,
 				89ACEE7F278B8615008DD3C9 /* LessonTVCellViewModel.swift in Sources */,
 				8906C6B527AABAF4008F53BA /* NewsTableViewController.swift in Sources */,
 				8906C6BA27AB1C5D008F53BA /* NewsViewModel.swift in Sources */,
+				013DC7BB281AE88500222BA8 /* LessonViewController+UITableViewDataSource.swift in Sources */,
 				8906C6B727AABBE0008F53BA /* ArticleViewController.swift in Sources */,
+				013DC7B7281AE7BE00222BA8 /* TheoryViewController+UITableViewDelegate.swift in Sources */,
 				89F0609527A45DA700F10E18 /* DatabaseManager.swift in Sources */,
 				89A595D727AC3EFA006A240E /* UIImageView+DownloadImage.swift in Sources */,
 				891FCC652780CAD70016842A /* TheoryTVCellViewModel.swift in Sources */,
@@ -571,11 +636,14 @@
 				013DC7B3281AE55600222BA8 /* LessonsState.swift in Sources */,
 				892936B627235C290067CD25 /* AppDelegate.swift in Sources */,
 				8906C6C327AB3841008F53BA /* NewsTVCellViewModel.swift in Sources */,
+				013DC7C1281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift in Sources */,
 				891FCC632780C60C0016842A /* Protocols.swift in Sources */,
 				89F0609227A43A0600F10E18 /* QuestDataModel.xcdatamodeld in Sources */,
 				892936B827235C290067CD25 /* SceneDelegate.swift in Sources */,
+				013DC7C3281AE9EB00222BA8 /* SituationsTableViewController+Delegate.swift in Sources */,
 				89D57050278D9DCA002126DF /* SituationTableViewCell.swift in Sources */,
 				892481E1278CC45600BD03C5 /* SituationsViewModel.swift in Sources */,
+				013DC7BD281AE8AD00222BA8 /* LessonViewController+UITableViewDelegate.swift in Sources */,
 				89640D8F27276B5B000D2A12 /* TheoryModels.swift in Sources */,
 				89ACEE7D278B792B008DD3C9 /* LessonViewModel.swift in Sources */,
 				892E1AF5274D7C73008AC606 /* RulesAlert.swift in Sources */,

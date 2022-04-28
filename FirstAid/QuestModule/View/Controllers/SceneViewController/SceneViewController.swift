@@ -88,7 +88,7 @@ class SceneViewController: UIViewController {
         
     }
     
-    private func showMainUI(_ bool: Bool) {
+    func showMainUI(_ bool: Bool) {
         sceneLabel.alpha = bool ? 1 : 0
         sceneLabelContainer.alpha = bool ? 1 : 0
         topButton.alpha = bool ? 1 : 0
@@ -250,19 +250,4 @@ class SceneViewController: UIViewController {
         })
     }
     
-}
-
-
-// MARK: - Timer delegate
-
-extension SceneViewController: SRCountdownTimerDelegate {
-    func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
-        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
-            self.showMainUI(false)
-        } completion: { done in
-            if done {
-                self.viewModel?.setLastScene()
-            }
-        }
-    }
 }
