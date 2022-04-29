@@ -19,9 +19,7 @@ class SceneViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var middleButton: UIButton!
     @IBOutlet weak var bottomButton: UIButton!
-    
     @IBOutlet weak var sceneLabelContainer: UIView!
-    private var shadowLayer: CAShapeLayer!
     
     var pauseButton: UIBarButtonItem!
     var restartButton: UIBarButtonItem!
@@ -36,7 +34,7 @@ class SceneViewController: UIViewController {
         navigationItem.leftBarButtonItem?.isEnabled = false
         configureNavigationBar()
         configureTimer()
-        showAlert()
+        showRulesAlert()
         setUpBindings()
     }
     
@@ -60,22 +58,16 @@ class SceneViewController: UIViewController {
     
     private func updateUI() {
         sceneLabel.text = viewModel?.text
-        guard let scene = viewModel?.scene else {
-            return
-        }
         
         guard viewModel!.sceneHasChoices() else {
-            countdownTimer.pause()
-            hideButtons(true)
-            navigationItem.leftBarButtonItem?.isEnabled = true
-            viewModel?.saveEnding(isFinished: true, isSuccess: scene.value?.isHappyEnd ?? false)
-            UIView.animate(withDuration: Constants.Animation.sceneDuration) {
-                self.sceneLabel.alpha = 1
-                self.sceneLabelContainer.alpha = 1
-            }
+            finishQuest()
             return
         }
         
+        continueQuest()
+    }
+    
+    private func continueQuest() {
         topButton.setTitle(viewModel?.choiceText(0), for: .normal)
         middleButton.setTitle(viewModel?.choiceText(1), for: .normal)
         bottomButton.setTitle(viewModel?.choiceText(2), for: .normal)
@@ -85,19 +77,32 @@ class SceneViewController: UIViewController {
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(true)
         }
-        
+    }
+    
+    private func finishQuest() {
+        countdownTimer.pause()
+        hideButtons(true)
+        navigationItem.leftBarButtonItem?.isEnabled = true
+        viewModel?.saveEnding(isFinished: true, isSuccess: viewModel!.isHappyEnd())
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.sceneLabel.alpha = 1
+            self.sceneLabelContainer.alpha = 1
+        }
     }
     
     func showMainUI(_ bool: Bool) {
-        sceneLabel.alpha = bool ? 1 : 0
-        sceneLabelContainer.alpha = bool ? 1 : 0
-        topButton.alpha = bool ? 1 : 0
-        middleButton.alpha = bool ? 1 : 0
-        bottomButton.alpha = bool ? 1 : 0
-        countdownTimer.alpha = bool ? 1 : 0
+        let views = [sceneLabel,
+                     sceneLabelContainer,
+                     topButton,
+                     middleButton,
+                     bottomButton,
+                     countdownTimer]
+        for view in views {
+            view?.alpha = bool ? 1 : 0
+        }
     }
     
-    private func showAlert() {
+    private func showRulesAlert() {
         rulesAlert.showAlert(on: self)
     }
     
@@ -117,17 +122,13 @@ class SceneViewController: UIViewController {
     
     private func configureSceneLabelContainer() {
         sceneLabelContainer.layer.cornerRadius = 12
-        if shadowLayer == nil {
-            shadowLayer = CAShapeLayer()
-            shadowLayer.path = UIBezierPath(roundedRect: sceneLabelContainer.bounds, cornerRadius: 12).cgPath
-            shadowLayer.fillColor = UIColor.systemBackground.cgColor
-            shadowLayer.shadowColor = UIColor.darkGray.cgColor
-            shadowLayer.shadowPath = shadowLayer.path
-            shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-            shadowLayer.shadowOpacity = 0.8
-            shadowLayer.shadowRadius = 2
-            sceneLabelContainer.layer.insertSublayer(shadowLayer, below: nil)
-        }
+        sceneLabelContainer.layer.shadowColor = UIColor.darkGray.cgColor
+        sceneLabelContainer.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        sceneLabelContainer.layer.shadowRadius = 2
+        sceneLabelContainer.layer.shadowOpacity = 0.8
+        sceneLabelContainer.layer.shadowPath = UIBezierPath(roundedRect: sceneLabelContainer.bounds, cornerRadius: 12).cgPath
+        sceneLabelContainer.layer.shouldRasterize = true
+        sceneLabelContainer.layer.rasterizationScale = UIScreen.main.scale
     }
     
     private func configureButton(_ button: UIButton) {
@@ -178,54 +179,54 @@ class SceneViewController: UIViewController {
     @IBAction func answerButtonTapped(_ sender: UIButton) {
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(false)
-        } completion: { done in
-            if done {
-                self.viewModel?.setNextScene(sender.tag)
-            }
+        } completion: { _ in
+            self.viewModel?.setNextScene(sender.tag)
         }
     }
     
     @objc private func didTapPause() {
         countdownTimer.pause()
         navigationItem.leftBarButtonItem?.isEnabled = false
+        hideButtons(true)
         
+        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
+            self.showMainUI(false)
+        } completion: { _ in
+            self.showPauseAlert()
+        }
+    }
+    
+    private func showPauseAlert() {
         let vc = UIAlertController(
             title: "Квест приостановлен",
             message: "Продолжить квест?\nЕсли Вы покинете игру, прогресс будет потерян",
             preferredStyle: .alert)
         
-        vc.addAction(UIAlertAction(title: "Продолжить", style: .default, handler: { [weak self] _ in
+        vc.addAction(UIAlertAction(title: "Продолжить", style: .default) { [weak self] _ in
             self?.countdownTimer.resume()
             self?.hideButtons(false)
             UIView.animate(withDuration: Constants.Animation.sceneDuration) {
                 self?.showMainUI(true)
             }
-        }))
+        })
         
-        vc.addAction(UIAlertAction(title: "Начать заново", style: .destructive, handler: { [weak self] _ in
+        vc.addAction(UIAlertAction(title: "Начать заново", style: .destructive) { [weak self] _ in
             self?.didTapRestart()
-        }))
+        })
         
-        vc.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { [weak self] _ in
+        vc.addAction(UIAlertAction(title: "Выйти", style: .destructive) { [weak self] _ in
             self?.exit()
-        }))
+        })
         
-        hideButtons(true)
-        UIView.animate(withDuration: Constants.Animation.sceneDuration) {
-            self.showMainUI(false)
-        } completion: { done in
-            self.present(vc, animated: true)
-        }
+        self.present(vc, animated: true)
     }
     
     @objc private func didTapRestart() {
         viewModel?.saveEnding(isFinished: false, isSuccess: false)
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(false)
-        } completion: { done in
-            if done {
-                self.setFirstScene()
-            }
+        } completion: { _ in
+            self.setFirstScene()
         }
     }
     

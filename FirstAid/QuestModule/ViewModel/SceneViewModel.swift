@@ -74,4 +74,8 @@ class SceneViewModel {
         return choices?.count == 3
     }
     
+    func isHappyEnd() -> Bool {
+         return scene.value?.isHappyEnd ?? false
+    }
+    
 }
