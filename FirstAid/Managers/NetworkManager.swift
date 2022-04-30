@@ -9,7 +9,12 @@ import Foundation
 
 class NetworkManager {
     
-    private(set) var state: State = .noResults
+    private(set) var state: State = .noResults {
+        didSet {
+            postNotification()
+        }
+    }
+    
     let healthHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=ru&category=health&apiKey=\(yourKey)")
     
     func getArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
@@ -57,6 +62,12 @@ class NetworkManager {
             completion(.failure(DecodingError.typeMismatch(type, context)))
         } catch {
             completion(.failure(error))
+        }
+    }
+    
+    private func postNotification() {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: NSNotification.Name("lessonsStateChanged"), object: nil)
         }
     }
 

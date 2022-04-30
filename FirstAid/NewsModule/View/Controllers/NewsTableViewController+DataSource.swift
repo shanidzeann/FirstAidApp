@@ -14,29 +14,33 @@ extension NewsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch viewModel.state {
         case .loading:
-            tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.loadingCell, for: indexPath)
-            cell.backgroundColor = .systemBackground
-            let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
-            spinner.startAnimating()
-            return cell
-            
+            return createLoadingCell(for: indexPath)
         case .noResults:
-            tableView.separatorStyle = .none
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
-            cell.backgroundColor = .systemBackground
-            return cell
-            
+            return createNothingFoundCell(for: indexPath)
         case .results:
-            tableView.separatorStyle = .singleLine
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.resultCell, for: indexPath) as? NewsTableViewCell
-            guard let cell = cell else { return UITableViewCell() }
-            cell.viewModel = viewModel.cellViewModel(forIndexPath: indexPath)
-            return cell
+            return createResultCell(for: indexPath)
         }
+    }
+    
+    private func createLoadingCell(for indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.loadingCell, for: indexPath)
+        let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
+        spinner.startAnimating()
+        return cell
+    }
+    
+    private func createNothingFoundCell(for indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
+        return cell
+    }
+    
+    private func createResultCell(for indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableView.CellIdentifiers.resultCell, for: indexPath) as? NewsTableViewCell
+        guard let cell = cell else { return UITableViewCell() }
+        cell.viewModel = viewModel.cellViewModel(forIndexPath: indexPath)
+        return cell
     }
     
 }

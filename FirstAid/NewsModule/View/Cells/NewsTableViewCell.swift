@@ -21,7 +21,7 @@ class NewsTableViewCell: UITableViewCell {
             titleLabel.text = viewModel.title
             descriptionLabel.text = viewModel.desctiption
             if let imageURL = viewModel.imageURL, let url = URL(string: imageURL) {
-                downloadTask = newsImageView.loadImage(url: url)
+                downloadTask = newsImageView.loadImage(url: url, completion: nil)
             }
         }
     }
@@ -29,6 +29,10 @@ class NewsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        configureNewsImageView()
+    }
+    
+    private func configureNewsImageView() {
         newsImageView.layer.cornerRadius = newsImageView.bounds.height / 10
         newsImageView.clipsToBounds = true
     }

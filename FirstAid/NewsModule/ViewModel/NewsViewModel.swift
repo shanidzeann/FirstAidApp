@@ -18,9 +18,7 @@ class NewsViewModel {
     
     func numberOfRows() -> Int {
         switch networkManager.state {
-        case .loading:
-            return 1
-        case .noResults:
+        case .loading, .noResults:
             return 1
         case .results:
             return articles?.count ?? 0

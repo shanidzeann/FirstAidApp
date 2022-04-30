@@ -18,16 +18,14 @@ class NewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
-        
+        configureTableView()
         registerCells()
         getArticles()
-        
-        tableView.rowHeight = Constants.TableView.RowHeights.news
+        addObserver()
     }
     
     // MARK: - Methods
+    
     func getArticles() {
         viewModel.getArticles { [weak self] in
             DispatchQueue.main.async {
@@ -41,12 +39,31 @@ class NewsTableViewController: UITableViewController {
         getArticles()
     }
     
+    private func configureTableView() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        tableView.rowHeight = Constants.TableView.RowHeights.news
+    }
+    
     func registerCells() {
         var cellNib = UINib(nibName: Constants.TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.nothingFoundCell)
         
         cellNib = UINib(nibName: Constants.TableView.CellIdentifiers.loadingCell, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.loadingCell)
+    }
+    
+    private func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSeparatorStyle), name: NSNotification.Name("lessonsStateChanged"), object: nil)
+    }
+    
+    @objc private func changeSeparatorStyle() {
+        switch viewModel.state {
+        case .loading, .noResults:
+            tableView.separatorStyle = .none
+        case .results:
+            tableView.separatorStyle = .singleLine
+        }
     }
     
 }

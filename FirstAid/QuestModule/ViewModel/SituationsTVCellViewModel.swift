@@ -22,6 +22,7 @@ class SituationsTVCellViewModel {
     var isFinished: Bool {
         return situation.isFinished
     }
+    
     var isSuccess: Bool {
         return situation.isSuccess
     }

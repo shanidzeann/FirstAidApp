@@ -12,10 +12,8 @@ extension SceneViewController: SRCountdownTimerDelegate {
     func timerDidEnd(sender: SRCountdownTimer, elapsedTime: TimeInterval) {
         UIView.animate(withDuration: Constants.Animation.sceneDuration) {
             self.showMainUI(false)
-        } completion: { done in
-            if done {
-                self.viewModel?.setLastScene()
-            }
+        } completion: { _ in
+            self.viewModel?.setLastScene()
         }
     }
 }
