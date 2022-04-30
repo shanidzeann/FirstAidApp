@@ -11,8 +11,14 @@ class SituationsViewModel {
     
     // MARK: - Properties
     
-    let db = DatabaseManager()
+    var databaseManager: DatabaseManager
     var situations: [SituationDB]?
+    
+    // MARK: - Init
+    
+    init(databaseManager: DatabaseManager) {
+        self.databaseManager = databaseManager
+    }
     
     // MARK: - Methods
     
@@ -21,13 +27,13 @@ class SituationsViewModel {
     }
     
     func loadSituations() {
-        situations = db.loadSituations()
+        situations = databaseManager.loadSituations()
     }
     
     func saveEnding(situation: SituationDB, isFinished: Bool, isSuccess: Bool) {
         situation.isFinished = isFinished
         situation.isSuccess = isSuccess
-        db.save()
+        databaseManager.save()
     }
     
     func selectedSituation(at indexPath: IndexPath) -> SituationDB? {
@@ -40,7 +46,8 @@ class SituationsViewModel {
     }
     
     func situationViewModel(for situation: SituationDB) -> SceneViewModel? {
-        return SceneViewModel(situation)
+        let databaseManager = DatabaseManager()
+        return SceneViewModel(situation, databaseManager: databaseManager)
     }
     
 }

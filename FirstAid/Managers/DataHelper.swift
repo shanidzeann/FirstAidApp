@@ -9,7 +9,11 @@ import Foundation
 
 class DataHelper {
      
-    static let shared = DataHelper()
+    private var jsonParser: JSONParser
+    
+    init(jsonParser: JSONParser) {
+        self.jsonParser = jsonParser
+    }
 
     func loadJson(filename fileName: String) -> Data? {
         if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {

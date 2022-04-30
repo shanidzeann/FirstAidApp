@@ -11,14 +11,15 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    private(set) var viewModel = SituationsViewModel()
+    private(set) var viewModel: SituationsViewModel!
     
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setViewModel()
         loadSituations()
-        tableView.rowHeight = Constants.TableView.RowHeights.quest
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,8 +30,17 @@ class SituationsTableViewController: UITableViewController {
     
     // MARK: - Hepler Methods
     
+    private func setViewModel() {
+        let databaseManager = DatabaseManager()
+        viewModel = SituationsViewModel(databaseManager: databaseManager)
+    }
+    
     private func loadSituations() {
         viewModel.loadSituations()
+    }
+    
+    private func configureTableView() {
+        tableView.rowHeight = Constants.TableView.RowHeights.quest
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

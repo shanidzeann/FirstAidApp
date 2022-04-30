@@ -11,7 +11,7 @@ class SceneViewModel {
     
     // MARK: - Properties
     
-    let db = DatabaseManager()
+    var databaseManager: DatabaseManager
     var situation: SituationDB
     lazy var scene = Box(situation.scenes?[0] as? SceneDB)
     
@@ -29,8 +29,9 @@ class SceneViewModel {
     
     // MARK: - Init
     
-    init(_ situation: SituationDB) {
+    init(_ situation: SituationDB, databaseManager: DatabaseManager) {
         self.situation = situation
+        self.databaseManager = databaseManager
     }
     
     // MARK: - Methods
@@ -67,7 +68,7 @@ class SceneViewModel {
     func saveEnding(isFinished: Bool, isSuccess: Bool) {
         situation.isFinished = isFinished
         situation.isSuccess = isSuccess
-        db.save()
+        databaseManager.save()
     }
     
     func sceneHasChoices() -> Bool {

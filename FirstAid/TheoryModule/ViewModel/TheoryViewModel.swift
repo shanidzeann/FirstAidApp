@@ -11,12 +11,18 @@ class TheoryViewModel {
     
     // MARK: - Properties
     
+    var dataHelper: DataHelper
+    
     var allLessons: [Lesson]?
     var filteredLessons: [Lesson]?
     var lessonsState: LessonsState?
     
     let titleForHeader = "Первая помощь при ..."
     let allDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("AllTheory.plist")
+    
+    init(dataHelper: DataHelper) {
+        self.dataHelper = dataHelper
+    }
     
     // MARK: - Work with lessons
     
@@ -25,16 +31,16 @@ class TheoryViewModel {
     }
     
     func createLessons() {
-        if let data = DataHelper.shared.loadJson(filename: "theory") {
+        if let data = dataHelper.loadJson(filename: "theory") {
             if !UserDefaults.standard.bool(forKey: "TheoryExecuteOnce") {
-                allLessons = DataHelper.shared.createPlist(from: data, at: allDataFilePath)
+                allLessons = dataHelper.createPlist(from: data, at: allDataFilePath)
                 UserDefaults.standard.set(true, forKey: "TheoryExecuteOnce")
             }
         }
     }
     
     func loadLessons() {
-        allLessons = DataHelper.shared.loadData(from: allDataFilePath)
+        allLessons = dataHelper.loadData(from: allDataFilePath)
         filteredLessons = allLessons?.sorted { !$0.isFinished && $1.isFinished }
     }
     
@@ -79,7 +85,7 @@ class TheoryViewModel {
         // find selected item in all lessons
         if let itemID = allLessons?.firstIndex(where: {$0.title == lesson.title}) {
             allLessons?[itemID].isFinished = !done
-            DataHelper.shared.saveData(allLessons, at: allDataFilePath)
+            dataHelper.saveData(allLessons, at: allDataFilePath)
         }
     }
     

@@ -11,7 +11,7 @@ class TheoryViewController: UIViewController {
     
     // MARK: - Properties
     
-    private(set) var viewModel = TheoryViewModel()
+    private(set) var viewModel: TheoryViewModel!
     
     // MARK: - UI
     
@@ -27,6 +27,7 @@ class TheoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewModel()
         setBackgroundColor()
         addTableView()
         configureNavigationBar()
@@ -47,6 +48,12 @@ class TheoryViewController: UIViewController {
     }
     
     // MARK: - Private
+    
+    private func setViewModel() {
+        let jsonParser = JSONParser()
+        let dataHelper = DataHelper(jsonParser: jsonParser)
+        viewModel = TheoryViewModel(dataHelper: dataHelper)
+    }
     
     private func setBackgroundColor() {
         view.backgroundColor = .systemBackground
@@ -108,9 +115,8 @@ class TheoryViewController: UIViewController {
             
             guard let self = self,
                   let cell = self.tableView.cellForRow(at: indexPath) as? TheoryTableViewCell else { return }
-            let viewModel = self.viewModel
             
-            viewModel.toggleCompletion(of: &lesson, at: indexPath)
+            self.viewModel.toggleCompletion(of: &lesson, at: indexPath)
             cell.done = lesson.isFinished
             cell.setBackground()
             

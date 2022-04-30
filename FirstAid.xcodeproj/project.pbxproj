@@ -20,6 +20,7 @@
 		018C475627E9A81400FA4B02 /* QuestDataModel.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */; };
 		018C475727E9A81400FA4B02 /* QuestDataModel.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */; };
 		018C475827E9A81400FA4B02 /* QuestDataModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */; };
+		01E95B40281D978E009F6CC7 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E95B3F281D978E009F6CC7 /* JSONParser.swift */; };
 		2D36F76C0278EDE8699A11E7 /* Pods_FirstAid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */; };
 		8906C6B527AABAF4008F53BA /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */; };
 		8906C6B727AABBE0008F53BA /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8906C6B627AABBE0008F53BA /* ArticleViewController.swift */; };
@@ -80,6 +81,7 @@
 		018C475327E9A81300FA4B02 /* QuestDataModel.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-wal"; sourceTree = "<group>"; };
 		018C475427E9A81300FA4B02 /* QuestDataModel.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QuestDataModel.sqlite-shm"; sourceTree = "<group>"; };
 		018C475527E9A81400FA4B02 /* QuestDataModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = QuestDataModel.sqlite; sourceTree = "<group>"; };
+		01E95B3F281D978E009F6CC7 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		480822E2A3C1374AB64F1D8B /* Pods-FirstAid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirstAid.release.xcconfig"; path = "Target Support Files/Pods-FirstAid/Pods-FirstAid.release.xcconfig"; sourceTree = "<group>"; };
 		87D149BD5D70C222AE4AF525 /* Pods_FirstAid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirstAid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8906C6B427AABAF4008F53BA /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				895B94C527286EF4001B466A /* DataHelper.swift */,
 				89F0609427A45DA700F10E18 /* DatabaseManager.swift */,
 				8906C6BD27AB1CB1008F53BA /* NetworkManager.swift */,
+				01E95B3F281D978E009F6CC7 /* JSONParser.swift */,
 				89793116272AAB4000476E45 /* NotificationManager.swift */,
 			);
 			path = Managers;
@@ -637,6 +640,7 @@
 				892936B627235C290067CD25 /* AppDelegate.swift in Sources */,
 				8906C6C327AB3841008F53BA /* NewsTVCellViewModel.swift in Sources */,
 				013DC7C1281AE9CE00222BA8 /* SituationsTableViewController+DataSource.swift in Sources */,
+				01E95B40281D978E009F6CC7 /* JSONParser.swift in Sources */,
 				891FCC632780C60C0016842A /* Protocols.swift in Sources */,
 				89F0609227A43A0600F10E18 /* QuestDataModel.xcdatamodeld in Sources */,
 				892936B827235C290067CD25 /* SceneDelegate.swift in Sources */,

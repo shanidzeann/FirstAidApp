@@ -9,7 +9,7 @@ import Foundation
 
 class NewsTVCellViewModel {
     
-    let networkManager = NetworkManager()
+    var networkManager: NetworkManager
     private var article: Article
     
     var title: String {
@@ -24,8 +24,9 @@ class NewsTVCellViewModel {
         return article.urlToImage
     }
     
-    init(article: Article) {
+    init(article: Article, networkManager: NetworkManager) {
         self.article = article
+        self.networkManager = networkManager
     }
     
 }

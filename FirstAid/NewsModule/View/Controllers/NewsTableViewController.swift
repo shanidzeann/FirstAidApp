@@ -11,13 +11,14 @@ class NewsTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    let viewModel = NewsViewModel()
+    var viewModel: NewsViewModel!
     
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViewModel()
         configureTableView()
         registerCells()
         getArticles()
@@ -25,6 +26,12 @@ class NewsTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
+    
+    private func setViewModel() {
+        let jsonParser = JSONParser()
+        let networkManager = NetworkManager(jsonParser: jsonParser)
+        viewModel = NewsViewModel(networkManager: networkManager)
+    }
     
     func getArticles() {
         viewModel.getArticles { [weak self] in

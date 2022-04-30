@@ -9,11 +9,15 @@ import Foundation
 
 class NewsViewModel {
     
-    let networkManager = NetworkManager()
+    let networkManager: NetworkManager
     private var articles: [Article]?
     
     var state: State {
         return networkManager.state
+    }
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
     }
     
     func numberOfRows() -> Int {
@@ -31,7 +35,9 @@ class NewsViewModel {
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> NewsTVCellViewModel? {
         guard let article = articles?[indexPath.row] else { return nil }
-        return NewsTVCellViewModel(article: article)
+        let jsonParser = JSONParser()
+        let networkManager = NetworkManager(jsonParser: jsonParser)
+        return NewsTVCellViewModel(article: article, networkManager: networkManager)
     }
     
     func articleViewModel(for article: Article) -> ArticleViewModel? {
