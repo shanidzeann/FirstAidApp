@@ -17,22 +17,20 @@ class NetworkManager {
         }
     }
     
-    let healthHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=ru&category=health&apiKey=\(yourKey)")
-    
     init(jsonParser: JSONParser) {
         self.jsonParser = jsonParser
     }
     
     func getArticles(completion: @escaping (Result<[Article], Error>) -> Void) {
         state = .loading
-        guard let url = healthHeadlinesURL else { return }
+        guard let url = Constants.URLs.healthHeadlinesURL else { return }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 self?.state = .noResults
                 completion(.failure(error))
             } else if let data = data {
-                self?.jsonParser.parseJSON(data: data, completion: { (result: Result<APIResponse, Error>) in
+                self?.jsonParser.parseJSON(data: data) { (result: Result<APIResponse, Error>) in
                     switch result {
                     case .success(let articles):
                         self?.state = .results
@@ -41,7 +39,7 @@ class NetworkManager {
                         self?.state = .noResults
                         completion(.failure(error))
                     }
-                })
+                }
             }
         }
         task.resume()
@@ -54,11 +52,3 @@ class NetworkManager {
     }
 
 }
-
-
-
-
-
-
-
-

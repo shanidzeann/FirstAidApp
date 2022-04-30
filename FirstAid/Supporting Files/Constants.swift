@@ -25,6 +25,10 @@ enum Constants {
         }
     }
     
+    enum URLs {
+        static let healthHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=ru&category=health&apiKey=\(yourKey)")
+    }
+    
     enum SegueIdentifiers {
         static let sceneSegue = "sceneSegue"
         static let articleSegue = "articleSegue"

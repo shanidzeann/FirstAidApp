@@ -27,14 +27,15 @@ class DataHelper {
         return nil
     }
     
-    func createPlist<T: Codable>(from jsonData: Data, at path: URL?) -> T? {
-        do {
-            let plist = try JSONDecoder().decode(T.self, from: jsonData)
-            saveData(plist, at: path)
-            return plist
-        } catch {
-            print("Error decoding: \(error)")
-            return nil
+    func createPlist<T: Codable>(from jsonData: Data, at path: URL?, completion: @escaping (Result<[T], Error>) -> Void) {
+        jsonParser.parseJSON(data: jsonData) { [weak self] (result: Result<[T], Error>) in
+            switch result {
+            case .success(let plist):
+                self?.saveData(plist, at: path)
+                completion(.success(plist))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
@@ -62,5 +63,4 @@ class DataHelper {
         return nil
     }
 
-    
 }

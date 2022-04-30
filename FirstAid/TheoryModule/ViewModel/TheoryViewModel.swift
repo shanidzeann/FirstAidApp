@@ -30,13 +30,24 @@ class TheoryViewModel {
         return filteredLessons?.count ?? 0
     }
     
-    func createLessons() {
+    func createLessonsFileIfFirstLaunch() {
         if let data = dataHelper.loadJson(filename: "theory") {
             if !UserDefaults.standard.bool(forKey: "TheoryExecuteOnce") {
-                allLessons = dataHelper.createPlist(from: data, at: allDataFilePath)
+                createLessonsFile(data: data)
                 UserDefaults.standard.set(true, forKey: "TheoryExecuteOnce")
             }
         }
+    }
+    
+    private func createLessonsFile(data: Data) {
+        dataHelper.createPlist(from: data, at: allDataFilePath, completion: { (result: Result<[Lesson], Error>) in
+            switch result {
+            case .success(let lessons):
+                self.allLessons = lessons
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func loadLessons() {
@@ -78,7 +89,6 @@ class TheoryViewModel {
     func toggleCompletion(of lesson: inout Lesson, at indexPath: IndexPath) {
         
         let done = lesson.isFinished
-        
         filteredLessons?[indexPath.row].isFinished = !done
         lesson.isFinished = !done
         
