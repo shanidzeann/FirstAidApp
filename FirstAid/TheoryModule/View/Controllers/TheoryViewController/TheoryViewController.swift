@@ -19,6 +19,7 @@ class TheoryViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(TheoryTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.theoryCell)
         tableView.rowHeight = 80
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -66,7 +67,7 @@ class TheoryViewController: UIViewController {
     }
     
     private func setData() {
-        viewModel.createLessons()
+        viewModel.createLessonsFileIfFirstLaunch()
         viewModel.loadLessons()
     }
     

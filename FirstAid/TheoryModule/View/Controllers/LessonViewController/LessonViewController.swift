@@ -33,6 +33,7 @@ class LessonViewController: UIViewController {
         tableView.register(LessonImageTableViewCell.self, forCellReuseIdentifier: Constants.TableView.CellIdentifiers.lessonImageCell)
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 200
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
