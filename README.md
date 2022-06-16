@@ -15,12 +15,12 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 - Фильтрация лекций (прочитанные/непрочитанные/все) - UIMenu
 - Лекции выводятся в table view с двумя типами ячеек
 
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/launch.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f1.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f2.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f3.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/lesson1.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/lesson2.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/launch.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f1.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f2.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f3.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/lesson1.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/lesson2.png)
 
 
 2) Текстовый квест
@@ -29,16 +29,16 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 - Время выбора ответа ограничено таймером (SRCountdownTimer)
 - Переходы между сценами анимированы
 
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f5.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f6.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/fa1.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f8.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f5.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f6.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/fa1.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f8.png)
 
 - Квест пройден успешно / Выбран неверный ответ / Истекло время 
 
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/faWin.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/faLoss.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/faTime.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/faWin.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/faLoss.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/faTime.png)
 
 
 
@@ -46,6 +46,6 @@ UI: Storyboard/код (NSLayoutAnchor, SnapKit)
 - Парсинг JSON (Decodable)
 - Работа с сетью (URLSession)
 
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/FirstAid11.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/FirstAid9.png)
-![Image alt](https://github.com/shanidzeann/Screenshots/blob/main/f12.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/FirstAid11.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/FirstAid9.png)
+![Image alt](https://github.com/shanidzeann/Screenshots/blob/master/f12.png)
